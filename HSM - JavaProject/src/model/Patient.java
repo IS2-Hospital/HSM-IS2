@@ -1,9 +1,9 @@
 package model;
 
-public class Patient {
+public class Patient extends User{
 	
-	public Patient() {
-		
+	public Patient(String dni, String fullName) {
+		super (dni, fullName);
 	}
 	
 
