@@ -1,4 +1,4 @@
-package model.userManager;
+package model.userManagment;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -42,6 +42,8 @@ public class LoginAuthenticator {
 		if(!pass.equals(resultSet.getString("password")))
 			throw new InvalidPasswordException();
 
-		return UserRole.valueOf(resultSet.getString("role"));
+		String role = resultSet.getString("role");
+		con.close();
+		return UserRole.valueOf(role);
 	}
 }

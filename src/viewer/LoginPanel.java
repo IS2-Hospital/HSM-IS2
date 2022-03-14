@@ -114,7 +114,7 @@ class LoginPanel extends JPanel{
 				String pw  = String.valueOf(_passwordTF.getPassword());
 				try {
 					int dni = Integer.parseInt(_userNameTF.getText());
-					_ctrl.logIn(dni, pw);
+					_ctrl.login(dni, pw);
 				}
 				catch (SQLException e1) {
 					String title = "Something went wrong:";

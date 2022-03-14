@@ -7,7 +7,7 @@ import viewer.MainWindow;
 
 public class Main {
 
-	private static void startGUIMode() throws Exception{
+	private static void startGUIMode() throws Exception {
 		Controller ctrl = new Controller();
 
 		SwingUtilities.invokeAndWait(new Runnable() {
