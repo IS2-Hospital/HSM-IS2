@@ -12,17 +12,8 @@ public class Controller {
 
 	}
 
-	public void run() {
-
-		// login
+	public void logIn(int dni, String password) throws LoginException, SQLException{
 		LoginAuthenticator loginAuth = new LoginAuthenticator();
-		try {
-			loginAuth.login("001", "12345");
-		} catch (LoginException le) {
-			System.out.println(le.getMessage());
-		} catch (SQLException sqle) {
-			System.out.println(sqle.getMessage());
-			sqle.printStackTrace();
-		}
+		loginAuth.login(dni, password);
 	}
 }

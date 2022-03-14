@@ -13,7 +13,7 @@ import model.exceptions.UserNotFoundException;
 
 public class LoginAuthenticator {
 
-	public void login(String dni, String pass) throws SQLException, LoginException{
+	public void login(int dni, String pass) throws SQLException, LoginException{
 
 		UserRole userValidated = LoginAuthenticator.authenticateUser(dni, pass);
 
@@ -27,7 +27,7 @@ public class LoginAuthenticator {
 		}
 	}
 
-	private static UserRole authenticateUser(String dni, String pass) throws SQLException, LoginException {
+	private static UserRole authenticateUser(int dni, String pass) throws SQLException, LoginException {
 
 		Connection con = DBConnector.connectdb();
 		Statement statement = con.createStatement();
