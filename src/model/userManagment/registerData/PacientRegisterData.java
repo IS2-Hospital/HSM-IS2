@@ -1,13 +1,13 @@
-package model.userManagment;
+package model.userManagment.registerData;
 
 import model.Patient;
 
-public class RegisterData {
+public class PacientRegisterData {
 
 	private Patient patient;
 	private String password;
 
-	public RegisterData(Patient patient, String password) {
+	public PacientRegisterData(Patient patient, String password) {
 		this.patient = patient;
 		this.password = password;
 	}

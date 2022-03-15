@@ -32,6 +32,7 @@ public class MainWindow extends JFrame {
 		// NECESARIO ------------------------------------------------------------
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
+		this.setLocationRelativeTo(null); // center window in the screen
 		this.setVisible(true);
 	}
 }
