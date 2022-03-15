@@ -1,8 +1,11 @@
 
 package viewer;
 
-import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridBagLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -22,17 +25,24 @@ public class MainWindow extends JFrame {
 
 	private void initGUI() {
 
-		JPanel mainPanel = new JPanel(new BorderLayout());
-		setContentPane(mainPanel);
-
-		// Initial Page (Login) ------------------------------------------------
-		_loginPanel = new LoginPanel(_ctrl);
-		mainPanel.add(_loginPanel, BorderLayout.PAGE_START);
+		JPanel bgPanel = new BgPanel();
+		bgPanel.setLayout(new GridBagLayout());
+		bgPanel.add(new LoginPanel(_ctrl));
+		this.setContentPane(bgPanel);
+		this.setPreferredSize(new Dimension(1500, 1500));
 
 		// NECESARIO ------------------------------------------------------------
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setLocationRelativeTo(null); // center window in the screen
 		this.setVisible(true);
+	}
+
+	class BgPanel extends JPanel {
+		java.awt.Image bg = new ImageIcon("resources/icons/background.jpg").getImage();
+		@Override
+		public void paintComponent(Graphics g) {
+			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+		}
 	}
 }

@@ -46,10 +46,9 @@ class LoginPanel extends JPanel{
 
 		// Panel principal para el login
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2),
-				TITLE, TitledBorder.LEFT, TitledBorder.TOP));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white, 3), TITLE, TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.white));
 		this.add(mainPanel);
-
+		this.setOpaque(false);
 		// Etiqueta de ayuda (NORTH) --------------------------------------------
 
 		JLabel help = new JLabel("<html><p>Introduce DNI and correct password to access the platform.</p></html>");
