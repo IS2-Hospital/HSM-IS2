@@ -23,6 +23,7 @@ import javax.swing.border.TitledBorder;
 import control.Controller;
 import model.exceptions.LoginException;
 
+@SuppressWarnings("serial")
 class LoginPanel extends JPanel{
 
 	private final String TITLE = "Login Form";
@@ -30,7 +31,7 @@ class LoginPanel extends JPanel{
 	private JLabel _name, _password;
 	private JTextField _userNameTF;
 	private JPasswordField _passwordTF;
-	private JButton _loginButton, _closeButton;
+	private JButton _loginButton, _clearButton;
 	private JButton _regButton;
 
 	private Controller _ctrl;
@@ -112,8 +113,8 @@ class LoginPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String pw  = String.valueOf(_passwordTF.getPassword());
+				String dni = _userNameTF.getText();
 				try {
-					int dni = Integer.parseInt(_userNameTF.getText());
 					_ctrl.login(dni, pw);
 				}
 				catch (SQLException e1) {
@@ -133,18 +134,18 @@ class LoginPanel extends JPanel{
 			}
 		});
 		loginResetPanel.add(_loginButton);
-		// Close button
-		_closeButton = new JButton("Clear");
-		_closeButton.setActionCommand("Clear");
-		_closeButton.setToolTipText("Click for clear dni and password");
-		_closeButton.addActionListener(new ActionListener() {
+		// Clear button
+		_clearButton = new JButton("Clear");
+		_clearButton.setActionCommand("Clear");
+		_clearButton.setToolTipText("Click for clear dni and password");
+		_clearButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				_userNameTF.setText("");
 				_passwordTF.setText("");
 			}
 		});
-		loginResetPanel.add(_closeButton);
+		loginResetPanel.add(_clearButton);
 
 		// Registration option
 		JLabel reg = new JLabel("If you don't have a profile, you can registrate here.");

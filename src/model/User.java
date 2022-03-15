@@ -1,5 +1,7 @@
 package model;
 
+import model.Enums.UserRole;
+
 public abstract class User {
 
 	protected String dni;

@@ -1,0 +1,157 @@
+package model.userManagment;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import model.DBConnector;
+import model.Patient;
+import model.User;
+import model.Enums.BloodType;
+import model.Enums.Gender;
+import model.Enums.HealthInsuranceType;
+import model.Enums.UserRole;
+import model.exceptions.sqlExeptions.SqlConnectionException;
+import model.userManagment.registerData.PacientRegisterData;
+
+public class UserRegisterer {
+
+	public void registerUsers(JSONObject usersToRegister) {
+
+		UserRole role = UserRole.valueOf(usersToRegister.getString("role"));
+
+		switch (role) {
+		case PATIENT:
+			List<PacientRegisterData> patients = parsePatientJSON(usersToRegister);
+			try {
+				registerPatients(patients);
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SqlConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case DOCTOR:
+			break;
+		case ADMIN:
+			break;
+		}
+
+
+	}
+
+	/* Recieves a List of registerData wich contains a Patient and its password.
+	 * It begins registering into the database the first Patient in the list, and then, if there are more, it registers them.
+	 * 
+	 * The first Patient in the list is the only one who has to pay, becouse the rest are his familiars.
+	 * 
+	 * If the patient just wants to register itself with the Single insurance, the list will contain only 1 element.
+	 * */
+	private void registerPatients(List<PacientRegisterData> patients) throws IllegalArgumentException, SqlConnectionException, SQLException {
+		Connection connex = DBConnector.connectdb();
+
+		float insurancePrice = getinsurancePrice(connex, patients.get(0).getPatient().getInsuranceType());
+		float bill = insurancePrice * patients.size();
+
+		// register first patient of the list
+		// (if there are several patients registered with the familiar plan, the first one will be the only who pays)
+
+		registerUser(connex, patients.get(0).getPatient(), patients.get(0).getPassword());
+		registerPatient(connex, patients.get(0).getPatient(), bill);
+
+		// register the rest of the patients
+		final float NOT_PAYS = 0;
+		if (patients.size() >= 2)
+			for (PacientRegisterData p : patients.subList(1, patients.size())) {
+				registerUser(connex, p.getPatient(), p.getPassword());
+				registerPatient(connex, patients.get(0).getPatient(), NOT_PAYS);
+			}
+
+		connex.close();
+	}
+
+	private float getinsurancePrice(Connection connex, HealthInsuranceType type) throws SQLException {
+		Statement query = connex.createStatement();
+		ResultSet result = query.executeQuery(String.format("SELECT price FROM health_insurances WHERE insurance_type = '%s'", type.toString()));
+
+		result.next();
+		return result.getFloat("price");
+	}
+
+	private void registerUser(Connection connex, User user, String password) throws IllegalArgumentException, SQLException {
+
+		// Insert info in USERS table
+		String insertUser = "INSERT INTO users VALUES (?, ?, ?, STR_TO_DATE(?, \"%Y-%m-%d\"), ?, ?, ?, ?);";
+		PreparedStatement st = connex.prepareStatement(insertUser, Statement.RETURN_GENERATED_KEYS);
+		st.setString(1, user.getDni());
+		st.setString(2, user.getName());
+		st.setString(3, user.getLastname());
+		st.setString(4, user.getBirthdate());
+		st.setString(5, password);
+		st.setString(6, user.getEmail());
+		st.setString(7, user.getPhone());
+		st.setString(8, UserRole.PATIENT.toString());
+
+		st.execute();
+	}
+
+	private void registerPatient(Connection connex, Patient patient, double bill ) throws IllegalArgumentException, SQLException  {
+
+		// If a patient is registered with the familiar insurace plan, he needs to be asociated with the person who paid;
+		if (patient.getInsuranceType() == HealthInsuranceType.FAMILIAR && patient.getDniInsuranceTaker() == null) {
+			connex.close();
+			throw new IllegalArgumentException("dniInsuranceTaker can't be null if familiar plan is selected");
+		}
+
+		// Insert info in PATIENTS table
+		String insertPatient = "INSERT INTO patients VALUES (?, ?, ?, ?, ?, ?);";
+		PreparedStatement st = connex.prepareStatement(insertPatient, Statement.RETURN_GENERATED_KEYS);
+		st.setString(1, patient.getDni());
+		st.setString(2, patient.getGender().toString());
+		st.setString(3, patient.getBloodType().toString());
+		st.setString(4, patient.getInsuranceType().toString());
+		st.setString(5, patient.getDniInsuranceTaker());
+		st.setDouble(6, bill);
+
+		st.execute();
+	}
+
+	private List<PacientRegisterData> parsePatientJSON(JSONObject usersToRegister) {
+		List<PacientRegisterData> patients = new ArrayList<>();
+
+		JSONArray reg = usersToRegister.getJSONArray("register");
+		for (Object p : reg) {
+			JSONObject jo = (JSONObject) p;
+			String dni = jo.getJSONObject("userData").getString("dni");
+			String name = jo.getJSONObject("userData").getString("name");
+			String lastname = jo.getJSONObject("userData").getString("lastname");
+			String birthdate = jo.getJSONObject("userData").getString("birthdate");
+			String email = jo.getJSONObject("userData").getString("email");
+			String phone = jo.getJSONObject("userData").getString("phone");
+
+			Gender gender = Gender.valueOf(jo.getJSONObject("roleData").getString("gender"));
+			BloodType bloodtype = BloodType.valueOf(jo.getJSONObject("roleData").getString("bloodType"));
+			HealthInsuranceType insuranceType = HealthInsuranceType.valueOf(jo.getJSONObject("roleData").getString("insuranceType"));
+			String dniInsuranceTaker = jo.getJSONObject("roleData").getString("dniInsuranceTaker");
+
+			String pass = jo.getString("password");
+			Patient patient = new Patient(dni, name, lastname, birthdate, email, phone, gender, bloodtype, insuranceType, dniInsuranceTaker);
+
+			patients.add(new PacientRegisterData(patient, pass));
+		}
+
+		return patients;
+	}
+}

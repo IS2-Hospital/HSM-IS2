@@ -3,12 +3,16 @@ package launcher;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import model.userManagment.LoginAuthenticator;
+import model.userManagment.UserRegisterer;
+import model.userManagment.UserManager;
 import viewer.MainWindow;
 
 public class Main {
 
 	private static void startGUIMode() throws Exception {
-		Controller ctrl = new Controller();
+		UserManager userManager = new UserManager(new LoginAuthenticator(), new UserRegisterer());
+		Controller ctrl = new Controller(userManager);
 
 		SwingUtilities.invokeAndWait(new Runnable() {
 			@Override

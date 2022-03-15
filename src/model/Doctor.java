@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Date;
 
+import model.Enums.UserRole;
+
 public class Doctor extends User {
 
 	private String speciality;

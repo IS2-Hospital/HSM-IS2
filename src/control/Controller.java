@@ -2,19 +2,25 @@ package control;
 
 import java.sql.SQLException;
 
+import org.json.JSONObject;
+
 import model.exceptions.LoginException;
-import model.userManagment.LoginAuthenticator;
+import model.userManagment.UserManager;
 
 public class Controller {
 
+	UserManager _userManager;
 
-	public Controller() {
-
+	public Controller(UserManager userManager) {
+		_userManager = userManager;
 	}
 
-	public void login(int dni, String password) throws LoginException, SQLException {
-		LoginAuthenticator loginAuth = new LoginAuthenticator();
-		loginAuth.login(dni, password);
+	public void login(String dni, String password) throws LoginException, SQLException {
+		_userManager.get_loginAuthenticator().login(dni, password);
+	}
+
+	public void registerUsers(JSONObject usersToRegister) {
+		_userManager.get_patientRegisterer().registerUsers(usersToRegister);
 	}
 
 	public void run() {
