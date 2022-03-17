@@ -4,8 +4,8 @@ import javax.swing.SwingUtilities;
 
 import control.Controller;
 import model.userManagment.LoginAuthenticator;
-import model.userManagment.UserRegisterer;
 import model.userManagment.UserManager;
+import model.userManagment.UserRegisterer;
 import viewer.MainWindow;
 
 public class Main {

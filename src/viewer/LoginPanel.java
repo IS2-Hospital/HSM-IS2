@@ -4,13 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -35,16 +38,26 @@ class LoginPanel extends JPanel{
 	private JButton _regButton;
 
 	private Controller _ctrl;
+	MainWindow _mainWindow;
 
-
-	LoginPanel(Controller ctrl){
+	LoginPanel(Controller ctrl, MainWindow mainWindow){
 		_ctrl = ctrl;
+		_mainWindow = mainWindow;
 		initGUI();
+	}
+
+	Image bg = new ImageIcon("resources/icons/background.jpg").getImage();
+	@Override
+	public void paintComponent(Graphics g) {
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	}
 
 	private void initGUI() {
 
+
+
 		// Panel principal para el login
+		this.setLayout(new GridBagLayout());
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white, 3), TITLE, TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.white));
 		this.add(mainPanel);
@@ -157,10 +170,20 @@ class LoginPanel extends JPanel{
 		_regButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				_mainWindow.setContentPane(new RegPanel(_ctrl, _mainWindow));
+				_mainWindow.revalidate();
+				_mainWindow.repaint();
 			}
 		});
 		regPanel.add(_regButton);
+	}
+
+	class BgPanel extends JPanel {
+		Image bg = new ImageIcon("resources/icons/background.jpg").getImage();
+		@Override
+		public void paintComponent(Graphics g) {
+			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+		}
 	}
 
 }

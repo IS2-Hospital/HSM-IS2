@@ -68,18 +68,29 @@ public class UserRegisterer {
 		// register first patient of the list
 		// (if there are several patients registered with the familiar plan, the first one will be the only who pays)
 
-		registerUser(connex, patients.get(0).getPatient(), patients.get(0).getPassword());
-		registerPatient(connex, patients.get(0).getPatient(), bill);
+		try {
+			registerUser(connex, patients.get(0).getPatient(), patients.get(0).getPassword());
+			registerPatient(connex, patients.get(0).getPatient(), bill);
 
-		// register the rest of the patients
-		final float NOT_PAYS = 0;
-		if (patients.size() >= 2)
-			for (PacientRegisterData p : patients.subList(1, patients.size())) {
-				registerUser(connex, p.getPatient(), p.getPassword());
-				registerPatient(connex, patients.get(0).getPatient(), NOT_PAYS);
-			}
+			// register the rest of the patients
+			final float NOT_PAYS = 0;
+			if (patients.size() >= 2)
+				for (PacientRegisterData p : patients.subList(1, patients.size())) {
+					registerUser(connex, p.getPatient(), p.getPassword());
+					registerPatient(connex, patients.get(0).getPatient(), NOT_PAYS);
+				}
 
-		connex.close();
+			connex.close();
+		} catch (IllegalArgumentException e) {
+			connex.close();
+			throw e;
+		} catch (SqlConnectionException e) {
+			connex.close();
+			throw e;
+		} catch (SQLException e) {
+			connex.close();
+			throw e;
+		}
 	}
 
 	private float getinsurancePrice(Connection connex, HealthInsuranceType type) throws SQLException {
@@ -110,9 +121,9 @@ public class UserRegisterer {
 	private void registerPatient(Connection connex, Patient patient, double bill ) throws IllegalArgumentException, SQLException  {
 
 		// If a patient is registered with the familiar insurace plan, he needs to be asociated with the person who paid;
-		if (patient.getInsuranceType() == HealthInsuranceType.FAMILIAR && patient.getDniInsuranceTaker() == null) {
+		if (patient.getInsuranceType() == HealthInsuranceType.FAMILIAR && patient.getDniInsuranceTaker() == "") {
 			connex.close();
-			throw new IllegalArgumentException("dniInsuranceTaker can't be null if familiar plan is selected");
+			throw new IllegalArgumentException("dniInsuranceTaker can't be empty if familiar plan is selected");
 		}
 
 		// Insert info in PATIENTS table
@@ -131,7 +142,7 @@ public class UserRegisterer {
 	private List<PacientRegisterData> parsePatientJSON(JSONObject usersToRegister) {
 		List<PacientRegisterData> patients = new ArrayList<>();
 
-		JSONArray reg = usersToRegister.getJSONArray("register");
+		JSONArray reg = usersToRegister.getJSONArray("registerList");
 		for (Object p : reg) {
 			JSONObject jo = (JSONObject) p;
 			String dni = jo.getJSONObject("userData").getString("dni");
@@ -142,9 +153,12 @@ public class UserRegisterer {
 			String phone = jo.getJSONObject("userData").getString("phone");
 
 			Gender gender = Gender.valueOf(jo.getJSONObject("roleData").getString("gender"));
-			BloodType bloodtype = BloodType.valueOf(jo.getJSONObject("roleData").getString("bloodType"));
+			BloodType bloodtype = BloodType.getEnum(jo.getJSONObject("roleData").getString("bloodType"));
 			HealthInsuranceType insuranceType = HealthInsuranceType.valueOf(jo.getJSONObject("roleData").getString("insuranceType"));
+
 			String dniInsuranceTaker = jo.getJSONObject("roleData").getString("dniInsuranceTaker");
+			if (dniInsuranceTaker == "")
+				dniInsuranceTaker = null;
 
 			String pass = jo.getString("password");
 			Patient patient = new Patient(dni, name, lastname, birthdate, email, phone, gender, bloodtype, insuranceType, dniInsuranceTaker);
