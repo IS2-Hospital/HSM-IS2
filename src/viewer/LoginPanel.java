@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
@@ -59,6 +60,8 @@ class LoginPanel extends JPanel{
 		// Panel principal para el login
 		this.setLayout(new GridBagLayout());
 		JPanel mainPanel = new JPanel(new BorderLayout());
+
+		mainPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white, 3), TITLE, TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.white));
 		this.add(mainPanel);
 		this.setOpaque(false);

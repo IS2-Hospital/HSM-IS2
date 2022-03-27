@@ -1,14 +1,19 @@
 package viewer;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -18,6 +23,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,6 +36,8 @@ import model.Enums.UserRole;
 @SuppressWarnings("serial")
 public class RegPanel extends JPanel {
 
+	private Image backgroundImage;
+	private static final String TITLE = "Register form";
 	private JTextField _dniTF, _nameTF, _lastnameTF, _emailTF, _phoneTF;
 	JPasswordField _passTF;
 	private JSpinner _birthdateSelector;
@@ -44,9 +53,18 @@ public class RegPanel extends JPanel {
 		initGUI();
 	}
 
+	Image bg = new ImageIcon("resources/icons/background.jpg").getImage();
+	@Override
+	public void paintComponent(Graphics g) {
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+	}
+
+
 	private void initGUI() {
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white, 3), TITLE, TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.white));
 		this.setLayout(new GridBagLayout());
 		JPanel mainPanel = new JPanel(new BorderLayout());
+		mainPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));
 		this.add(mainPanel);
 
 		JPanel centerPanel = new JPanel(new GridBagLayout());
@@ -259,5 +277,12 @@ public class RegPanel extends JPanel {
 		mainPanel.add(southPanel, BorderLayout.SOUTH);
 	}
 
+	class BgPanel extends JPanel {
+		Image bg = new ImageIcon("resources/icons/background.jpg").getImage();
+		@Override
+		public void paintComponent(Graphics g) {
+			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+		}
+	}
 
 }

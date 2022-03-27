@@ -3,6 +3,7 @@ package viewer;
 
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import control.Controller;
@@ -33,5 +34,7 @@ public class MainWindow extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null); // center window in the screen
 		this.setVisible(true);
+		ImageIcon image = new ImageIcon("resources/icons/logo.png"); //icon image
+		setIconImage(image.getImage());
 	}
 }
