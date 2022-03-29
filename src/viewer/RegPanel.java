@@ -23,7 +23,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
 import org.json.JSONArray;
@@ -37,7 +36,8 @@ import model.Enums.UserRole;
 public class RegPanel extends JPanel {
 
 	private Image backgroundImage;
-	private static final String TITLE = "Register form";
+	private static final String TITLE  = "Register form";
+	private static final String TITLE2 = "User registration";
 	private JTextField _dniTF, _nameTF, _lastnameTF, _emailTF, _phoneTF;
 	JPasswordField _passTF;
 	private JSpinner _birthdateSelector;
@@ -61,10 +61,18 @@ public class RegPanel extends JPanel {
 
 
 	private void initGUI() {
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white, 3), TITLE, TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.white));
+
 		this.setLayout(new GridBagLayout());
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white, 3), TITLE,
+				TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.white));
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));
+
+		javax.swing.border.Border innerEmpty = BorderFactory.createEmptyBorder(20, 25, 20, 25);
+		javax.swing.border.Border outterTitled = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 3), TITLE2,
+				TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.black);
+		mainPanel.setBorder(BorderFactory.createCompoundBorder(outterTitled, innerEmpty));
+
+
 		this.add(mainPanel);
 
 		JPanel centerPanel = new JPanel(new GridBagLayout());

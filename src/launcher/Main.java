@@ -17,6 +17,7 @@ public class Main {
 		SwingUtilities.invokeAndWait(new Runnable() {
 			@Override
 			public void run() {
+				//new PatientPanel();
 				new MainWindow(ctrl);
 			}
 		});
