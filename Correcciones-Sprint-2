@@ -12,3 +12,5 @@ No se ha encontrado la siguiente documentación:
 Respecto al código se ve que hay pruebas automatizados, pero no se incluye ninguna imagen de la aplicación en ejecución ni mostraron el código funcionando en el último laboratorio.
 No se mencionan cuáles son los avances de sprint 1 a sprint 2, aunque se pueden ver las fechas de últimas modificaciones de los archivos.
 Se ha aplicado el patrón MVC, pero no se observa que se haya aplicado ningún otro patrón de diseño.
+
+La unica prueba de JUnit parece insuficiente dado que sólo comprueba que cero es igual a cero.
