@@ -1,16 +1,17 @@
 --- Corrección de Sprint 2 de Grupo 2:  ---
-No se usa adecuadamente UML. El diagrama "Database_UML.png" no usa la notación de diagrama de clases. La herencia se debería expresar con triángulo. La composición o agregación se debería represetar con rombo. Las flechas de asociación no deberían llevar esas líneas cortantes. En caso de que quiera representar el diseño de la base de datos, entonces se tendría que haber usado un diagrama entidad-relación cuya notación también es bastante diferente. Se debería usar rombos grandes aplanados para relaciones.
+No se usa adecuadamente UML. El diagrama "Database_UML.png" no usa la notación de diagrama de clases. La herencia se debería expresar con triángulo. La composición o agregación se debería representar con rombo. Las flechas de asociación no deberían llevar esas líneas cortantes. En caso de que quiera representar el diseño de la base de datos, entonces se tendría que haber usado un diagrama entidad-relación cuya notación también es bastante diferente. Se debería usar rombos grandes aplanados para relaciones.
 El diagrama "UML.png" ya tiene una notación de diagrama de clases. Aun así se recomienda que la clase "PatientRegister" esté asociada con alguna. Por el propio diseño y viendo los nombres de los parámetros de los métodos parece estar relacionada por asociación con Patient y DBConnector, pero faltan las flechas.
-No veo los diagramas de secuencia. Recordad de poner un imagen por cada diagrama. Creo que lo habéis hecho pero por si acaso el diagrama de secuencia estuviera en un archivo con una extensión distinta a las habituales de imágenes.
+No veo los diagramas de secuencia. Recordad poner una imagen por cada diagrama. Creo que lo habéis hecho pero por si acaso el diagrama de secuencia estuviera en un archivo con una extensión distinta a las habituales de imágenes.
 No se ha encontrado la siguiente documentación:
-	- Historias de usuario (producto)
-	- Sprint (por separado los tres)
-		* planning (no hace falta diagra Gantt de barras)
-		* review (ver si lo han conseguido)
-		* restroprective (ver el proceso)
+    - Historias de usuario (producto)
+    - Sprint (por separado los tres)
+        * planning (no hace falta diagrama Gantt de barras)
+        * review (ver si lo han conseguido)
+        * restroprective (ver el proceso)
 
-Respecto al código se ve que hay pruebas automatizados, pero no se incluye ninguna imagen de la aplicación en ejecución ni mostraron el código funcionando en el último laboratorio.
+Respecto al código se ve que hay pruebas automatizadas, pero no se incluye ninguna imagen de la aplicación en ejecución ni mostraron el código funcionando en el último laboratorio.
 No se mencionan cuáles son los avances de sprint 1 a sprint 2, aunque se pueden ver las fechas de últimas modificaciones de los archivos.
 Se ha aplicado el patrón MVC, pero no se observa que se haya aplicado ningún otro patrón de diseño.
 
-La unica prueba de JUnit parece insuficiente dado que sólo comprueba que cero es igual a cero.
+La única prueba de JUnit parece insuficiente dado que sólo comprueba que cero es igual a cero.
+
