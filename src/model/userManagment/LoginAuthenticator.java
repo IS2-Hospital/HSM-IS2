@@ -19,7 +19,8 @@ public class LoginAuthenticator {
 
 		switch(userValidated) {
 		case PATIENT:
-			System.out.println("Patient's Home"); break;
+			System.out.println("Patient's Home");
+			break;
 		case DOCTOR:
 			System.out.println("Doctor's Home"); break;
 		case ADMIN:

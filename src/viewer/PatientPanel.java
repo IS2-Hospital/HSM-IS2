@@ -1,19 +1,39 @@
+
 package viewer;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 
-/**
- *
- * @author amele
- */
-public class PatientPanel extends javax.swing.JFrame {
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
-	/**
-	 * Creates new form MiVentana
-	 */
+@SuppressWarnings("serial")
+public class PatientPanel extends JPanel {
+
+	private javax.swing.JButton hereButton;
+	private javax.swing.JLabel PatientsHome;
+	private javax.swing.JLabel PablosPrivateClinic;
+	private javax.swing.JLabel HowMayIHelp;
+	private javax.swing.JLabel AvailableServices;
+	private javax.swing.JLabel askForAppointment;
+	private javax.swing.JLabel CheckDoctors;
+	private javax.swing.JLabel CheckTreatment;
+	private javax.swing.JLabel CanAlsoContact;
+	private javax.swing.JPanel lateralPanel;
+	private javax.swing.JPanel jPanel2;
+	private javax.swing.JPanel supPanel;
+	private javax.swing.JPanel PatientsHomePanel;
+	private javax.swing.JPanel PanelLateralOscuro;
+	private javax.swing.JPanel panelInf;
+	private javax.swing.JSeparator jSeparator1;
+	private RSButtonMetro askAppointmentButton;
+	private RSButtonMetro AboutUsButton;
+	private RSButtonMetro checkDoctorsButton;
+	private RSButtonMetro checkTreatmentButton;
+	private RSButtonMetro homeButton;
+	private RSButtonMetro appointmentsButton;
+	private RSButtonMetro clinicButton;
+
 	public PatientPanel() {
 		initComponents();
 	}
@@ -27,236 +47,391 @@ public class PatientPanel extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
-		jPanel1 = new javax.swing.JPanel();
+		supPanel = new javax.swing.JPanel();
+		lateralPanel = new javax.swing.JPanel();
+		PatientsHomePanel = new javax.swing.JPanel();
+		PatientsHome = new javax.swing.JLabel();
+		jSeparator1 = new javax.swing.JSeparator();
+		PanelLateralOscuro = new javax.swing.JPanel();
+		PablosPrivateClinic = new javax.swing.JLabel();
+		HowMayIHelp = new javax.swing.JLabel();
+		AvailableServices = new javax.swing.JLabel();
+		askAppointmentButton = new RSButtonMetro();
+		askForAppointment = new javax.swing.JLabel();
+		checkDoctorsButton = new RSButtonMetro();
+		CheckDoctors = new javax.swing.JLabel();
+		checkTreatmentButton = new RSButtonMetro();
+		CheckTreatment = new javax.swing.JLabel();
+		CanAlsoContact = new javax.swing.JLabel();
+		hereButton = new javax.swing.JButton();
+		homeButton = new RSButtonMetro();
+		clinicButton = new RSButtonMetro();
+		appointmentsButton = new RSButtonMetro();
+		AboutUsButton = new RSButtonMetro();
 		jPanel2 = new javax.swing.JPanel();
-		jPanel4 = new javax.swing.JPanel();
-		jLabel1 = new javax.swing.JLabel();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
-		jButton1 = new javax.swing.JButton();
-		jButton2 = new javax.swing.JButton();
-		jButton3 = new javax.swing.JButton();
-		jLabel4 = new javax.swing.JLabel();
-		jLabel5 = new javax.swing.JLabel();
-		jLabel6 = new javax.swing.JLabel();
-		jButton4 = new javax.swing.JButton();
-		jButton5 = new javax.swing.JButton();
-		jButton6 = new javax.swing.JButton();
+		panelInf = new javax.swing.JPanel();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setUndecorated(true);
+		setPreferredSize(new java.awt.Dimension(1500, 998));
 
-		jPanel1.setBackground(new java.awt.Color(0, 204, 153));
-		jPanel1.setForeground(new java.awt.Color(204, 204, 204));
-		jPanel1.setAutoscrolls(true);
+		this.setBackground(new java.awt.Color(255, 255, 255));
+		this.setMinimumSize(new java.awt.Dimension(1900, 1000));
 
-		jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+		supPanel.setBackground(new java.awt.Color(0, 204, 204));
+		supPanel.setLayout(new FlowLayout());
 
-		jPanel4.setBackground(new java.awt.Color(0, 153, 153));
-		jPanel4.setForeground(new java.awt.Color(0, 153, 153));
 
-		jLabel1.setText("La Clínica de Pablo");
+		lateralPanel.setBackground(new java.awt.Color(204, 204, 204));
 
-		jLabel2.setText("Tlf: 60x 35x 65x");
+		PatientsHomePanel.setBackground(new java.awt.Color(204, 204, 204));
 
-		jLabel3.setText("Online Services");
+		PatientsHome.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+		PatientsHome.setForeground(new java.awt.Color(102, 102, 102));
+		PatientsHome.setText("  Patient's Home");
 
-		jButton1.setText("A");
-		jButton1.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton1ActionPerformed(evt);
-			}
-		});
+		jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
+		jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
 
-		jButton2.setText("B");
-
-		jButton3.setText("C");
-
-		jLabel4.setText("Check doctors");
-
-		jLabel5.setText("See traitments");
-
-		jLabel6.setText("Appointment");
-
-		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-		jPanel4.setLayout(jPanel4Layout);
-		jPanel4Layout.setHorizontalGroup(
-				jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel4Layout.createSequentialGroup()
-						.addGap(14, 14, 14)
-						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel4Layout.createSequentialGroup()
-										.addComponent(jButton3)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jLabel6))
-								.addGroup(jPanel4Layout.createSequentialGroup()
-										.addComponent(jButton2)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jLabel5))
-								.addGroup(jPanel4Layout.createSequentialGroup()
-										.addComponent(jButton1)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jLabel4))
-								.addComponent(jLabel3)
-								.addComponent(jLabel2)
-								.addComponent(jLabel1))
+		javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(PatientsHomePanel);
+		PatientsHomePanel.setLayout(jPanel5Layout);
+		jPanel5Layout.setHorizontalGroup(
+				jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel5Layout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(PatientsHome)
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(jPanel5Layout.createSequentialGroup()
+						.addGap(12, 12, 12)
+						.addComponent(jSeparator1)
+						.addContainerGap())
 				);
-		jPanel4Layout.setVerticalGroup(
-				jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel4Layout.createSequentialGroup()
-						.addGap(16, 16, 16)
-						.addComponent(jLabel1)
+		jPanel5Layout.setVerticalGroup(
+				jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+						.addContainerGap(25, Short.MAX_VALUE)
+						.addComponent(PatientsHome)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jLabel2)
-						.addGap(18, 18, 18)
-						.addComponent(jLabel3)
-						.addGap(18, 18, 18)
-						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(jButton1)
-								.addComponent(jLabel4))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(jButton2)
-								.addComponent(jLabel5))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(jButton3)
-								.addComponent(jLabel6))
-						.addContainerGap(22, Short.MAX_VALUE))
+						.addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(12, 12, 12))
 				);
 
-		jButton4.setText("Home");
+		PanelLateralOscuro.setBackground(new java.awt.Color(0, 102, 102));
 
-		jButton5.setText("About Us / Help");
-		jButton5.addActionListener(new java.awt.event.ActionListener() {
+		PablosPrivateClinic.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+		PablosPrivateClinic.setForeground(new java.awt.Color(255, 255, 255));
+		PablosPrivateClinic.setText("PABLO'S PRIVATE CLINIC");
+
+		HowMayIHelp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		HowMayIHelp.setForeground(new java.awt.Color(255, 255, 255));
+		HowMayIHelp.setText("Tlf: 312 666 522");
+
+		AvailableServices.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+		AvailableServices.setForeground(new java.awt.Color(255, 255, 255));
+		AvailableServices.setText("Available Online Services");
+
+		askAppointmentButton.setText("A");
+		askAppointmentButton.setColorHover(new java.awt.Color(0, 153, 102));
+		askAppointmentButton.init();
+		askAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton5ActionPerformed(evt);
+				askAppointmentActionPerformed(evt);
 			}
 		});
 
-		jButton6.setText("Clinic History");
+		askForAppointment.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		askForAppointment.setForeground(new java.awt.Color(255, 255, 255));
+		askForAppointment.setText("Ask for an appointment    ");
+
+		checkTreatmentButton.setText("B");
+		checkTreatmentButton.setColorHover(new java.awt.Color(0, 153, 102));
+		checkTreatmentButton.init();
+		checkTreatmentButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				checkTreatmentActionPerformed(evt);
+			}
+		});
+
+		CheckTreatment.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		CheckTreatment.setForeground(new java.awt.Color(255, 255, 255));
+		CheckTreatment.setText("Check my treatment");
+
+		checkDoctorsButton.setText("C");
+		checkDoctorsButton.setColorHover(new java.awt.Color(0, 153, 102));
+		checkDoctorsButton.init();
+		checkDoctorsButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				checkDoctorsActionPerformed(evt);
+			}
+		});
+
+		CheckDoctors.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		CheckDoctors.setForeground(new java.awt.Color(255, 255, 255));
+		CheckDoctors.setText("Check available doctors");
+
+
+
+		CanAlsoContact.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+		CanAlsoContact.setForeground(new java.awt.Color(255, 255, 255));
+		CanAlsoContact.setText("You can also contact us");
+
+		hereButton.setText("here");
+
+		javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(PanelLateralOscuro);
+		PanelLateralOscuro.setLayout(jPanel6Layout);
+		jPanel6Layout.setHorizontalGroup(
+				jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel6Layout.createSequentialGroup()
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel6Layout.createSequentialGroup()
+										.addGap(15, 15, 15)
+										.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(jPanel6Layout.createSequentialGroup()
+														.addComponent(askAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(CheckDoctors))
+												.addGroup(jPanel6Layout.createSequentialGroup()
+														.addComponent(checkTreatmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(CheckTreatment))
+												.addGroup(jPanel6Layout.createSequentialGroup()
+														.addComponent(checkDoctorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(askForAppointment))
+												.addGroup(jPanel6Layout.createSequentialGroup()
+														.addGap(9, 9, 9)
+														.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																.addComponent(HowMayIHelp)
+																.addComponent(PablosPrivateClinic)
+																.addComponent(AvailableServices)))
+												.addGroup(jPanel6Layout.createSequentialGroup()
+														.addComponent(CanAlsoContact)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(hereButton))))
+								.addGroup(jPanel6Layout.createSequentialGroup()
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								)));
+		jPanel6Layout.setVerticalGroup(
+				jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel6Layout.createSequentialGroup()
+						.addGap(20, 20, 20)
+						.addComponent(PablosPrivateClinic)
+						.addGap(20, 20, 20)
+						.addComponent(HowMayIHelp)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGap(20, 20, 20)
+						.addComponent(AvailableServices)
+						.addGap(20, 20, 20)
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(askAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(CheckDoctors))
+						.addGap(14, 14, 14)
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(checkTreatmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(CheckTreatment))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(checkDoctorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(askForAppointment))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(CanAlsoContact)
+								.addComponent(hereButton))
+						.addGap(20, 20, 20))
+				);
+
+		homeButton.setIcon(new ImageIcon("resources/icons/home.png"));
+		homeButton.setText(" Home Menu");
+		homeButton.setColorHover(new java.awt.Color(102, 102, 102));
+		homeButton.setColorNormal(new java.awt.Color(204, 204, 204));
+		homeButton.setColorPressed(new java.awt.Color(0, 102, 102));
+		homeButton.setColorTextNormal(new java.awt.Color(102, 102, 102));
+		homeButton.setColorTextPressed(new java.awt.Color(255, 255, 255));
+		homeButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		homeButton.init();
+		homeButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				homeButtonActionPerformed(evt);
+			}
+		});
+
+		clinicButton.setIcon(new ImageIcon("resources/icons/web.png"));
+		clinicButton.setText(" Clinic History");
+		clinicButton.setColorHover(new java.awt.Color(102, 102, 102));
+		clinicButton.setColorNormal(new java.awt.Color(204, 204, 204));
+		clinicButton.setColorPressed(new java.awt.Color(0, 102, 102));
+		clinicButton.setColorTextNormal(new java.awt.Color(102, 102, 102));
+		clinicButton.setColorTextPressed(new java.awt.Color(255, 255, 255));
+		clinicButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		clinicButton.init();
+		clinicButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				clinicHistoryButtonActionPerformed(evt);
+			}
+		});
+
+		appointmentsButton.setIcon(new ImageIcon("resources/icons/collection.png"));
+		appointmentsButton.setText(" My Appointments");
+		appointmentsButton.setColorHover(new java.awt.Color(102, 102, 102));
+		appointmentsButton.setColorNormal(new java.awt.Color(204, 204, 204));
+		appointmentsButton.setColorPressed(new java.awt.Color(0, 102, 102));
+		appointmentsButton.setColorTextNormal(new java.awt.Color(102, 102, 102));
+		appointmentsButton.setColorTextPressed(new java.awt.Color(255, 255, 255));
+		appointmentsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		appointmentsButton.init();
+		appointmentsButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				appointmentsButtonActionPerformed(evt);
+			}
+		});
+
+		AboutUsButton.setIcon(new ImageIcon("resources/icons/feedback.png"));
+		AboutUsButton.setText("About Us");
+		AboutUsButton.setColorHover(new java.awt.Color(102, 102, 102));
+		AboutUsButton.setColorNormal(new java.awt.Color(204, 204, 204));
+		AboutUsButton.setColorPressed(new java.awt.Color(0, 102, 102));
+		AboutUsButton.setColorTextNormal(new java.awt.Color(102, 102, 102));
+		AboutUsButton.setColorTextPressed(new java.awt.Color(255, 255, 255));
+		AboutUsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		AboutUsButton.init();
+		AboutUsButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				aboutUsButtonActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(lateralPanel);
+		lateralPanel.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(
+				jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(PatientsHomePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(homeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(clinicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(jPanel1Layout.createSequentialGroup()
+										.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+												.addComponent(AboutUsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(appointmentsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(PanelLateralOscuro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addGap(0, 0, Short.MAX_VALUE)))
+						.addContainerGap())
+				);
+		jPanel1Layout.setVerticalGroup(
+				jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addComponent(PatientsHomePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(clinicButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(appointmentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(AboutUsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(PanelLateralOscuro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(15, Short.MAX_VALUE))
+				);
+
+		jPanel2.setBackground(new java.awt.Color(255, 255, 204));
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
 		jPanel2Layout.setHorizontalGroup(
 				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel2Layout.createSequentialGroup()
-						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel2Layout.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(jPanel2Layout.createSequentialGroup()
-										.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-												.addComponent(jButton6)
-												.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(jPanel2Layout.createSequentialGroup()
-																.addGap(27, 27, 27)
-																.addComponent(jButton4))
-														.addGroup(jPanel2Layout.createSequentialGroup()
-																.addContainerGap()
-																.addComponent(jButton5))))
-										.addGap(0, 0, Short.MAX_VALUE)))
-						.addContainerGap())
+				.addGap(0, 1596, Short.MAX_VALUE)
 				);
 		jPanel2Layout.setVerticalGroup(
 				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-						.addGap(15, 15, 15)
-						.addComponent(jButton4)
-						.addGap(43, 43, 43)
-						.addComponent(jButton5)
-						.addGap(40, 40, 40)
-						.addComponent(jButton6)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-						.addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addGap(0, 0, Short.MAX_VALUE)
+				);
+
+		panelInf.setBackground(new java.awt.Color(0, 204, 204));
+		panelInf.setForeground(new java.awt.Color(0, 204, 204));
+
+		javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(panelInf);
+		panelInf.setLayout(jPanel7Layout);
+		jPanel7Layout.setHorizontalGroup(
+				jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 0, Short.MAX_VALUE)
+				);
+		jPanel7Layout.setVerticalGroup(
+				jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 39, Short.MAX_VALUE)
+				);
+
+		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(this);
+		this.setLayout(jPanel4Layout);
+		jPanel4Layout.setHorizontalGroup(
+				jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(supPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addComponent(panelInf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(jPanel4Layout.createSequentialGroup()
+										.addComponent(lateralPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(18, 18, 18)))
 						.addContainerGap())
 				);
-
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(0, 867, Short.MAX_VALUE))
+		jPanel4Layout.setVerticalGroup(
+				jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel4Layout.createSequentialGroup()
+						.addComponent(supPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(lateralPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(panelInf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-				);
+	}
 
-		pack();
-		setLocationRelativeTo(null);
-	}// </editor-fold>
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+	// Main Lateral Panel
+
+	private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
-	private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void clinicHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-		 * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(PatientPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(PatientPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(PatientPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(PatientPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new PatientPanel().setVisible(true);
-			}
-		});
+	private void appointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
 	}
 
-	// Variables declaration - do not modify
-	private javax.swing.JButton jButton1;
-	private javax.swing.JButton jButton2;
-	private javax.swing.JButton jButton3;
-	private javax.swing.JButton jButton4;
-	private javax.swing.JButton jButton5;
-	private javax.swing.JButton jButton6;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JLabel jLabel5;
-	private javax.swing.JLabel jLabel6;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JPanel jPanel2;
-	private javax.swing.JPanel jPanel4;
-	// End of variables declaration
+	private void aboutUsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	// Online Services
+
+	private void checkDoctorsActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void checkTreatmentActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void askAppointmentActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
+
 
 

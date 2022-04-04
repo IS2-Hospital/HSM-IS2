@@ -2,6 +2,7 @@
 package viewer;
 
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -26,8 +27,10 @@ public class MainWindow extends JFrame {
 		//bgPanel.setLayout(new GridBagLayout());
 		//bgPanel.add(new LoginPanel(_ctrl, this));
 		//this.setContentPane(bgPanel);
+		this.setLayout(new GridBagLayout());
 		this.setContentPane(new LoginPanel(_ctrl, this));
-		this.setPreferredSize(new Dimension(1500, 1500));
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setMinimumSize(new Dimension(800, 800));
 
 		// NECESARIO ------------------------------------------------------------
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,5 +39,8 @@ public class MainWindow extends JFrame {
 		this.setVisible(true);
 		ImageIcon image = new ImageIcon("resources/icons/logo.png"); //icon image
 		setIconImage(image.getImage());
+
+
+
 	}
 }

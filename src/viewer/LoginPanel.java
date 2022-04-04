@@ -2,6 +2,7 @@ package viewer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
@@ -20,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -92,6 +96,14 @@ class LoginPanel extends JPanel{
 		c.gridx = 1;
 		_userNameTF = new JTextField("", 10);
 		_userNameTF.setFont(new Font("Arial", Font.PLAIN, 13));
+		_userNameTF.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					loginButtonPressed();
+				}
+			}
+		});
 		centerPanel.add(_userNameTF, c);
 
 		// JLabel Password
@@ -104,6 +116,14 @@ class LoginPanel extends JPanel{
 		_passwordTF = new JPasswordField("", 10);
 		_passwordTF.setFont(new Font("Arial", Font.PLAIN, 13));
 		_passwordTF.setEchoChar('*');
+		_passwordTF.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					loginButtonPressed();
+				}
+			}
+		});
 		centerPanel.add(_passwordTF, c);
 
 		JCheckBox showPassword = new JCheckBox("Show");
@@ -133,25 +153,7 @@ class LoginPanel extends JPanel{
 		_loginButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String pw  = String.valueOf(_passwordTF.getPassword());
-				String dni = _userNameTF.getText();
-				try {
-					_ctrl.login(dni, pw);
-				}
-				catch (SQLException e1) {
-					String title = "Something went wrong:";
-					JOptionPane.showMessageDialog(mainPanel, e1.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-				}
-				catch (LoginException e2) {
-					String title = "Login Error:";
-					JOptionPane.showMessageDialog(mainPanel, e2.getMessage(), title, JOptionPane.INFORMATION_MESSAGE);
-				}
-				catch(NumberFormatException e3) {
-					String title = "Login Error:";
-					JOptionPane.showMessageDialog(mainPanel, "Invalid DNI. The ID consist only in the numbers", title, JOptionPane.INFORMATION_MESSAGE);
-				}
-
-
+				loginButtonPressed();
 			}
 		});
 		loginResetPanel.add(_loginButton);
@@ -193,6 +195,35 @@ class LoginPanel extends JPanel{
 		public void paintComponent(Graphics g) {
 			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 		}
+	}
+
+	private void loginButtonPressed() {
+		String pw  = String.valueOf(_passwordTF.getPassword());
+		String dni = _userNameTF.getText();
+		try {
+			_ctrl.login(dni, pw);
+			//TODO login devuelve enum y se crea un controllador para la vista
+			JPanel panel = new PatientPanel();
+			panel.setPreferredSize(_mainWindow.getSize());
+			JScrollPane scroll = new JScrollPane(panel);
+			scroll.setPreferredSize(new Dimension(1000, 700));
+			_mainWindow.setContentPane(scroll);
+			_mainWindow.revalidate();
+			_mainWindow.repaint();
+		}
+		catch (SQLException e1) {
+			String title = "Something went wrong:";
+			JOptionPane.showMessageDialog(_mainWindow, e1.getMessage(), title, JOptionPane.ERROR_MESSAGE);
+		}
+		catch (LoginException e2) {
+			String title = "Login Error:";
+			JOptionPane.showMessageDialog(_mainWindow, e2.getMessage(), title, JOptionPane.INFORMATION_MESSAGE);
+		}
+		catch(NumberFormatException e3) {
+			String title = "Login Error:";
+			JOptionPane.showMessageDialog(_mainWindow, "Invalid DNI. The ID consist only in the numbers", title, JOptionPane.INFORMATION_MESSAGE);
+		}
+
 	}
 
 }
