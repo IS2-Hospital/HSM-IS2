@@ -3,13 +3,20 @@ package viewer;
 
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import control.Controller;
 
 public class MainWindow extends JFrame {
+
+	private Image backgroundImage;
 
 	Controller _ctrl;
 	private LoginPanel _loginPanel;
@@ -39,8 +46,23 @@ public class MainWindow extends JFrame {
 		this.setVisible(true);
 		ImageIcon image = new ImageIcon("resources/icons/logo.png"); //icon image
 		setIconImage(image.getImage());
-
-
-
+		setFondo();
 	}
+
+	void setFondo() {
+		try {
+			Fondo fondo = new Fondo(ImageIO.read(new File("resources/icons/background.jpg")));
+			JPanel panel = (JPanel) this.getContentPane();
+			panel.setBorder(fondo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void repaint() {
+		super.repaint();
+		setFondo();
+	}
+
 }

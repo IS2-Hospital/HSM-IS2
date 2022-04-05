@@ -3,17 +3,14 @@ package viewer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -35,7 +32,6 @@ import model.Enums.UserRole;
 @SuppressWarnings("serial")
 public class RegPanel extends JPanel {
 
-	private Image backgroundImage;
 	private static final String TITLE  = "Register form";
 	private static final String TITLE2 = "User registration";
 	private JTextField _dniTF, _nameTF, _lastnameTF, _emailTF, _phoneTF;
@@ -53,16 +49,9 @@ public class RegPanel extends JPanel {
 		initGUI();
 	}
 
-	//public RegPanel() {
-	//	initGUI();
-	//}
-
-	Image bg = new ImageIcon("resources/icons/background.jpg").getImage();
-	@Override
-	public void paintComponent(Graphics g) {
-		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+	public RegPanel() {
+		initGUI();
 	}
-
 
 	private void initGUI() {
 
@@ -287,14 +276,6 @@ public class RegPanel extends JPanel {
 		southPanel.add(loginButton, BorderLayout.SOUTH);
 
 		mainPanel.add(southPanel, BorderLayout.SOUTH);
-	}
-
-	class BgPanel extends JPanel {
-		Image bg = new ImageIcon("resources/icons/background.jpg").getImage();
-		@Override
-		public void paintComponent(Graphics g) {
-			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
-		}
 	}
 
 }
