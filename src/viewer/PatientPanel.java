@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -128,7 +129,7 @@ public class PatientPanel extends JPanel {
 		AvailableServices.setForeground(new java.awt.Color(255, 255, 255));
 		AvailableServices.setText("Available Online Services");
 
-		askAppointmentButton.setText("A");
+		askAppointmentButton.setText("C");
 		askAppointmentButton.setColorHover(new java.awt.Color(0, 153, 102));
 		askAppointmentButton.init();
 		askAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +157,7 @@ public class PatientPanel extends JPanel {
 		CheckTreatment.setForeground(new java.awt.Color(255, 255, 255));
 		CheckTreatment.setText("Check my treatment");
 
-		checkDoctorsButton.setText("C");
+		checkDoctorsButton.setText("A");
 		checkDoctorsButton.setColorHover(new java.awt.Color(0, 153, 102));
 		checkDoctorsButton.init();
 		checkDoctorsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -169,8 +170,6 @@ public class PatientPanel extends JPanel {
 		CheckDoctors.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		CheckDoctors.setForeground(new java.awt.Color(255, 255, 255));
 		CheckDoctors.setText("Check available doctors");
-
-
 
 		CanAlsoContact.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 		CanAlsoContact.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,7 +187,7 @@ public class PatientPanel extends JPanel {
 										.addGap(15, 15, 15)
 										.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 												.addGroup(jPanel6Layout.createSequentialGroup()
-														.addComponent(askAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(checkDoctorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 														.addComponent(CheckDoctors))
 												.addGroup(jPanel6Layout.createSequentialGroup()
@@ -196,7 +195,7 @@ public class PatientPanel extends JPanel {
 														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 														.addComponent(CheckTreatment))
 												.addGroup(jPanel6Layout.createSequentialGroup()
-														.addComponent(checkDoctorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(askAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 														.addComponent(askForAppointment))
 												.addGroup(jPanel6Layout.createSequentialGroup()
@@ -224,7 +223,7 @@ public class PatientPanel extends JPanel {
 						.addComponent(AvailableServices)
 						.addGap(20, 20, 20)
 						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(askAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(checkDoctorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(CheckDoctors))
 						.addGap(14, 14, 14)
 						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -232,7 +231,7 @@ public class PatientPanel extends JPanel {
 								.addComponent(CheckTreatment))
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(checkDoctorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(askAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(askForAppointment))
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
 						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -340,7 +339,7 @@ public class PatientPanel extends JPanel {
 						.addContainerGap(15, Short.MAX_VALUE))
 				);
 
-		jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+		jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
@@ -400,34 +399,70 @@ public class PatientPanel extends JPanel {
 
 	private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+		int reply = JOptionPane.showConfirmDialog(null, "Home Button Clicked", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+		if (reply == JOptionPane.OK_OPTION) {
+			//JOptionPane.showMessageDialog(this, "GOODBYE");
+			System.exit(0);
+		}
+
 	}
 
 	private void clinicHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+		int reply = JOptionPane.showConfirmDialog(null, "Clinic History Button Clicked", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+		if (reply == JOptionPane.OK_OPTION) {
+			//JOptionPane.showMessageDialog(this, "GOODBYE");
+			System.exit(0);
+		}
 	}
 
 	private void appointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+		int reply = JOptionPane.showConfirmDialog(null, "Appointment Button Clicked", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+		if (reply == JOptionPane.OK_OPTION) {
+			//JOptionPane.showMessageDialog(this, "GOODBYE");
+			System.exit(0);
+		}
 	}
 
 	private void aboutUsButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+		int reply = JOptionPane.showConfirmDialog(null, "About Us Button Clicked", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+		if (reply == JOptionPane.OK_OPTION) {
+			//JOptionPane.showMessageDialog(this, "GOODBYE");
+			System.exit(0);
+		}
 	}
 
 	// Online Services
 
 	private void checkDoctorsActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
+		int reply = JOptionPane.showConfirmDialog(null, "OS Check Doctors Button Clicked", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+		if (reply == JOptionPane.OK_OPTION) {
+			//JOptionPane.showMessageDialog(this, "GOODBYE");
+			System.exit(0);
+		}
 
 	}
 
 	private void checkTreatmentActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
+		int reply = JOptionPane.showConfirmDialog(null, "OS Check Treatment Button Clicked", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+		if (reply == JOptionPane.OK_OPTION) {
+			//JOptionPane.showMessageDialog(this, "GOODBYE");
+			System.exit(0);
+		}
 
 	}
 
 	private void askAppointmentActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
+		int reply = JOptionPane.showConfirmDialog(null, "OS Ask For Appointment Button Clicked", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+		if (reply == JOptionPane.OK_OPTION) {
+			//JOptionPane.showMessageDialog(this, "GOODBYE");
+			System.exit(0);
+		}
 
 	}
 

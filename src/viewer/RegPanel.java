@@ -53,6 +53,10 @@ public class RegPanel extends JPanel {
 		initGUI();
 	}
 
+	//public RegPanel() {
+	//	initGUI();
+	//}
+
 	Image bg = new ImageIcon("resources/icons/background.jpg").getImage();
 	@Override
 	public void paintComponent(Graphics g) {
