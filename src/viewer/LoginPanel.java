@@ -30,9 +30,7 @@ import model.exceptions.LoginException;
 @SuppressWarnings("serial")
 class LoginPanel extends JPanel{
 
-	private final String TITLE  = "Login Form";
-	private final String TITLE2 = "User Login";
-
+	private final String TITLE = "User Login";
 
 	private JLabel _name, _password;
 	private JTextField _userNameTF;
@@ -54,12 +52,11 @@ class LoginPanel extends JPanel{
 		// Panel principal para el login
 
 		this.setLayout(new GridBagLayout());
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white, 3), TITLE,
-				TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.white));
+
 		JPanel mainPanel = new JPanel(new BorderLayout());
 
 		javax.swing.border.Border innerEmpty = BorderFactory.createEmptyBorder(20, 25, 20, 25);
-		javax.swing.border.Border outterTitled = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 3), TITLE2,
+		javax.swing.border.Border outterTitled = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 3), TITLE,
 				TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.black);
 		mainPanel.setBorder(BorderFactory.createCompoundBorder(outterTitled, innerEmpty));
 
@@ -172,7 +169,7 @@ class LoginPanel extends JPanel{
 		_regButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_mainWindow.setContentPane(new RegPanel(_ctrl, _mainWindow));
+				_mainWindow.setContentPane(new RegisterPlanPanel(_ctrl, _mainWindow));
 				_mainWindow.revalidate();
 				_mainWindow.repaint();
 			}
@@ -192,7 +189,6 @@ class LoginPanel extends JPanel{
 			scroll.setPreferredSize(new Dimension(1000, 700));
 			_mainWindow.setContentPane(scroll);
 			_mainWindow.revalidate();
-			_mainWindow.repaint();
 		}
 		catch (SQLException e1) {
 			String title = "Something went wrong:";

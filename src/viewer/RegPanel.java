@@ -8,18 +8,23 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import org.json.JSONArray;
@@ -34,11 +39,15 @@ public class RegPanel extends JPanel {
 
 	private static final String TITLE  = "Register form";
 	private static final String TITLE2 = "User registration";
+	private static final Border JTEXTFIELDBORDER = new JTextField().getBorder();
+
 	private JTextField _dniTF, _nameTF, _lastnameTF, _emailTF, _phoneTF;
 	JPasswordField _passTF;
 	private JSpinner _birthdateSelector;
 	private JRadioButton _maleRB, _femaleRB, _singleInsuranceRB, _familiarInsuranceRB;
 	private JComboBox<BloodType> _bloodType;
+	private ButtonGroup _genderGroup, _insuranceGroup;
+	ArrayList<JTextField> _wrongList = new ArrayList<JTextField>();
 
 	private Controller _ctrl;
 	private MainWindow _mainWindow;
@@ -104,6 +113,7 @@ public class RegPanel extends JPanel {
 		c.gridx = 1;
 		_lastnameTF = new JTextField("", 20);
 		_lastnameTF.setFont(new Font("Arial", Font.PLAIN, 13));
+
 		centerPanel.add(_lastnameTF, c);
 
 
@@ -117,8 +127,10 @@ public class RegPanel extends JPanel {
 		SimpleDateFormat model = new SimpleDateFormat("yyyy-MM-dd");
 		_birthdateSelector = new JSpinner(new SpinnerDateModel());
 		_birthdateSelector.setEditor(new JSpinner.DateEditor(_birthdateSelector, model.toPattern()));
+		JFormattedTextField tf = ((JSpinner.DefaultEditor) _birthdateSelector.getEditor()).getTextField();
+		tf.setEditable(false);
+		tf.setBackground(Color.white);
 		centerPanel.add(_birthdateSelector, c);
-
 
 		// JLabel email
 		c.gridx = 0; c.gridy = 4;
@@ -161,9 +173,9 @@ public class RegPanel extends JPanel {
 		c.gridx = 1;
 		centerPanel.add(genderPanel, c);
 
-		ButtonGroup genderGroup = new ButtonGroup();
-		genderGroup.add(_maleRB);
-		genderGroup.add(_femaleRB);
+		_genderGroup = new ButtonGroup();
+		_genderGroup.add(_maleRB);
+		_genderGroup.add(_femaleRB);
 
 
 		// JLabel Blood type
@@ -194,9 +206,9 @@ public class RegPanel extends JPanel {
 		c.gridx = 1;
 		centerPanel.add(insurancePanel, c);
 
-		ButtonGroup insuranceGroup = new ButtonGroup();
-		insuranceGroup.add(_singleInsuranceRB);
-		insuranceGroup.add(_familiarInsuranceRB);
+		_insuranceGroup = new ButtonGroup();
+		_insuranceGroup.add(_singleInsuranceRB);
+		_insuranceGroup.add(_familiarInsuranceRB);
 
 
 		// JLabel Password
@@ -222,38 +234,39 @@ public class RegPanel extends JPanel {
 		register.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO hacer el JSON del registro
-				JSONObject jo = new JSONObject();
-				jo.put("role", UserRole.PATIENT.toString());
 
-				JSONArray registerList = new JSONArray();
+				if(_wrongList.size() != 0) {
+					for(JTextField tf: _wrongList) tf.setBorder(JTEXTFIELDBORDER);
+				}
+				_wrongList.clear();
 
-				JSONObject patientJO = new JSONObject();
-				// Password
-				patientJO.put("password", String.valueOf(_passTF.getPassword()));
+				if(_dniTF.getText().equals("")) _wrongList.add(_dniTF);
+				if(_nameTF.getText().equals("")) _wrongList.add(_nameTF);
+				if(_emailTF.getText().equals("")) _wrongList.add(_emailTF);
+				if(String.valueOf(_passTF.getPassword()).equals("")) _wrongList.add(_passTF);
 
-				// User Data
-				JSONObject userData = new JSONObject();
-				userData.put("dni", _dniTF.getText());
-				userData.put("name", _nameTF.getText());
-				userData.put("lastname", _lastnameTF.getText());
-				userData.put("birthdate", new SimpleDateFormat("yyyy-MM-dd").format(_birthdateSelector.getValue()));
-				userData.put("email", _emailTF.getText());
-				userData.put("phone", _phoneTF.getText());
-				patientJO.put("userData", userData);
+				if(_wrongList.size() != 0) {
+					for(JTextField tf : _wrongList) {
+						tf.setBorder(new LineBorder(Color.RED, 1));
+					}
+					JOptionPane.showMessageDialog(_mainWindow, "Some fields are mandatory.");
+				}
+				else {
+					try {
 
-				// Role Data
-				JSONObject roleData = new JSONObject();
-				roleData.put("gender", genderGroup.getSelection().getActionCommand());
-				roleData.put("bloodType", _bloodType.getSelectedItem().toString());
-				roleData.put("insuranceType", insuranceGroup.getSelection().getActionCommand());
-				roleData.put("dniInsuranceTaker", "");
-				patientJO.put("roleData", roleData);
+						int n = Integer.parseInt(_phoneTF.getText());
+					}
+					catch(Exception ex){
+						_phoneTF.setBorder(new LineBorder(Color.RED, 1));
+						_wrongList.add(_phoneTF);
+						JOptionPane.showMessageDialog(_mainWindow, "Invalid phone number.", "Wrong value", JOptionPane.ERROR_MESSAGE);
+					}
+				}
 
-				registerList.put(patientJO);
-				jo.put("registerList", registerList);
 
-				_ctrl.registerUsers(jo);
+
+				//createRegistrationJO();
+
 			}
 		});
 		southPanel.add(register, BorderLayout.NORTH);
@@ -276,6 +289,41 @@ public class RegPanel extends JPanel {
 		southPanel.add(loginButton, BorderLayout.SOUTH);
 
 		mainPanel.add(southPanel, BorderLayout.SOUTH);
+	}
+
+	private void createRegistrationJO() {
+		//TODO hacer el JSON del registro
+		JSONObject jo = new JSONObject();
+		jo.put("role", UserRole.PATIENT.toString());
+
+		JSONArray registerList = new JSONArray();
+
+		JSONObject patientJO = new JSONObject();
+		// Password
+		patientJO.put("password", String.valueOf(_passTF.getPassword()));
+
+		// User Data
+		JSONObject userData = new JSONObject();
+		userData.put("dni", _dniTF.getText());
+		userData.put("name", _nameTF.getText());
+		userData.put("lastname", _lastnameTF.getText());
+		userData.put("birthdate", new SimpleDateFormat("yyyy-MM-dd").format(_birthdateSelector.getValue()));
+		userData.put("email", _emailTF.getText());
+		userData.put("phone", _phoneTF.getText());
+		patientJO.put("userData", userData);
+
+		// Role Data
+		JSONObject roleData = new JSONObject();
+		roleData.put("gender", _genderGroup.getSelection().getActionCommand());
+		roleData.put("bloodType", _bloodType.getSelectedItem().toString());
+		roleData.put("insuranceType", _insuranceGroup.getSelection().getActionCommand());
+		roleData.put("dniInsuranceTaker", "");
+		patientJO.put("roleData", roleData);
+
+		registerList.put(patientJO);
+		jo.put("registerList", registerList);
+
+		_ctrl.registerUsers(jo);
 	}
 
 }
