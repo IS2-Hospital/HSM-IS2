@@ -1,5 +1,5 @@
 
-package viewer;
+package viewer.pacient;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import misc.RSButtonMetro;
 
 @SuppressWarnings("serial")
 public class PatientPanel extends JPanel {

@@ -1,4 +1,4 @@
-package viewer;
+package viewer.pacient;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -17,6 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
+import viewer.LoginPanel;
+import viewer.MainWindow;
+import viewer.RegisterPlanPanel;
 
 public class RegPatientPanel extends JPanel{
 
@@ -43,12 +46,30 @@ public class RegPatientPanel extends JPanel{
 		JPanel regPanel; c.gridx = 0; c.gridy = 0;
 
 		if(plan) { // Plan individual
-			regPanel = new RegPanelTemplate();
+			regPanel = new RegPanelTemplate(mainPanel);
 		}
 		else { // Plan cohabitante
 			regPanel = new RegPatientTabbedPane();
 		}
 		mainPanel.add(regPanel, c);
+
+		// Register button
+		JButton regButton = new JButton("Register");
+		regButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(plan) {
+					if(((RegPanelTemplate) regPanel).getJSONObject() == null) System.out.println("Hubo error");
+					else System.out.println("Todo bien");
+				}
+				else {
+					((RegPatientTabbedPane) regPanel).getJSONObject();
+				}
+			}
+		});
+		c.gridy= 1; c.anchor = GridBagConstraints.EAST;
+		mainPanel.add(regButton, c);
+		c.anchor = GridBagConstraints.CENTER;
 
 		// Back to login
 		JPanel loginPanel = new JPanel(new FlowLayout());
@@ -66,7 +87,7 @@ public class RegPatientPanel extends JPanel{
 			}
 		});
 		loginPanel.add(loginButton);
-		c.gridy = 1;
+		c.gridy = 2;
 		mainPanel.add(loginPanel, c);
 
 		// Back to Selection Plan
@@ -93,7 +114,7 @@ public class RegPatientPanel extends JPanel{
 		});
 		msg1.setHorizontalAlignment(JLabel.CENTER);
 		selectPanel.add(msg3); selectPanel.add(msg1);
-		c.gridy = 2;
+		c.gridy = 3;
 		mainPanel.add(selectPanel, c);
 
 

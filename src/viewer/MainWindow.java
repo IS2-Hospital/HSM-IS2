@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import control.Controller;
+import viewer.pacient.RegPanelTemplate;
 
 public class MainWindow extends JFrame {
 

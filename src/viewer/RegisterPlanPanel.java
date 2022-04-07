@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
+import viewer.pacient.RegPatientPanel;
 
 /**
  *
@@ -174,7 +175,7 @@ public class RegisterPlanPanel extends javax.swing.JPanel{
 		CohPlanText.setBackground(new java.awt.Color(255, 255, 204));
 		CohPlanText.setLayout(new java.awt.GridBagLayout());
 
-		jLabel6.setText("<html> <br>The perfect plan for you and<br> those you are living with. It's<br>like multiple individual plan!<br> <br> We will love taking care of you <br> for just 20$/month*pp<br>---------------------------");
+		jLabel6.setText("<html> <br>The perfect plan for you and<br> those you are living with. It's<br>like multiple individual plan!<br> <br> We will love taking care of you <br> for just 20$/month*pp(min 3pp)<br>---------------------------");
 		CohPlanText.add(jLabel6, new java.awt.GridBagConstraints());
 
 		CohabitantsPlanPanel.add(CohPlanText, java.awt.BorderLayout.CENTER);

@@ -26,9 +26,10 @@ import javax.swing.border.TitledBorder;
 
 import control.Controller;
 import model.exceptions.LoginException;
+import viewer.pacient.PatientPanel;
 
 @SuppressWarnings("serial")
-class LoginPanel extends JPanel{
+public class LoginPanel extends JPanel{
 
 	private final String TITLE = "User Login";
 
@@ -41,7 +42,7 @@ class LoginPanel extends JPanel{
 	private Controller _ctrl;
 	MainWindow _mainWindow;
 
-	LoginPanel(Controller ctrl, MainWindow mainWindow){
+	public LoginPanel(Controller ctrl, MainWindow mainWindow){
 		_ctrl = ctrl;
 		_mainWindow = mainWindow;
 		initGUI();
