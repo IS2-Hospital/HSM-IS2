@@ -8,7 +8,10 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -35,16 +38,16 @@ import model.Enums.BloodType;
 import model.Enums.UserRole;
 
 @SuppressWarnings("serial")
-public class RegPanel extends JPanel {
+public class RegPanelTemplate extends JPanel {
 
 	private static final String TITLE  = "Register form";
 	private static final String TITLE2 = "User registration";
 	private static final Border JTEXTFIELDBORDER = new JTextField().getBorder();
 
-	private JTextField _dniTF, _nameTF, _lastnameTF, _emailTF, _phoneTF;
+	private JTextField _dniTF, _nameTF, _lastnameTF, _emailTF, _phoneTF, _homeAdressTF;
 	JPasswordField _passTF;
 	private JSpinner _birthdateSelector;
-	private JRadioButton _maleRB, _femaleRB, _singleInsuranceRB, _familiarInsuranceRB;
+	private JRadioButton _maleRB, _femaleRB;
 	private JComboBox<BloodType> _bloodType;
 	private ButtonGroup _genderGroup, _insuranceGroup;
 	ArrayList<JTextField> _wrongList = new ArrayList<JTextField>();
@@ -52,21 +55,20 @@ public class RegPanel extends JPanel {
 	private Controller _ctrl;
 	private MainWindow _mainWindow;
 
-	public RegPanel(Controller ctrl, MainWindow mainWindow) {
+	public RegPanelTemplate(Controller ctrl, MainWindow mainWindow) {
 		_ctrl = ctrl;
 		_mainWindow = mainWindow;
 		initGUI();
 	}
 
-	public RegPanel() {
+	public RegPanelTemplate() {
 		initGUI();
 	}
 
 	private void initGUI() {
 
 		this.setLayout(new GridBagLayout());
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white, 3), TITLE,
-				TitledBorder.CENTER, TitledBorder.TOP, new Font("times new roman",Font.PLAIN,12), Color.white));
+
 		JPanel mainPanel = new JPanel(new BorderLayout());
 
 		javax.swing.border.Border innerEmpty = BorderFactory.createEmptyBorder(20, 25, 20, 25);
@@ -189,30 +191,25 @@ public class RegPanel extends JPanel {
 		centerPanel.add(_bloodType, c);
 
 
-		// JLabel Insurance type
+		// Home Adress JLabel
 		c.gridx = 0; c.gridy = 8;
-		JLabel insurance = new JLabel("Insurance type: ");
-		centerPanel.add(insurance, c);
+		JLabel homeAdressLabel = new JLabel("Home adress: ");
+		centerPanel.add(homeAdressLabel, c);
 
-		// Insurance selection
-		JPanel insurancePanel = new JPanel();
-		_singleInsuranceRB = new JRadioButton("Single");
-		_singleInsuranceRB.setActionCommand("SINGLE");
-		insurancePanel.add(_singleInsuranceRB);
-		_familiarInsuranceRB = new JRadioButton("Familiar");
-		_familiarInsuranceRB.setActionCommand("FAMILIAR");
-		insurancePanel.add(_familiarInsuranceRB);
-
+		// Home Adress JTextField
+		_homeAdressTF = new JTextField("", 20);
+		_homeAdressTF.setFont(new Font("Arial", Font.PLAIN, 13));
 		c.gridx = 1;
-		centerPanel.add(insurancePanel, c);
+		centerPanel.add(_homeAdressTF, c);
 
-		_insuranceGroup = new ButtonGroup();
-		_insuranceGroup.add(_singleInsuranceRB);
-		_insuranceGroup.add(_familiarInsuranceRB);
-
+		// Home Adress JLabel
+		c.gridy = 9;
+		JLabel infoHomeAdress = new JLabel("<html> We need this information for facturation<br>and for checking data in Cohabitant's plan.");
+		infoHomeAdress.setFont(new Font("Arial", Font.PLAIN, 10));
+		centerPanel.add(infoHomeAdress, c);
 
 		// JLabel Password
-		c.gridx = 0; c.gridy = 9;
+		c.gridx = 0; c.gridy = 10;
 		JLabel pass = new JLabel("Password: ");
 		centerPanel.add(pass, c);
 
@@ -234,61 +231,60 @@ public class RegPanel extends JPanel {
 		register.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				if(_wrongList.size() != 0) {
-					for(JTextField tf: _wrongList) tf.setBorder(JTEXTFIELDBORDER);
-				}
-				_wrongList.clear();
-
-				if(_dniTF.getText().equals("")) _wrongList.add(_dniTF);
-				if(_nameTF.getText().equals("")) _wrongList.add(_nameTF);
-				if(_emailTF.getText().equals("")) _wrongList.add(_emailTF);
-				if(String.valueOf(_passTF.getPassword()).equals("")) _wrongList.add(_passTF);
-
-				if(_wrongList.size() != 0) {
-					for(JTextField tf : _wrongList) {
-						tf.setBorder(new LineBorder(Color.RED, 1));
-					}
-					JOptionPane.showMessageDialog(_mainWindow, "Some fields are mandatory.");
-				}
-				else {
-					try {
-
-						int n = Integer.parseInt(_phoneTF.getText());
-					}
-					catch(Exception ex){
-						_phoneTF.setBorder(new LineBorder(Color.RED, 1));
-						_wrongList.add(_phoneTF);
-						JOptionPane.showMessageDialog(_mainWindow, "Invalid phone number.", "Wrong value", JOptionPane.ERROR_MESSAGE);
-					}
-				}
-
-
-
-				//createRegistrationJO();
-
+				validateIntroducedData();
 			}
 		});
 		southPanel.add(register, BorderLayout.NORTH);
 
 
-		// Back to login
-		JLabel msg = new JLabel("Alredy have an account?");
-		msg.setHorizontalAlignment(JLabel.CENTER);
-		southPanel.add(msg);
 
-		JButton loginButton = new JButton("Login");
-		loginButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				_mainWindow.setContentPane(new LoginPanel(_ctrl, _mainWindow));
-				_mainWindow.revalidate();
-				_mainWindow.repaint();
-			}
-		});
-		southPanel.add(loginButton, BorderLayout.SOUTH);
 
 		mainPanel.add(southPanel, BorderLayout.SOUTH);
+	}
+
+	private void validateIntroducedData() {
+		if(_wrongList.size() != 0) {
+			for(JTextField tf: _wrongList) tf.setBorder(JTEXTFIELDBORDER);
+		}
+		_wrongList.clear();
+
+		if(_dniTF.getText().equals("")) _wrongList.add(_dniTF);
+		if(_nameTF.getText().equals("")) _wrongList.add(_nameTF);
+		if(_emailTF.getText().equals("")) _wrongList.add(_emailTF);
+		if(String.valueOf(_passTF.getPassword()).equals("")) _wrongList.add(_passTF);
+		if(_homeAdressTF.getText().equals("")) _wrongList.add(_homeAdressTF);
+
+		if(_wrongList.size() != 0) {
+			for(JTextField tf : _wrongList) {
+				tf.setBorder(new LineBorder(Color.RED, 1));
+			}
+			JOptionPane.showMessageDialog(_mainWindow, "Some fields are mandatory.");
+		}
+		else {
+			try {
+				// Parseo numero telefono
+				if(!_phoneTF.getText().equals("")) Integer.parseInt(_phoneTF.getText());
+				// Parseo género
+				if(!isSelection(_genderGroup)) throw new Exception("Please, select your gender.");
+				// Parseo fecha
+				String introducedDate = new SimpleDateFormat("yyyy-MM-dd").format(_birthdateSelector.getValue());
+				LocalDateTime ldt = LocalDateTime.now();
+				DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
+				int compare = formmat1.format(ldt).compareTo(introducedDate);
+				if(compare == 0) JOptionPane.showMessageDialog(_mainWindow,  "You have born today! Congratulations to the newborn and you, parents.", "Happy birthday", JOptionPane.PLAIN_MESSAGE);
+				else if(compare < 0) throw new Exception("According to our calculations, you haven´t born yet. Congratulations, you have surpass the matrix's Laws of Physics.");
+			}
+			catch(NumberFormatException ex) {
+				_phoneTF.setBorder(new LineBorder(Color.RED, 1));
+				_wrongList.add(_phoneTF);
+				JOptionPane.showMessageDialog(_mainWindow, "Invalid phone number.", "Wrong value", JOptionPane.ERROR_MESSAGE);
+			}
+			catch(Exception ex){
+				JOptionPane.showMessageDialog(_mainWindow,  ex.getMessage(), "Selecting gender", JOptionPane.WARNING_MESSAGE);
+			}
+		}
+
+		//createRegistrationJO();
 	}
 
 	private void createRegistrationJO() {
@@ -324,6 +320,10 @@ public class RegPanel extends JPanel {
 		jo.put("registerList", registerList);
 
 		_ctrl.registerUsers(jo);
+	}
+
+	private boolean isSelection(ButtonGroup buttonGroup) {
+		return (buttonGroup.getSelection() != null);
 	}
 
 }

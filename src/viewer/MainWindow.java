@@ -20,7 +20,7 @@ public class MainWindow extends JFrame {
 
 	Controller _ctrl;
 	private LoginPanel _loginPanel;
-	private RegPanel _regPanel;
+	private RegPanelTemplate _regPanel;
 
 	public MainWindow(Controller ctrl) {
 		super("La clínica de Pablo");

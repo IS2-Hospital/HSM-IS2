@@ -271,11 +271,15 @@ public class RegisterPlanPanel extends javax.swing.JPanel{
 	}// </editor-fold>
 
 	private void individualPlanActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		_mainWindow.setContentPane(new RegPatientPanel(_ctrl, _mainWindow, true));
+		_mainWindow.revalidate();
+		_mainWindow.repaint();
 	}
 
 	private void cohabitantPlanActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		_mainWindow.setContentPane(new RegPatientPanel(_ctrl, _mainWindow, false));
+		_mainWindow.revalidate();
+		_mainWindow.repaint();
 	}
 
 	private void doctorPlanActionPerformed(java.awt.event.ActionEvent evt) {
