@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package viewer.pacient;
+package viewer.patient;
 
 /**
  *
@@ -41,7 +41,7 @@ public class PatientHomePanel extends javax.swing.JPanel {
 		setBackground(new java.awt.Color(204, 204, 204));
 		setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(null, "Home", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Times New Roman", 0, 10), new java.awt.Color(204, 204, 204)), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.darkGray))); // NOI18N
 
-		doctorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/HomeImages/Doctor.jpg"))); // NOI18N
+		doctorLabel.setIcon(new javax.swing.ImageIcon(("resources/HomeImages/Doctor.jpg"))); // NOI18N
 
 		textField.setColumns(20);
 		textField.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
@@ -51,7 +51,7 @@ public class PatientHomePanel extends javax.swing.JPanel {
 
 		jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 		jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/HomeImages/BrokenToy.jpg"))); // NOI18N
+		jLabel5.setIcon(new javax.swing.ImageIcon(("resources/HomeImages/BrokenToy.jpg"))); // NOI18N
 		jLabel5.setText("Customized care for everyone");
 		jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 		jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -60,7 +60,7 @@ public class PatientHomePanel extends javax.swing.JPanel {
 
 		jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 		jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/HomeImages/DoctorItems.jpg"))); // NOI18N
+		jLabel4.setIcon(new javax.swing.ImageIcon(("resources/HomeImages/DoctorItems.jpg"))); // NOI18N
 		jLabel4.setText("The best care of the region");
 		jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 		jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -68,7 +68,7 @@ public class PatientHomePanel extends javax.swing.JPanel {
 
 		jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 		jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/HomeImages/DoctorOnline.jpg"))); // NOI18N
+		jLabel3.setIcon(new javax.swing.ImageIcon(("resources/HomeImages/DoctorOnline.jpg"))); // NOI18N
 		jLabel3.setText("The only one in online format");
 		jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 		jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -76,7 +76,7 @@ public class PatientHomePanel extends javax.swing.JPanel {
 
 		jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 		jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/HomeImages/DoctorFamily.jpg"))); // NOI18N
+		jLabel6.setIcon(new javax.swing.ImageIcon(("resources/HomeImages/DoctorFamily.jpg"))); // NOI18N
 		jLabel6.setText("For you and for your family");
 		jLabel6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 		jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -108,7 +108,7 @@ public class PatientHomePanel extends javax.swing.JPanel {
 								.addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
 				);
 
-		iconPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/proyectois/paneles/LogoHome.png"))); // NOI18N
+		iconPanel.setIcon(new javax.swing.ImageIcon(("com/mycompany/proyectois/paneles/LogoHome.png"))); // NOI18N
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);

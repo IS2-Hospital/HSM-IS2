@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
-import viewer.pacient.RegPatientPanel;
+import viewer.patient.RegPatientPanel;
 
 /**
  *

@@ -1,18 +1,23 @@
 package control;
 
 import java.sql.SQLException;
+import java.util.Vector;
 
 import org.json.JSONObject;
 
+import model.Doctor;
+import model.PatientApp;
 import model.exceptions.LoginException;
 import model.userManagment.UserManager;
 
 public class Controller {
 
 	UserManager _userManager;
+	PatientApp patientApp;
 
 	public Controller(UserManager userManager) {
 		_userManager = userManager;
+		this.patientApp = new PatientApp();
 	}
 
 	public void login(String dni, String password) throws LoginException, SQLException {
@@ -23,24 +28,15 @@ public class Controller {
 		_userManager.get_patientRegisterer().registerUsers(usersToRegister);
 	}
 
-	public void run() {
+	public Vector<Doctor> getDoctorsOf(String dni) throws SQLException {
+		return patientApp.getDoctorsOf(dni);
+	}
 
-		//		PRUEBA DE REGISTER
-		//		Patient p1 = new Patient("003", "Diego", "Revenga", "2002-10-01", "reven@gmail.com", null, Gender.MALE, HealthInsuranceType.SINGLE, null);
-		//		RegisterData rd = new RegisterData(p1, "12345");
-		//		List<RegisterData> l = new ArrayList<>();
-		//		l.add(rd);
-		//
-		//		PatientRegisterer registerer = new PatientRegisterer();
-		//		try {
-		//			registerer.registerPatients(l);
-		//			System.out.println("BIEN");
-		//		} catch (IllegalArgumentException e) {
-		//			System.out.println(e.getMessage());
-		//		} catch (SqlConnectionException e) {
-		//			System.out.println(e.getMessage());
-		//		} catch (SQLException e) {
-		//			System.out.println(e.getMessage());
-		//		}
+	public Vector<String> getAvailableHours(String dni_doctor, String date) throws SQLException {
+		return patientApp.getAvailableHours(dni_doctor, date);
+	}
+
+	public void askForAppointment(String day, String hour, String dni_doctor, String dni_patient, String desc) throws SQLException {
+		patientApp.askForAppointment(day, hour, dni_doctor, dni_patient, desc);
 	}
 }

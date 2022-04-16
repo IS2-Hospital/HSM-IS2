@@ -19,6 +19,9 @@ public class Doctor extends User {
 		this.contractEndDate = contractEndDate;
 	}
 
-
+	@Override
+	public String toString() {
+		return name + " " + lastname;
+	}
 
 }

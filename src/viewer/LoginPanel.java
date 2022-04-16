@@ -2,7 +2,6 @@ package viewer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -20,13 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
 import model.exceptions.LoginException;
-import viewer.pacient.PatientPanel;
+import viewer.patient.PatientPanel;
 
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel{
@@ -184,11 +182,7 @@ public class LoginPanel extends JPanel{
 		try {
 			_ctrl.login(dni, pw);
 			//TODO login devuelve enum y se crea un controllador para la vista
-			JPanel panel = new PatientPanel();
-			panel.setPreferredSize(_mainWindow.getSize());
-			JScrollPane scroll = new JScrollPane(panel);
-			scroll.setPreferredSize(new Dimension(1000, 700));
-			_mainWindow.setContentPane(scroll);
+			_mainWindow.setContentPane(new PatientPanel(_ctrl, dni));
 			_mainWindow.revalidate();
 		}
 		catch (SQLException e1) {

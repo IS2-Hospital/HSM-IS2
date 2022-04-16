@@ -1,4 +1,4 @@
-package viewer.pacient;
+package viewer.patient;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

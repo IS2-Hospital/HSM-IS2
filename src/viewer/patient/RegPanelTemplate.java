@@ -1,4 +1,4 @@
-package viewer.pacient;
+package viewer.patient;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

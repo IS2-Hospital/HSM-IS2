@@ -1,5 +1,5 @@
 
-package viewer.pacient;
+package viewer.patient;
 
 /**
  *
@@ -53,7 +53,7 @@ public class AboutUsPanel extends javax.swing.JPanel {
 
 		ourTeamLabel.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 		ourTeamLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		ourTeamLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/AboutImages/OurTeam.jpg"))); // NOI18N
+		ourTeamLabel.setIcon(new javax.swing.ImageIcon(("resources/AboutImages/OurTeam.jpg"))); // NOI18N
 		ourTeamLabel.setText("Our Team");
 		ourTeamLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 		ourTeamLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
