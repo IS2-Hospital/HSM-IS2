@@ -4,6 +4,8 @@
  */
 package viewer.patient;
 
+import java.awt.Color;
+
 import control.Controller;
 
 /**
@@ -58,44 +60,12 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 
 		centerPanel.setLayout(new java.awt.BorderLayout());
 
-		// TODO rellenar modelo con la base de datos
-		jTable1.setModel(new javax.swing.table.DefaultTableModel(
-				new Object [][] {
-					{null, null, null, null, null},
-					{null, null, null, null, null},
-					{null, null, null, null, null},
-					{null, null, null, null, null},
-					{null, null, null, null, null},
-					{null, null, null, null, null},
-					{null, null, null, null, null},
-					{null, null, null, null, null},
-					{null, null, null, null, null},
-					{null, null, null, null, null}
-				},
-				new String [] {
-						"Date", "Hour", "Doctor", "Room", "Description"
-				}
-				) {
-			Class[] types = new Class [] {
-					java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
-			};
-			boolean[] canEdit = new boolean [] {
-					false, false, false, false, false
-			};
-
-			@Override
-			public Class getColumnClass(int columnIndex) {
-				return types [columnIndex];
-			}
-
-			@Override
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return canEdit [columnIndex];
-			}
-		});
+		jTable1 = new javax.swing.JTable(new AppointmentsTableModel(dni));
 		jScrollPane2.setViewportView(jTable1);
 
 		centerPanel.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+		centerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK,5), "My Appointments",
+				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
 		add(centerPanel, java.awt.BorderLayout.CENTER);
 	}// </editor-fold>
