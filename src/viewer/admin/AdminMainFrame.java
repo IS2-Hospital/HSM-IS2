@@ -22,12 +22,8 @@ import javax.swing.border.TitledBorder;
 import control.Controller;
 import model.exceptions.sqlExeptions.SqlConnectionException;
 
+@SuppressWarnings("serial")
 public class AdminMainFrame extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	Controller _ctrl;
 

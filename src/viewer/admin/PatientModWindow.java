@@ -24,6 +24,7 @@ import model.Enums.BloodType;
 import model.Enums.Gender;
 import model.Enums.HealthInsuranceType;
 
+@SuppressWarnings("serial")
 public class PatientModWindow extends JFrame {
 
 	private Controller _ctrl;
