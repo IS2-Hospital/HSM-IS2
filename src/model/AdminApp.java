@@ -89,7 +89,7 @@ public class AdminApp {
 		String patients;
 		if(colData.size() == 12) { //Modificar contraseña
 			//TODO Modificar la consulta para que actualica el valor de la contraseña
-			// y actualizar el valor de la contraseña
+			// y actualizar el valor de la contraseña en la base de datos
 			patients = "UPDATE patients, users SET gender = ? , insurance_type = ? , dni_insurance_taker = ? , blood_type = ? , bill = ?, name = ?, lastname = ?, birthdate = '"+ colData.get(3) +" 00:00:00.000' , email = ?, phone = ? WHERE dni_patient = ? AND dni = dni_patient;";
 		}
 		else {

@@ -22,7 +22,7 @@ import javax.swing.border.TitledBorder;
 import control.Controller;
 import model.exceptions.sqlExeptions.SqlConnectionException;
 
-@SuppressWarnings("serial")
+
 public class AdminMainFrame extends JFrame {
 
 	Controller _ctrl;

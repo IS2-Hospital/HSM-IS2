@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 
 import control.Controller;
 
-@SuppressWarnings("serial")
+
 public class PatientModWindowPassword extends PatientModWindow{
 
 	Controller _ctrl;

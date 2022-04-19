@@ -24,7 +24,7 @@ public class MainWindow extends JFrame {
 	private RegPanelTemplate _regPanel;
 
 	public MainWindow(Controller ctrl) {
-		super("La clínica de Pablo");
+		super("La clinica de Pablo");
 		_ctrl = ctrl;
 		initGUI();
 	}
