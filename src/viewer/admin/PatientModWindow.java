@@ -28,7 +28,7 @@ public class PatientModWindow extends JFrame {
 
 	private Controller _ctrl;
 	private String _dni;
-	private List<String> _dataList;
+	protected List<String> _dataList;
 	private JComboBox<HealthInsuranceType> healthText;
 	private JTextField takerText;
 	private JTextField textDNI;
@@ -47,10 +47,10 @@ public class PatientModWindow extends JFrame {
 		this._dni = dni;
 		// dni, lastname,name, birthdate, email, phone, gender, blood_type, insurance_type, dni_insurance_taker, bill
 		_dataList = _ctrl.getPatientData(dni);
-		initGUI();
+		add(initGUI(), BorderLayout.CENTER);
 	}
 
-	private void initGUI() {
+	protected JPanel initGUI() {
 		setLayout(new BorderLayout());
 		setVisible(true);
 		setSize(new Dimension(280,400));
@@ -203,7 +203,7 @@ public class PatientModWindow extends JFrame {
 		panel5.add(panel3, BorderLayout.SOUTH);
 		panel4.add(panel5, BorderLayout.NORTH);
 
-		add(panel4, BorderLayout.CENTER);
+
 
 		JPanel buttonPanel = new JPanel();
 
@@ -227,23 +227,7 @@ public class PatientModWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor (PatientModWindow.this),
-						"Are you sure you want to commit the data?", "Commit", JOptionPane.YES_NO_OPTION )){
-					List<String> colData = getIntroducedData();
-					if (colData.size() != 11) {
-						JOptionPane.showMessageDialog(null, "Not enough arguments",
-								"Error on data collection", JOptionPane.ERROR_MESSAGE);
-					}
-					else {
-						try {
-							_ctrl.updatePatient(colData);
-						} catch (SQLException e1) {
-							JOptionPane.showMessageDialog(null, e1.getMessage(),
-									"Error on Query", JOptionPane.ERROR_MESSAGE);
-						}
-						PatientModWindow.this.dispose();
-					}
-				}
+				commit();
 			}
 
 		});
@@ -252,7 +236,27 @@ public class PatientModWindow extends JFrame {
 
 		add(buttonPanel, BorderLayout.SOUTH);
 
+		return panel4;
+	}
 
+	protected void commit() {
+		if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor (PatientModWindow.this),
+				"Are you sure you want to commit the data?", "Commit", JOptionPane.YES_NO_OPTION )){
+			List<String> colData = getIntroducedData();
+			if (colData.size() != 11) {
+				JOptionPane.showMessageDialog(null, "Not enough arguments",
+						"Error on data collection", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				try {
+					_ctrl.updatePatient(colData);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(),
+							"Error on Query", JOptionPane.ERROR_MESSAGE);
+				}
+				PatientModWindow.this.dispose();
+			}
+		}
 	}
 
 	public List<String> getIntroducedData(){
