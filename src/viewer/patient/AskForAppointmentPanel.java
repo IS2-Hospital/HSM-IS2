@@ -246,7 +246,10 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 		}
 
 		DefaultListModel<String> m = new DefaultListModel<>();
-		m.addAll(v);
+
+		for(int i = 0; i < v.size(); i++)
+			m.add(i, v.get(i));
+
 		hourList.setModel(m);
 	}
 
