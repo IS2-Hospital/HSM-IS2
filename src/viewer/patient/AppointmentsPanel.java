@@ -6,6 +6,8 @@ package viewer.patient;
 
 import java.awt.Color;
 
+import javax.swing.JOptionPane;
+
 import control.Controller;
 
 /**
@@ -60,7 +62,8 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 
 		centerPanel.setLayout(new java.awt.BorderLayout());
 
-		jTable1 = new javax.swing.JTable(new AppointmentsTableModel(dni));
+		tableModel = new AppointmentsTableModel(dni);
+		jTable1 = new javax.swing.JTable(tableModel);
 		jScrollPane2.setViewportView(jTable1);
 
 		centerPanel.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -77,6 +80,17 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 	private javax.swing.JLabel jLabel7;
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JTable jTable1;
+	private AppointmentsTableModel tableModel;
 	private javax.swing.JPanel rightPanel;
 	// End of variables declaration
+
+	public void open() {
+		try {
+			tableModel.open();
+			tableModel.fireTableDataChanged();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
+	}
 }

@@ -22,7 +22,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 	public AppointmentsTableModel(String dni) {
 		this.dni =  dni;
 		try {
-			initGUI();
+			open();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
@@ -30,7 +30,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void initGUI() throws Exception {
+	public void open() throws Exception {
 		Connection con = DBConnector.connectdb();
 		String SQL = "SELECT a.day, a.hour, u.name, u.lastname "
 				+ "FROM appointments a "
@@ -43,7 +43,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 		ResultSet resultSet = st.executeQuery(SQL);
 
 		if (resultSet == null)
-			throw new Exception("You don´t have appointments");
+			throw new Exception("You donï¿½t have appointments");
 
 		v = new Vector<>();
 		while(resultSet.next()) {
@@ -52,7 +52,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 			String name = resultSet.getString("name");
 			String lastName = resultSet.getString("lastname");
 			String doctor = name + " " + lastName;
-			Appointment ap = new Appointment(date, hour, doctor,0, null);
+			Appointment ap = new Appointment(date, hour, doctor, null);
 			v.add(ap);
 		}
 		resultSet.close();
@@ -78,7 +78,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 		Object obj = null;
 		switch(columnIndex){
 		case 0:
-			obj = v.get(rowIndex).getDate();
+			obj = v.get(rowIndex).getDay();
 			break;
 		case 1:
 			obj = v.get(rowIndex).getHour();

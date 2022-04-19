@@ -8,6 +8,7 @@ import java.util.Vector;
 import org.json.JSONObject;
 
 import model.AdminApp;
+import model.Appointment;
 import model.Doctor;
 import model.PatientApp;
 import model.exceptions.LoginException;
@@ -41,8 +42,8 @@ public class Controller {
 		return patientApp.getAvailableHours(dni_doctor, date);
 	}
 
-	public void askForAppointment(String day, String hour, String dni_doctor, String dni_patient, String desc) throws SQLException {
-		patientApp.askForAppointment(day, hour, dni_doctor, dni_patient, desc);
+	public void askForAppointment(Appointment appointment, String dni_patient) throws SQLException {
+		patientApp.askForAppointment(appointment, dni_patient);
 	}
 
 	public ResultSet resultAllPatients() {

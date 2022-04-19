@@ -20,6 +20,7 @@ public class PatientPanel extends javax.swing.JPanel {
 	AppointmentsPanel appointmentsPanel;
 	AskForAppointmentPanel askForAppointmentPanel;
 	PatientHomePanel homePanel;
+	ProfilePanel profilePanel;
 
 	/**
 	 * Creates new form PatientPanel
@@ -34,6 +35,7 @@ public class PatientPanel extends javax.swing.JPanel {
 		appointmentsPanel = new AppointmentsPanel(ctrl, dni);
 		askForAppointmentPanel = new AskForAppointmentPanel(this);
 		homePanel = new PatientHomePanel();
+		profilePanel = new ProfilePanel();
 	}
 
 	/**
@@ -114,6 +116,12 @@ public class PatientPanel extends javax.swing.JPanel {
 		profileButton.setFocusPainted(false);
 		profileButton.setPreferredSize(new java.awt.Dimension(45, 35));
 		profileButton.setRolloverEnabled(false);
+		profileButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				profileButtonActionPerformed(evt);
+			}
+		});
 		northpanel.add(profileButton);
 
 		add(northpanel, java.awt.BorderLayout.PAGE_START);
@@ -329,6 +337,7 @@ public class PatientPanel extends javax.swing.JPanel {
 
 	private void appointButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		setCenterPanel(appointmentsPanel);
+		appointmentsPanel.open();
 	}
 
 	private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,6 +355,11 @@ public class PatientPanel extends javax.swing.JPanel {
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+	}
+
+	private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		setCenterPanel(profilePanel);
+		profilePanel.open();
 	}
 
 

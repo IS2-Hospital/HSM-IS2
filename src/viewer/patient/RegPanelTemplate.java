@@ -14,7 +14,6 @@ import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -126,9 +125,9 @@ public class RegPanelTemplate extends JPanel {
 		SimpleDateFormat model = new SimpleDateFormat("yyyy-MM-dd");
 		_birthdateSelector = new JSpinner(new SpinnerDateModel());
 		_birthdateSelector.setEditor(new JSpinner.DateEditor(_birthdateSelector, model.toPattern()));
-		JFormattedTextField tf = ((JSpinner.DefaultEditor) _birthdateSelector.getEditor()).getTextField();
-		tf.setEditable(false);
-		tf.setBackground(Color.white);
+		//JFormattedTextField tf = ((JSpinner.DefaultEditor) _birthdateSelector.getEditor()).getTextField();
+		//tf.setEditable(false);
+		//tf.setBackground(Color.white);
 		centerPanel.add(_birthdateSelector, c);
 
 		// JLabel email

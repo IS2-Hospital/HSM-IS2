@@ -12,6 +12,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 import control.Controller;
+import model.Appointment;
 import model.Doctor;
 
 /**
@@ -222,7 +223,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 			String dni_doctor = ((Doctor) doctorComboBox.getSelectedItem()).getDni();
 			String desc = descriptionTextArea.getText();
 
-			ctrl.askForAppointment(day, hour, dni_doctor, dni_patient, desc);
+			ctrl.askForAppointment(new Appointment(day, hour, dni_doctor, desc), dni_patient);
 			JOptionPane.showMessageDialog(this, "Your appointment has been registered successfully", "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e) {
 			e.printStackTrace();

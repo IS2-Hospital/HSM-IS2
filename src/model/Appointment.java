@@ -2,22 +2,20 @@ package model;
 
 public class Appointment {
 
-	private String date;
+	private String day;
 	private String hour;
 	private String doctor;
-	private int room;
 	private String description;
 
-	public Appointment(String date, String hour, String doctor, int room, String description) {
-		this.date = date;
+	public Appointment(String day, String hour, String doctor, String description) {
+		this.day = day;
 		this.hour = hour;
 		this.doctor = doctor;
-		this.room = room;
 		this.description = description;
 	}
 
-	public String getDate() {
-		return date;
+	public String getDay() {
+		return day;
 	}
 
 	public String getHour() {
@@ -26,10 +24,6 @@ public class Appointment {
 
 	public String getDoctor() {
 		return doctor;
-	}
-
-	public int getRoom() {
-		return room;
 	}
 
 	public String getDescription() {
