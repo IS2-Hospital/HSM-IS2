@@ -32,7 +32,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 	@SuppressWarnings("unchecked")
 	private void initGUI() throws Exception {
 		Connection con = DBConnector.connectdb();
-		String SQL = "SELECT a.hour, u.name, u.lastname "
+		String SQL = "SELECT a.day, a.hour, u.name, u.lastname "
 				+ "FROM appointments a "
 				+ "join users u on a.dni_doctor = u.dni "
 				+ "WHERE a.dni_patient =" +  dni;
@@ -47,12 +47,12 @@ public class AppointmentsTableModel extends AbstractTableModel {
 
 		v = new Vector<>();
 		while(resultSet.next()) {
-			//String date = resultSet.getString("date");
+			String date = resultSet.getString("day");
 			String hour = resultSet.getString("hour");
 			String name = resultSet.getString("name");
 			String lastName = resultSet.getString("lastname");
 			String doctor = name + " " + lastName;
-			Appointment ap = new Appointment("El date no funciona", hour, doctor,0, null);
+			Appointment ap = new Appointment(date, hour, doctor,0, null);
 			v.add(ap);
 		}
 		resultSet.close();

@@ -3,11 +3,10 @@ package launcher;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
-import model.exceptions.sqlExeptions.SqlConnectionException;
 import model.userManagment.LoginAuthenticator;
 import model.userManagment.UserManager;
 import model.userManagment.UserRegisterer;
-import viewer.admin.AdminMainFrame;
+import viewer.MainWindow;
 
 public class Main {
 
@@ -18,13 +17,13 @@ public class Main {
 		SwingUtilities.invokeAndWait(new Runnable() {
 			@Override
 			public void run() {
-				//new PatientPanel();
-				//new MainWindow(ctrl);
-				try {
+
+				new MainWindow(ctrl);
+				/*try {
 					new AdminMainFrame(ctrl);
 				} catch (SqlConnectionException e) {
 					System.out.print(e.getMessage());
-				}
+				}*/
 			}
 		});
 	}
