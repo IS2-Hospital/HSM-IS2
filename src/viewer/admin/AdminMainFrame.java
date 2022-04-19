@@ -22,12 +22,8 @@ import javax.swing.border.TitledBorder;
 import control.Controller;
 import model.exceptions.sqlExeptions.SqlConnectionException;
 
-public class AdminMainFrame extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class AdminMainFrame extends JFrame {
 
 	Controller _ctrl;
 

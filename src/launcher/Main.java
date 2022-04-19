@@ -3,10 +3,11 @@ package launcher;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import model.exceptions.sqlExeptions.SqlConnectionException;
 import model.userManagment.LoginAuthenticator;
 import model.userManagment.UserManager;
 import model.userManagment.UserRegisterer;
-import viewer.MainWindow;
+import viewer.admin.AdminMainFrame;
 
 public class Main {
 
@@ -18,12 +19,12 @@ public class Main {
 			@Override
 			public void run() {
 
-				new MainWindow(ctrl);
-				/*try {
+				//new MainWindow(ctrl);
+				try {
 					new AdminMainFrame(ctrl);
 				} catch (SqlConnectionException e) {
 					System.out.print(e.getMessage());
-				}*/
+				}
 			}
 		});
 	}

@@ -86,8 +86,15 @@ public class AdminApp {
 
 	public void updatePatient(List<String> colData) throws SQLException {
 		Connection con = DBConnector.connectdb();
-
-		String patients = "UPDATE patients, users SET gender = ? , insurance_type = ? , dni_insurance_taker = ? , blood_type = ? , bill = ?, name = ?, lastname = ?, birthdate = '"+ colData.get(3) +" 00:00:00.000' , email = ?, phone = ? WHERE dni_patient = ? AND dni = dni_patient;";
+		String patients;
+		if(colData.size() == 12) { //Modificar contraseña
+			//TODO Modificar la consulta para que actualica el valor de la contraseña
+			// y actualizar el valor de la contraseña en la base de datos
+			patients = "UPDATE patients, users SET gender = ? , insurance_type = ? , dni_insurance_taker = ? , blood_type = ? , bill = ?, name = ?, lastname = ?, birthdate = '"+ colData.get(3) +" 00:00:00.000' , email = ?, phone = ? WHERE dni_patient = ? AND dni = dni_patient;";
+		}
+		else {
+			patients = "UPDATE patients, users SET gender = ? , insurance_type = ? , dni_insurance_taker = ? , blood_type = ? , bill = ?, name = ?, lastname = ?, birthdate = '"+ colData.get(3) +" 00:00:00.000' , email = ?, phone = ? WHERE dni_patient = ? AND dni = dni_patient;";
+		}
 		PreparedStatement st = con.prepareStatement(patients, Statement.RETURN_GENERATED_KEYS);
 		st.setString(1, colData.get(6));
 		st.setString(2, colData.get(8));
@@ -99,6 +106,8 @@ public class AdminApp {
 		st.setString(8, colData.get(4));
 		st.setString(9, colData.get(5));
 		st.setString(10, colData.get(0));
+
+
 
 		st.execute();
 		st.close();

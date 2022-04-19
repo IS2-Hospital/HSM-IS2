@@ -24,7 +24,7 @@ public class MainWindow extends JFrame {
 	private RegPanelTemplate _regPanel;
 
 	public MainWindow(Controller ctrl) {
-		super("La clínica de Pablo");
+		super("La clinica de Pablo");
 		_ctrl = ctrl;
 		initGUI();
 	}
@@ -45,7 +45,7 @@ public class MainWindow extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null); // center window in the screen
 		this.setVisible(true);
-		ImageIcon image = new ImageIcon("resources/icons/logo.png"); //icon image
+		ImageIcon image = new ImageIcon("resources/icons/logo45x45.png"); //logo image
 		setIconImage(image.getImage());
 		setFondo();
 	}

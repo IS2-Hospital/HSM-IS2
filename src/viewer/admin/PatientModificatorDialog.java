@@ -27,7 +27,8 @@ public class PatientModificatorDialog extends JDialog {
 
 	private void initGUI() {
 		pack();
-		setPreferredSize(new Dimension(300, 200));
+		setPreferredSize(new Dimension(500, 200));
+		setMinimumSize(new Dimension(500, 200));
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
 		add(new JLabel("Select a patient"), BorderLayout.NORTH);
@@ -64,9 +65,9 @@ public class PatientModificatorDialog extends JDialog {
 		});
 		buttons.add(cancelButton, BorderLayout.WEST);
 
-		JButton okButton = new JButton("Ok");
-		okButton.setPreferredSize(new Dimension(100,30));
-		okButton.addActionListener(new ActionListener() {
+		JButton notButton = new JButton("Do not modify password");
+		notButton.setPreferredSize(new Dimension(200,30));
+		notButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -76,7 +77,21 @@ public class PatientModificatorDialog extends JDialog {
 
 		});
 
-		buttons.add(okButton, BorderLayout.EAST);
+		buttons.add(notButton, BorderLayout.EAST);
+
+		JButton okButton = new JButton("Modify password");
+		okButton.setPreferredSize(new Dimension(200,30));
+		okButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PatientModWindowPassword(_ctrl, (String)selection.getSelectedItem());
+				PatientModificatorDialog.this.dispose();
+			}
+
+		});
+
+		buttons.add(okButton, BorderLayout.WEST);
 
 		main.add(buttons, BorderLayout.SOUTH);
 
@@ -85,6 +100,5 @@ public class PatientModificatorDialog extends JDialog {
 		setVisible(true);
 		setSize(new Dimension(300,120));
 	}
-
 
 }
