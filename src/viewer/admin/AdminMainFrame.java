@@ -195,8 +195,7 @@ public class AdminMainFrame extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null); // center window in the screen
 		this.setVisible(true);
-		ImageIcon image = new ImageIcon("resources/icons/logo.png"); //icon image
-		setIconImage(image.getImage());
+		setIconImage(new ImageIcon("resources/icons/logo45x45.png").getImage());
 	}
 
 }
