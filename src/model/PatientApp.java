@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import model.patientDAO.AskForAppointmentDAO;
+import model.patientDAO.GetAppointmentsDAO;
 import model.patientDAO.GetDoctorsOfPatientDAO;
 import model.patientDAO.GetUnavailableTakenHoursDAO;
 
@@ -46,6 +47,10 @@ public class PatientApp {
 
 	public void askForAppointment(Appointment appo, String dni_patient) throws SQLException {
 		AskForAppointmentDAO.execute(appo, dni_patient);
+	}
+
+	public Vector<Appointment> getAppointments(String dni_patient) throws SQLException {
+		return GetAppointmentsDAO.execute(dni_patient);
 	}
 
 }

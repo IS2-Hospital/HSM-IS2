@@ -1,26 +1,25 @@
 package viewer.patient;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
+import control.Controller;
 import model.Appointment;
-import model.DBConnector;
 
 public class AppointmentsTableModel extends AbstractTableModel {
 
-	private static final long serialVersionUID = 1L;
 	private String dni;
-	private final String[] colNames = {"DATE", "HOUR", "DOCTOR"};
+	private Controller ctrl;
+
+	private final String[] colNames = {"DAY", "HOUR", "DOCTOR", "DESCRIPTION"};
 	private Vector<Appointment> v;
 
 
-	public AppointmentsTableModel(String dni) {
-		this.dni =  dni;
+	public AppointmentsTableModel(String dni, Controller ctrl) {
+		this.dni = dni;
+		this.ctrl = ctrl;
 		try {
 			open();
 		} catch (Exception e) {
@@ -29,35 +28,11 @@ public class AppointmentsTableModel extends AbstractTableModel {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void open() throws Exception {
-		Connection con = DBConnector.connectdb();
-		String SQL = "SELECT a.day, a.hour, u.name, u.lastname "
-				+ "FROM appointments a "
-				+ "join users u on a.dni_doctor = u.dni "
-				+ "WHERE a.dni_patient =" +  dni;
-		//+ " order by a.fecha;"; // XXX Cuando funcione el date
-
-		Statement st = con.createStatement();
-
-		ResultSet resultSet = st.executeQuery(SQL);
-
-		if (resultSet == null)
-			throw new Exception("You don�t have appointments");
-
-		v = new Vector<>();
-		while(resultSet.next()) {
-			String date = resultSet.getString("day");
-			String hour = resultSet.getString("hour");
-			String name = resultSet.getString("name");
-			String lastName = resultSet.getString("lastname");
-			String doctor = name + " " + lastName;
-			Appointment ap = new Appointment(date, hour, doctor, null);
-			v.add(ap);
-		}
-		resultSet.close();
-		st.close();
+		v = ctrl.getAppointments(dni);
+		fireTableDataChanged();
 	}
+
 	@Override
 	public String getColumnName(int col) {
 		return colNames[col];
@@ -75,21 +50,18 @@ public class AppointmentsTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Object obj = null;
 		switch(columnIndex){
 		case 0:
-			obj = v.get(rowIndex).getDay();
-			break;
+			return v.get(rowIndex).getDay();
 		case 1:
-			obj = v.get(rowIndex).getHour();
-			break;
+			return v.get(rowIndex).getHour();
 		case 2:
-			obj = v.get(rowIndex).getDoctor();
-			break;
+			return v.get(rowIndex).getDoctor();
+		case 3:
+			return v.get(rowIndex).getDescription();
 		default:
-			break;
+			return null;
 		}
-		return obj;
 	}
 
 }

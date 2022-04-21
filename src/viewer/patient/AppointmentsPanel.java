@@ -62,7 +62,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 
 		centerPanel.setLayout(new java.awt.BorderLayout());
 
-		tableModel = new AppointmentsTableModel(dni);
+		tableModel = new AppointmentsTableModel(dni, ctrl);
 		jTable1 = new javax.swing.JTable(tableModel);
 		jScrollPane2.setViewportView(jTable1);
 
@@ -87,7 +87,6 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 	public void open() {
 		try {
 			tableModel.open();
-			tableModel.fireTableDataChanged();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();

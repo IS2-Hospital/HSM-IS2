@@ -46,6 +46,10 @@ public class Controller {
 		patientApp.askForAppointment(appointment, dni_patient);
 	}
 
+	public Vector<Appointment> getAppointments(String dni_patient) throws SQLException {
+		return patientApp.getAppointments(dni_patient);
+	}
+
 	public ResultSet resultAllPatients() {
 		return resultAdminQuery("SELECT dni, lastname, name, birthdate, email, phone, gender, insurance_type, dni_insurance_taker FROM users JOIN patients ON dni = dni_patient order by lastname;");
 	}
@@ -86,7 +90,6 @@ public class Controller {
 
 	public void updateDoctor(List<String> colData) throws SQLException {
 		adminApp.updateDoctor(colData);
-
 	}
 
 	public List<String> getRequestIDList() {
