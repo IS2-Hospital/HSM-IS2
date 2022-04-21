@@ -3,7 +3,6 @@ package viewer;
 
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -13,15 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import control.Controller;
-import viewer.patient.RegPanelTemplate;
 
 public class MainWindow extends JFrame {
 
-	private Image backgroundImage;
-
 	Controller _ctrl;
-	private LoginPanel _loginPanel;
-	private RegPanelTemplate _regPanel;
 
 	public MainWindow(Controller ctrl) {
 		super("La clinica de Pablo");
@@ -31,10 +25,6 @@ public class MainWindow extends JFrame {
 
 	private void initGUI() {
 
-		//JPanel bgPanel = new BgPanel();
-		//bgPanel.setLayout(new GridBagLayout());
-		//bgPanel.add(new LoginPanel(_ctrl, this));
-		//this.setContentPane(bgPanel);
 		this.setLayout(new GridBagLayout());
 		this.setContentPane(new LoginPanel(_ctrl, this));
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -45,8 +35,7 @@ public class MainWindow extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null); // center window in the screen
 		this.setVisible(true);
-		ImageIcon image = new ImageIcon("resources/icons/logo45x45.png"); //logo image
-		setIconImage(image.getImage());
+		setIconImage(new ImageIcon("resources/icons/logo45x45.png").getImage());
 		setFondo();
 	}
 
