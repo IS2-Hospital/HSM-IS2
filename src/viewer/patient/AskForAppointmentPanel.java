@@ -220,6 +220,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 			String hour = hourList.getSelectedValue();
 			if (hour == null)
 				throw new NullPointerException("You have to select an hour before asking for the appointment");
+
 			String dni_doctor = ((Doctor) doctorComboBox.getSelectedItem()).getDni();
 			String desc = descriptionTextArea.getText();
 
@@ -237,7 +238,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 		Vector<String> v = new Vector<>();
 
 		try {
-			String dni_doctor = ((Doctor) doctorComboBox.getSelectedItem()).getDni();
+			Doctor dni_doctor = (Doctor) doctorComboBox.getSelectedItem();
 			String date = calendarPanel1.getSelectedDate();
 			v = ctrl.getAvailableHours(dni_doctor, date);
 		} catch (SQLException e) {

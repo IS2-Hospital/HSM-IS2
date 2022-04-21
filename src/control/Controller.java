@@ -38,8 +38,8 @@ public class Controller {
 		return patientApp.getDoctorsOf(dni);
 	}
 
-	public Vector<String> getAvailableHours(String dni_doctor, String date) throws SQLException {
-		return patientApp.getAvailableHours(dni_doctor, date);
+	public Vector<String> getAvailableHours(Doctor doctor, String date) throws SQLException {
+		return patientApp.getAvailableHours(doctor, date);
 	}
 
 	public void askForAppointment(Appointment appointment, String dni_patient) throws SQLException {

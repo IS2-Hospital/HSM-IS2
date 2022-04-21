@@ -1,56 +1,22 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 import java.util.Vector;
+
+import model.patientDAO.AskForAppointmentDAO;
+import model.patientDAO.GetDoctorsOfPatientDAO;
+import model.patientDAO.GetUnavailableTakenHoursDAO;
 
 public class PatientApp {
 
 	public Vector<Doctor> getDoctorsOf(String dni) throws SQLException {
-
-		Connection con = DBConnector.connectdb();
-		Statement statement = con.createStatement();
-
-		ResultSet resultSet = statement.executeQuery(String.format("select * "
-				+ "from treated_by "
-				+ "join doctors using(dni_doctor) "
-				+ "join users on (doctors.dni_doctor = users.dni) "
-				+ "where dni_patient = '%s'", dni));
-
-		Vector<Doctor> v = new Vector<>();
-		while (resultSet.next()) {
-			String dni_doctor = resultSet.getString("dni_doctor");
-			String name = resultSet.getString("name");
-			String lastname = resultSet.getString("lastname");
-
-			Doctor d = new Doctor(dni_doctor, name, lastname, null, null, null, null, -1, null, null);
-			v.add(d);
-		}
-
-		con.close();
-		return v;
+		return GetDoctorsOfPatientDAO.execute(dni);
 	}
 
-	public Vector<String> getAvailableHours(String dni_doctor, String date) throws SQLException {
+	public Vector<String> getAvailableHours(Doctor doctor, String date) throws SQLException {
 
-		Connection con = DBConnector.connectdb();
-
-		String select = "select * "
-				+ "from appointments "
-				+ "where dni_doctor = ? "
-				+ "and day = STR_TO_DATE(?, '%Y-%m-%d') "
-				+ "order by hour;";
-		PreparedStatement st = con.prepareStatement(select, Statement.RETURN_GENERATED_KEYS);
-		st.setString(1, dni_doctor);
-		st.setString(2, date);
-
-		st.execute();
-		ResultSet resultSet = st.getResultSet();
-
-		Vector<String> v = new Vector<>();
+		List<String> unavailableHours = GetUnavailableTakenHoursDAO.execute(doctor, date);
 
 		String[] laborableHours = {
 				"08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45",
@@ -58,39 +24,28 @@ public class PatientApp {
 				"14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45",
 				"17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45"};
 
-		String notAvailHour;
+		Vector<String> availableHours = new Vector<>();
+
 		int i = 0;
-		while (resultSet.next()) {
-			notAvailHour = resultSet.getTime("hour").toString().substring(0, 5);
-			while (laborableHours[i].compareTo(notAvailHour) < 0) {
-				v.add(laborableHours[i]);
+		for (String unavailableHour : unavailableHours) {
+			while (laborableHours[i].compareTo(unavailableHour) < 0) {
+				availableHours.add(laborableHours[i]);
 				i++;
 			}
+			i++; // skips unavailable hour
+		}
+
+		// add remaining laborable hours
+		while (i < laborableHours.length) {
+			availableHours.add(laborableHours[i]);
 			i++;
 		}
 
-		while(i < laborableHours.length) {
-			v.add(laborableHours[i]);
-			i++;
-		}
-
-		con.close();
-		return v;
+		return availableHours;
 	}
 
 	public void askForAppointment(Appointment appo, String dni_patient) throws SQLException {
-
-		Connection con = DBConnector.connectdb();
-
-		String select = "INSERT INTO appointments VALUES (STR_TO_DATE(?, '%Y-%m-%d'), STR_TO_DATE(?, '%H:%i'), ?, ?, ?)";
-		PreparedStatement st = con.prepareStatement(select, Statement.RETURN_GENERATED_KEYS);
-		st.setString(1, appo.getDay());
-		st.setString(2, appo.getHour());
-		st.setString(3, appo.getDoctor());
-		st.setString(4, dni_patient);
-		st.setString(5, appo.getDescription());
-
-		st.execute();
+		AskForAppointmentDAO.execute(appo, dni_patient);
 	}
 
 }
