@@ -39,7 +39,7 @@ public class DoctorModWindow extends JFrame {
 		this._ctrl = _ctrl;
 		this._dni = dni;
 		//dni, lastname,name, birthdate, email, phone, speciality, salary, contract_start_date, contract_end_date
-		_dataList = this._ctrl.getDoctorData(dni);
+		_dataList = this._ctrl.getDoctorData(dni).asStringList();
 		InitGUI();
 	}
 

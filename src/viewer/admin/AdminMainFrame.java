@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -20,6 +20,8 @@ import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
+import model.Doctor;
+import model.Patient;
 import model.exceptions.sqlExeptions.SqlConnectionException;
 
 
@@ -57,12 +59,12 @@ public class AdminMainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				ResultSet resultSet = _ctrl.resultAllPatients();
+				List<Patient> resultSet = _ctrl.getAllPatients();
 				JFrame popUp = new JFrame();
 				JPanel content = new JPanel();
 				content.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Patients", TitledBorder.CENTER, TitledBorder.TOP));
 				try {
-					JTable table = new JTable (new PatientListTableModel(resultSet));
+					JTable table = new JTable (new UserListTableModel<Patient>(resultSet));
 					table.setPreferredSize(new Dimension(700,700));
 					JScrollPane scroll = new JScrollPane(table);
 					scroll.setPreferredSize(new Dimension (800, 700));
@@ -86,12 +88,12 @@ public class AdminMainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ResultSet resultSet = _ctrl.resultAllDoctors();
+				List<Doctor> resultSet = _ctrl.getDoctorList();
 				JFrame popUp = new JFrame();
 				JPanel content = new JPanel();
 				content.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Doctors", TitledBorder.CENTER, TitledBorder.TOP));
 				try {
-					JTable table = new JTable (new DoctorListTableModel(resultSet));
+					JTable table = new JTable (new UserListTableModel(resultSet));
 					table.setPreferredSize(new Dimension(700,700));
 					JScrollPane scroll = new JScrollPane(table);
 					scroll.setPreferredSize(new Dimension (800, 700));

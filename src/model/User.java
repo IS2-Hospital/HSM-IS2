@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import model.Enums.UserRole;
 
 public abstract class User {
@@ -49,5 +51,11 @@ public abstract class User {
 	public UserRole getRole() {
 		return role;
 	}
+
+	public String getFullName() {
+		return name +" "+ lastname;
+	}
+	public abstract String[] getColName();
+	public abstract List<String> asStringList();
 
 }

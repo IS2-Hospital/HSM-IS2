@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -23,6 +22,8 @@ import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
+import model.Doctor;
+import model.Patient;
 
 public class DoctorSelectorDialog extends JDialog {
 	private Controller _ctrl;
@@ -44,9 +45,9 @@ public class DoctorSelectorDialog extends JDialog {
 
 		selector.add(new JLabel("Doctor: "));
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
-		List<String> doctors = _ctrl.getDoctorDNIList();
-		for (String i : doctors) {
-			model.addElement(i);
+		List<Doctor> doctors = _ctrl.getDoctorList();
+		for (Doctor i : doctors) {
+			model.addElement(i.getDni());
 		}
 		JComboBox<String> selection = new JComboBox<String>(model);
 		selection.setPreferredSize(new Dimension (80, 20));
@@ -74,12 +75,12 @@ public class DoctorSelectorDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ResultSet resultSet = _ctrl.resultAllPatientsFrom((String)selection.getSelectedItem());
+				List<Patient> resultSet = _ctrl.resultAllPatientsFrom((String)selection.getSelectedItem());
 				JFrame popUp = new JFrame();
 				JPanel content = new JPanel();
 				content.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Doctors", TitledBorder.CENTER, TitledBorder.TOP));
 				try {
-					JTable table = new JTable (new PatientListTableModel(resultSet));
+					JTable table = new JTable (new UserListTableModel(resultSet));
 					table.setPreferredSize(new Dimension(700,700));
 					JScrollPane scroll = new JScrollPane(table);
 					scroll.setPreferredSize(new Dimension (800, 700));

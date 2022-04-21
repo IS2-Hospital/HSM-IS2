@@ -1,11 +1,14 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Enums.UserRole;
 
 public class Doctor extends User {
 
+	static String[] colNames = {"dni", "lastname","name", "birthdate", "email", "phone", "speciality","salary","Contract Start Date", "Contract End Date" };
 	private String speciality;
 	private float salary;
 	private Date contractStartDate;
@@ -22,6 +25,31 @@ public class Doctor extends User {
 	@Override
 	public String toString() {
 		return name + " " + lastname;
+	}
+
+	@Override
+	public String[] getColName() {
+		return colNames;
+	}
+
+	@Override
+	public List<String> asStringList() {
+		List<String> list = new ArrayList<String>();
+		list.add(dni);
+		list.add(lastname);
+		list.add(name);
+		list.add(birthdate);
+		list.add(email);
+		list.add(phone);
+		list.add(speciality.toString());
+		list.add(String.valueOf(salary));
+		list.add(contractStartDate.toString());
+		if(contractEndDate != null)
+			list.add(contractEndDate.toString());
+		else
+			list.add("Undefinded Contract");
+
+		return list;
 	}
 
 }

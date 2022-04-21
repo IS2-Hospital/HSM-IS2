@@ -82,18 +82,18 @@ public class DoctorChangeRequestAproverDialog extends JDialog {
 
 					}
 					try {
-						patientLabel.setText("Patient: " + _ctrl.getUserFullName(dni.get(0)));
-					} catch (SQLException e1) {
+						patientLabel.setText("Patient: " + _ctrl.getPatientData(dni.get(0)).getFullName());
+					} catch (NullPointerException e1) {
 						patientLabel.setText("Patient: None");
 					}
 					try {
-						doctorLabel.setText("Prev Doctor: " + _ctrl.getUserFullName(dni.get(1)));
-					} catch (SQLException e1) {
+						doctorLabel.setText("Prev Doctor: " + _ctrl.getDoctorData(dni.get(1)).getFullName());
+					} catch (NullPointerException e1) {
 						doctorLabel.setText("Prev Doctor: None");
 					}
 					try {
-						newLabel.setText("New Doctor: " + _ctrl.getUserFullName(dni.get(2)));
-					} catch (SQLException e1) {
+						newLabel.setText("New Doctor: " + _ctrl.getDoctorData(dni.get(2)).getFullName());
+					} catch (NullPointerException e1) {
 						newLabel.setText("New Doctor: None");
 					}
 					descText.setText(_ctrl.getReason(selection.getSelectedItem().toString()));
@@ -114,16 +114,16 @@ public class DoctorChangeRequestAproverDialog extends JDialog {
 
 		patientLabel = new JLabel();
 		try {
-			patientLabel.setText("Patient: " + _ctrl.getUserFullName(dni.get(0)));
-		} catch (SQLException e1) {
+			patientLabel.setText("Patient: " + _ctrl.getPatientData(dni.get(0)).getFullName());
+		} catch (NullPointerException e1) {
 			patientLabel.setText("Patient: None");
 		}
 		inside.add(patientLabel,BorderLayout.NORTH);
 
 		doctorLabel = new JLabel();
 		try {
-			doctorLabel.setText("Prev Doctor: " + _ctrl.getUserFullName(dni.get(1)));
-		} catch (SQLException e1) {
+			doctorLabel.setText("Prev Doctor: " + _ctrl.getDoctorData(dni.get(1)).getFullName());
+		} catch (NullPointerException e1) {
 			doctorLabel.setText("Prev Doctor: None");
 		}
 		inside.add(doctorLabel,BorderLayout.CENTER);
@@ -131,8 +131,8 @@ public class DoctorChangeRequestAproverDialog extends JDialog {
 
 		newLabel = new JLabel();
 		try {
-			newLabel.setText("New Doctor: " + _ctrl.getUserFullName(dni.get(2)));
-		} catch (SQLException e1) {
+			newLabel.setText("New Doctor: " + _ctrl.getDoctorData(dni.get(2)).getFullName());
+		} catch (NullPointerException e1) {
 			newLabel.setText("New Doctor: None");
 		}
 		inside.add(newLabel,BorderLayout.SOUTH);

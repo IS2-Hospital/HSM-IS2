@@ -1,6 +1,5 @@
 package control;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
@@ -10,6 +9,7 @@ import org.json.JSONObject;
 import model.AdminApp;
 import model.Appointment;
 import model.Doctor;
+import model.Patient;
 import model.PatientApp;
 import model.exceptions.LoginException;
 import model.userManagment.UserManager;
@@ -50,32 +50,19 @@ public class Controller {
 		return patientApp.getAppointments(dni_patient);
 	}
 
-	public ResultSet resultAllPatients() {
-		return resultAdminQuery("SELECT dni, lastname, name, birthdate, email, phone, gender, insurance_type, dni_insurance_taker FROM users JOIN patients ON dni = dni_patient order by lastname;");
+	public List<Patient> getAllPatients() {
+		return adminApp.getAllPatients();
 	}
 
-	public ResultSet resultAllDoctors() {
-		return resultAdminQuery("SELECT dni, lastname, name, birthdate, email, phone, speciality, salary, contract_start_date, contract_end_date FROM doctors JOIN users ON dni = dni_doctor  order by lastname;");
+	public List<Doctor> getDoctorList() {
+		return adminApp.getDoctorList();
 	}
 
-	private ResultSet resultAdminQuery( String SQL ) {
-
-		return adminApp.resultQuery(SQL);
+	public List<Patient> resultAllPatientsFrom(String dniDoctor) {
+		return adminApp.resultAllPatientsFrom(dniDoctor);
 	}
 
-	public List<String> getDoctorDNIList() {
-		return adminApp.getDoctorDNIList();
-	}
-
-	public ResultSet resultAllPatientsFrom(String dniDoctor) {
-		return resultAdminQuery("SELECT dni, lastname, name, birthdate, email, phone, gender, insurance_type, dni_insurance_taker FROM patients JOIN users ON dni = dni_patient JOIN treated_by ON treated_by.dni_patient = patients.dni_patient AND dni_doctor = "+dniDoctor+" order by dni;");
-	}
-
-	public List<String> getPatientDNIList() {
-		return adminApp.getPatientDNIList();
-	}
-
-	public List<String> getPatientData(String dni) {
+	public Patient getPatientData(String dni) {
 		return adminApp.getPatientData(dni);
 	}
 
@@ -84,7 +71,7 @@ public class Controller {
 
 	}
 
-	public List<String> getDoctorData(String dni) {
+	public Doctor getDoctorData(String dni) {
 		return adminApp.getDoctorData(dni);
 	}
 
@@ -94,10 +81,6 @@ public class Controller {
 
 	public List<String> getRequestIDList() {
 		return adminApp.getRequestIDList();
-	}
-
-	public String getUserFullName(String dni) throws SQLException {
-		return adminApp.getUserFullName(dni);
 	}
 
 	public List<String> getDNIFromRequest(String string) throws SQLException {
@@ -117,7 +100,7 @@ public class Controller {
 	}
 
 	public void assignPatientDoctor(String dniDoc, String dniPat) throws SQLException {
-		adminApp.resultQuery("INSERT INTO treated_by VALUES ( '"+dniPat +"' , '"+dniDoc +"');");
+		adminApp.assignPatientDoctor(dniDoc,dniPat);
 	}
 
 }

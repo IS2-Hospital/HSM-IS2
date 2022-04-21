@@ -47,7 +47,7 @@ public class PatientModWindow extends JFrame {
 		this._ctrl = _ctrl;
 		this._dni = dni;
 		// dni, lastname,name, birthdate, email, phone, gender, blood_type, insurance_type, dni_insurance_taker, bill
-		_dataList = _ctrl.getPatientData(dni);
+		_dataList = _ctrl.getPatientData(dni).asStringList();
 		add(initGUI(), BorderLayout.CENTER);
 	}
 

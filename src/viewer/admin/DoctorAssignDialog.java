@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import control.Controller;
+import model.Doctor;
+import model.Patient;
 
 public class DoctorAssignDialog extends JDialog {
 
@@ -44,9 +46,9 @@ public class DoctorAssignDialog extends JDialog {
 
 		selector.add(new JLabel("Doctor: "));
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
-		List<String> doctors = _ctrl.getDoctorDNIList();
-		for (String i : doctors) {
-			model.addElement(i);
+		List<Doctor> doctors = _ctrl.getDoctorList();
+		for (Doctor i : doctors) {
+			model.addElement(i.getDni());
 		}
 		JComboBox<String> selection = new JComboBox<String>(model);
 		selection.setPreferredSize(new Dimension (100, 20));
@@ -58,9 +60,9 @@ public class DoctorAssignDialog extends JDialog {
 
 		selectorPac.add(new JLabel("Patient: "));
 		DefaultComboBoxModel<String> modelPac = new DefaultComboBoxModel<String>();
-		List<String> patients = _ctrl.getPatientDNIList();
-		for (String i : patients) {
-			modelPac.addElement(i);
+		List<Patient> patients = _ctrl.getAllPatients();
+		for (Patient i : patients) {
+			modelPac.addElement(i.getDni());
 		}
 		JComboBox<String> selectionpac = new JComboBox<String>(modelPac);
 		selectionpac.setPreferredSize(new Dimension (100, 20));

@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import control.Controller;
+import model.Patient;
 
 public class PatientModificatorDialog extends JDialog {
 
@@ -41,9 +42,9 @@ public class PatientModificatorDialog extends JDialog {
 
 		selector.add(new JLabel("Patient: "));
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
-		List<String> patients = _ctrl.getPatientDNIList();
-		for (String i : patients) {
-			model.addElement(i);
+		List<Patient> patients = _ctrl.getAllPatients();
+		for (Patient i : patients) {
+			model.addElement(i.getDni());
 		}
 		JComboBox<String> selection = new JComboBox<String>(model);
 		selection.setPreferredSize(new Dimension (80, 20));
