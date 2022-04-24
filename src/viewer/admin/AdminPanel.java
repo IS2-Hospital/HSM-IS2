@@ -24,7 +24,7 @@ import model.Patient;
 import model.exceptions.sqlExeptions.SqlConnectionException;
 
 
-public class AdminMainFrame extends JPanel {
+public class AdminPanel extends JPanel {
 
 	Controller _ctrl;
 
@@ -40,7 +40,7 @@ public class AdminMainFrame extends JPanel {
 	private JButton ansreqButton;
 
 	private JButton assignDoctor;
-	public AdminMainFrame(Controller ctrl) throws SqlConnectionException {
+	public AdminPanel(Controller ctrl) throws SqlConnectionException {
 		_ctrl = ctrl;
 		initGUI();
 	}
@@ -67,7 +67,7 @@ public class AdminMainFrame extends JPanel {
 					scroll.setPreferredSize(new Dimension (800, 700));
 					content.add( scroll);
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(AdminMainFrame.this, e1.getMessage(),
+					JOptionPane.showMessageDialog(AdminPanel.this, e1.getMessage(),
 							"Database Error", JOptionPane.ERROR_MESSAGE);
 				}
 				content.setPreferredSize(new Dimension(800,600));
@@ -96,7 +96,7 @@ public class AdminMainFrame extends JPanel {
 					scroll.setPreferredSize(new Dimension (800, 700));
 					content.add( scroll);
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(AdminMainFrame.this, e1.getMessage(),
+					JOptionPane.showMessageDialog(AdminPanel.this, e1.getMessage(),
 							"Database Error", JOptionPane.ERROR_MESSAGE);
 				}
 				content.setPreferredSize(new Dimension(800,600));
@@ -164,7 +164,7 @@ public class AdminMainFrame extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor (AdminMainFrame.this),
+				if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor (AdminPanel.this),
 						"Are you sure you want to close the program?", "Exit", JOptionPane.YES_NO_OPTION ));
 				System.exit(0);
 			}

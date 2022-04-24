@@ -25,7 +25,7 @@ import javax.swing.border.TitledBorder;
 import control.Controller;
 import model.Enums.UserRole;
 import model.exceptions.LoginException;
-import viewer.admin.AdminMainFrame;
+import viewer.admin.AdminPanel;
 import viewer.patient.PatientPanel;
 
 @SuppressWarnings("serial")
@@ -192,7 +192,7 @@ public class LoginPanel extends JPanel{
 				//_mainWindow.setContentPane();
 				break;
 			case ADMIN:
-				_mainWindow.setContentPane(new AdminMainFrame(_ctrl));
+				_mainWindow.setContentPane(new AdminPanel(_ctrl));
 				break;
 			}
 
