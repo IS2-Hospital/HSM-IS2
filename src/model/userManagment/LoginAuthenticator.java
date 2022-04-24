@@ -13,19 +13,8 @@ import model.exceptions.UserNotFoundException;
 
 public class LoginAuthenticator {
 
-	public void login(String dni, String pass) throws SQLException, LoginException{
-
-		UserRole userValidated = LoginAuthenticator.authenticateUser(dni, pass);
-
-		switch(userValidated) {
-		case PATIENT:
-			System.out.println("Patient's Home");
-			break;
-		case DOCTOR:
-			System.out.println("Doctor's Home"); break;
-		case ADMIN:
-			System.out.println("Admin's Home"); break;
-		}
+	public UserRole login(String dni, String pass) throws SQLException, LoginException{
+		return LoginAuthenticator.authenticateUser(dni, pass);
 	}
 
 	private static UserRole authenticateUser(String dni, String pass) throws SQLException, LoginException {

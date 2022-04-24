@@ -23,7 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
+import model.Enums.UserRole;
 import model.exceptions.LoginException;
+import viewer.admin.AdminMainFrame;
 import viewer.patient.PatientPanel;
 
 @SuppressWarnings("serial")
@@ -180,9 +182,20 @@ public class LoginPanel extends JPanel{
 		String pw  = String.valueOf(_passwordTF.getPassword());
 		String dni = _userNameTF.getText();
 		try {
-			_ctrl.login(dni, pw);
-			//TODO login devuelve enum y se crea un controllador para la vista
-			_mainWindow.setContentPane(new PatientPanel(_ctrl, dni));
+			UserRole role = _ctrl.login(dni, pw);
+
+			switch (role) {
+			case PATIENT:
+				_mainWindow.setContentPane(new PatientPanel(_ctrl, dni));
+				break;
+			case DOCTOR:
+				//_mainWindow.setContentPane();
+				break;
+			case ADMIN:
+				_mainWindow.setContentPane(new AdminMainFrame(_ctrl));
+				break;
+			}
+
 			_mainWindow.revalidate();
 		}
 		catch (SQLException e1) {

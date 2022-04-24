@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +24,7 @@ import model.Patient;
 import model.exceptions.sqlExeptions.SqlConnectionException;
 
 
-public class AdminMainFrame extends JFrame {
+public class AdminMainFrame extends JPanel {
 
 	Controller _ctrl;
 
@@ -42,7 +41,6 @@ public class AdminMainFrame extends JFrame {
 
 	private JButton assignDoctor;
 	public AdminMainFrame(Controller ctrl) throws SqlConnectionException {
-		super("La clínica de Pablo");
 		_ctrl = ctrl;
 		initGUI();
 	}
@@ -50,8 +48,7 @@ public class AdminMainFrame extends JFrame {
 	private void initGUI() throws SqlConnectionException {
 		setPreferredSize(new Dimension (600, 500));
 
-		JPanel princ = new JPanel();
-		princ.setLayout(new GridLayout(4,3,50,20));
+		setLayout(new GridLayout(4,3,50,20));
 
 		patientList = new JButton("Patient List");
 		patientList.addActionListener(new ActionListener() {
@@ -174,30 +171,21 @@ public class AdminMainFrame extends JFrame {
 
 		});
 
+		add(patientList);
+		add(doctorList);
+		add(doctorPatients);
 
-		princ.add(patientList);
-		princ.add(doctorList);
-		princ.add(doctorPatients);
+		add(modifyPatientButton);
+		add(modDoctorButton);
+		add(ansreqButton);
 
-		princ.add(modifyPatientButton);
-		princ.add(modDoctorButton);
-		princ.add(ansreqButton);
+		add(assignDoctor);
+		add(new JLabel (""));
+		add(new JLabel (""));
 
-		princ.add(assignDoctor);
-		princ.add(new JLabel (""));
-		princ.add(new JLabel (""));
-
-		princ.add(new JLabel (""));
-		princ.add(exitButton);
-		princ.add(new JLabel (""));
-
-		this.setContentPane(princ);
-
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.pack();
-		this.setLocationRelativeTo(null); // center window in the screen
-		this.setVisible(true);
-		setIconImage(new ImageIcon("resources/icons/logo45x45.png").getImage());
+		add(new JLabel (""));
+		add(exitButton);
+		add(new JLabel (""));
 	}
 
 }

@@ -11,6 +11,7 @@ import model.Appointment;
 import model.Doctor;
 import model.Patient;
 import model.PatientApp;
+import model.Enums.UserRole;
 import model.exceptions.LoginException;
 import model.userManagment.UserManager;
 
@@ -26,8 +27,8 @@ public class Controller {
 		adminApp = new AdminApp();
 	}
 
-	public void login(String dni, String password) throws LoginException, SQLException {
-		_userManager.get_loginAuthenticator().login(dni, password);
+	public UserRole login(String dni, String password) throws LoginException, SQLException {
+		return _userManager.get_loginAuthenticator().login(dni, password);
 	}
 
 	public void registerUsers(JSONObject usersToRegister) {
