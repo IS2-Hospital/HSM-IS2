@@ -17,13 +17,7 @@ public class Main {
 		SwingUtilities.invokeAndWait(new Runnable() {
 			@Override
 			public void run() {
-
 				new MainWindow(ctrl);
-				//				try {
-				//					new AdminMainFrame(ctrl);
-				//				} catch (SqlConnectionException e) {
-				//					System.out.print(e.getMessage());
-				//				}
 			}
 		});
 	}

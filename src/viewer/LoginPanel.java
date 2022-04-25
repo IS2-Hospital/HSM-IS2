@@ -26,6 +26,7 @@ import control.Controller;
 import model.Enums.UserRole;
 import model.exceptions.LoginException;
 import viewer.admin.AdminPanel;
+import viewer.doctor.DoctorPanel;
 import viewer.patient.PatientPanel;
 
 @SuppressWarnings("serial")
@@ -189,7 +190,7 @@ public class LoginPanel extends JPanel{
 				_mainWindow.setContentPane(new PatientPanel(_ctrl, dni));
 				break;
 			case DOCTOR:
-				//_mainWindow.setContentPane();
+				_mainWindow.setContentPane(new DoctorPanel(_ctrl, dni));
 				break;
 			case ADMIN:
 				_mainWindow.setContentPane(new AdminPanel(_ctrl));

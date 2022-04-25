@@ -11,6 +11,7 @@ import javax.swing.table.AbstractTableModel;
 
 import model.DBConnector;
 
+@SuppressWarnings("serial")
 public class AppointmentsTableModel extends AbstractTableModel {
 	private String dni;
 	private final String[] colNames = {"DAY", "HOUR", "DOCTOR"};

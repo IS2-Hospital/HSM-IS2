@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import model.AdminApp;
 import model.Appointment;
 import model.Doctor;
+import model.DoctorApp;
 import model.Patient;
 import model.PatientApp;
 import model.Enums.UserRole;
@@ -20,11 +21,13 @@ public class Controller {
 	UserManager _userManager;
 	PatientApp patientApp;
 	AdminApp adminApp;
+	DoctorApp doctorApp;
 
 	public Controller(UserManager userManager) {
 		_userManager = userManager;
 		this.patientApp = new PatientApp();
-		adminApp = new AdminApp();
+		this.adminApp = new AdminApp();
+		this.doctorApp = new DoctorApp();
 	}
 
 	public UserRole login(String dni, String password) throws LoginException, SQLException {
@@ -109,6 +112,10 @@ public class Controller {
 
 	public void assignPatientDoctor(String dniDoc, String dniPat) throws SQLException {
 		adminApp.assignPatientDoctor(dniDoc,dniPat);
+	}
+
+	public List<Patient> getPatientsOfDoctor(String doctor_dni) {
+		return doctorApp.getPatientsOfDoctor(doctor_dni);
 	}
 
 }
