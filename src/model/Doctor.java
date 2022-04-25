@@ -15,7 +15,7 @@ public class Doctor extends User {
 	private Date contractEndDate;
 
 	public Doctor(String dni, String name, String lastname, String birthdate, String email, String phone, String speciality, float salary, Date contractStartDate, Date contractEndDate) {
-		super (dni, name, lastname, birthdate, email, phone, UserRole.DOCTOR);
+		super (dni, name, lastname, birthdate, email, phone, UserRole.DOCTOR, null);
 		this.speciality = speciality;
 		this.salary = salary;
 		this.contractStartDate = contractStartDate;

@@ -1,4 +1,4 @@
-package model.adminDAO;
+package model.patientDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +14,7 @@ import model.Enums.HealthInsuranceType;
 import model.exceptions.sqlExeptions.SqlConnectionException;
 import viewer.ErrorHandler;
 
-public class GetPatientDataDAO {
+public class GetPatientFullDataDAO {
 
 	public static Patient execute(String dni) {
 		Connection adminConex = null;
@@ -50,7 +50,10 @@ public class GetPatientDataDAO {
 				HealthInsuranceType insuranceType = HealthInsuranceType.valueOf(resultSet.getString("insurance_type"));
 				String insuranceTaker = resultSet.getString("dni_insurance_taker");
 				Double bill = resultSet.getDouble("bill");
-				docs = new Patient(dni1, name, lastName, birthDate, email, phone, gen, bloodType, insuranceType, insuranceTaker, bill);
+				String pass = resultSet.getString("password");
+				String iban = resultSet.getString("iban");
+				String homeAddress = resultSet.getString("home_address");
+				docs = new Patient(dni1, name, lastName, birthDate, email, phone, gen, bloodType, insuranceType, insuranceTaker, bill, pass, iban, homeAddress);
 			}
 			resultSet.close();
 		} catch (SQLException e) {

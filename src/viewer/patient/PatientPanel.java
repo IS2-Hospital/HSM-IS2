@@ -14,7 +14,7 @@ import control.Controller;
  */
 public class PatientPanel extends javax.swing.JPanel {
 
-	private String dni;
+	private String dni_patient;
 	private Controller ctrl;
 
 	AppointmentsPanel appointmentsPanel;
@@ -26,16 +26,16 @@ public class PatientPanel extends javax.swing.JPanel {
 	 * Creates new form PatientPanel
 	 * @param dni
 	 */
-	public PatientPanel(Controller ctrl, String dni) {
+	public PatientPanel(Controller ctrl, String dni_patient) {
 		this.ctrl = ctrl;
-		this.dni = dni;
+		this.dni_patient = dni_patient;
 
 		initComponents();
 
-		appointmentsPanel = new AppointmentsPanel(ctrl, dni);
+		appointmentsPanel = new AppointmentsPanel(ctrl, dni_patient);
 		askForAppointmentPanel = new AskForAppointmentPanel(this);
 		homePanel = new PatientHomePanel();
-		profilePanel = new ProfilePanel();
+		profilePanel = new ProfilePanel(ctrl, dni_patient);
 	}
 
 	/**
@@ -386,7 +386,7 @@ public class PatientPanel extends javax.swing.JPanel {
 	// End of variables declaration
 
 	public String getDniPatient() {
-		return dni;
+		return dni_patient;
 	}
 
 	public Controller getCtrl() {

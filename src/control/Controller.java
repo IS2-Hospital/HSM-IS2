@@ -67,9 +67,16 @@ public class Controller {
 		return adminApp.getPatientData(dni);
 	}
 
+	public Patient getPatientFullData(String dni) {
+		return patientApp.getPatientFullData(dni);
+	}
+
 	public void updatePatient(List<String> colData) throws SQLException {
 		adminApp.updatePatient(colData);
+	}
 
+	public void updatePatient(Patient p) throws SQLException {
+		patientApp.updatePatient(p);
 	}
 
 	public Doctor getDoctorData(String dni) {

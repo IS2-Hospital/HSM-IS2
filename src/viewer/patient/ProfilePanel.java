@@ -4,18 +4,76 @@
  */
 package viewer.patient;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import javax.swing.JOptionPane;
+
+import control.Controller;
+import model.Patient;
+import model.Enums.BloodType;
+import model.Enums.Gender;
+
 /**
  *
  * @author reven
  */
 public class ProfilePanel extends javax.swing.JPanel {
 
+	Controller ctrl;
+	String patient_dni;
+	Patient patient;
+
 	/**
 	 * Creates new form ProfilePanel
 	 */
-	public ProfilePanel() {
+	public ProfilePanel(Controller ctrl, String patient_dni) {
+		this.ctrl = ctrl;
+		this.patient_dni = patient_dni;
+
 		initComponents();
-		birthSpinner.setEditor(new javax.swing.JSpinner.DateEditor(birthSpinner, "yyyy-MM-dd"));
+	}
+
+	public void open() {
+		patient = ctrl.getPatientFullData(patient_dni);
+
+		nameField.setText(patient.getName());
+		lastnameField.setText(patient.getLastname());
+		passField.setText(patient.getPass());
+		birthSpinner.getModel().setValue(getBirthdate());
+		emailField.setText(patient.getEmail());
+		phoneField.setText(patient.getPhone());
+		selectGenderButton();
+		bloodComboBox.setSelectedIndex(patient.getBloodType().ordinal());
+		ibanField.setText(patient.getIban());
+		addressField.setText(patient.getHomeAddress());
+	}
+
+	private Date getBirthdate() {
+		int year = Integer.parseInt(patient.getBirthdate().substring(0, 4));
+		int month = Integer.parseInt(patient.getBirthdate().substring(5, 7));
+		int day = Integer.parseInt(patient.getBirthdate().substring(8));
+
+		Calendar cal = Calendar.getInstance(Locale.FRANCE);
+		cal.set(year, month, day);
+
+		return cal.getTime();
+	}
+
+	private void selectGenderButton() {
+		switch (patient.getGender()) {
+		case MALE:
+			maleButton.setSelected(true);
+			break;
+		case FEMALE:
+			femaleButton.setSelected(true);
+			break;
+		}
 	}
 
 	/**
@@ -50,7 +108,7 @@ public class ProfilePanel extends javax.swing.JPanel {
 		maleButton = new javax.swing.JRadioButton();
 		femaleButton = new javax.swing.JRadioButton();
 		bloodPanel = new javax.swing.JPanel();
-		bloodComboBox = new javax.swing.JComboBox<>();
+		bloodComboBox = new javax.swing.JComboBox<>(BloodType.values());
 		jLabel10 = new javax.swing.JLabel();
 		jLabel11 = new javax.swing.JLabel();
 		ibanField = new javax.swing.JTextField();
@@ -81,12 +139,6 @@ public class ProfilePanel extends javax.swing.JPanel {
 
 		nameField.setText("name");
 		nameField.setMargin(new java.awt.Insets(2, 7, 2, 6));
-		nameField.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				nameFieldActionPerformed(evt);
-			}
-		});
 		centerPanel.add(nameField);
 
 		lastnameField.setText("lastname");
@@ -109,6 +161,7 @@ public class ProfilePanel extends javax.swing.JPanel {
 		birthPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
 		birthSpinner.setModel(new javax.swing.SpinnerDateModel());
+		birthSpinner.setEditor(new javax.swing.JSpinner.DateEditor(birthSpinner, "yyyy-MM-dd"));
 		birthPanel.add(birthSpinner);
 
 		centerPanel.add(birthPanel);
@@ -123,12 +176,6 @@ public class ProfilePanel extends javax.swing.JPanel {
 
 		emailField.setText("email");
 		emailField.setMargin(new java.awt.Insets(2, 7, 2, 6));
-		emailField.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				emailFieldActionPerformed(evt);
-			}
-		});
 		centerPanel.add(emailField);
 
 		phoneField.setText("phone");
@@ -151,12 +198,6 @@ public class ProfilePanel extends javax.swing.JPanel {
 
 		genderButtonGroup.add(femaleButton);
 		femaleButton.setText("Female");
-		femaleButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				femaleButtonActionPerformed(evt);
-			}
-		});
 		genderPanel.add(femaleButton);
 
 		centerPanel.add(genderPanel);
@@ -164,7 +205,6 @@ public class ProfilePanel extends javax.swing.JPanel {
 		bloodPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		bloodPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-		bloodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 		bloodPanel.add(bloodComboBox);
 
 		centerPanel.add(bloodPanel);
@@ -179,12 +219,6 @@ public class ProfilePanel extends javax.swing.JPanel {
 
 		ibanField.setText("iban");
 		ibanField.setMargin(new java.awt.Insets(2, 7, 2, 6));
-		ibanField.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				ibanFieldActionPerformed(evt);
-			}
-		});
 		centerPanel.add(ibanField);
 
 		addressField.setText("address");
@@ -198,36 +232,55 @@ public class ProfilePanel extends javax.swing.JPanel {
 		saveButton.setColorNormal(new java.awt.Color(8, 72, 135));
 		saveButton.setColorPressed(new java.awt.Color(8, 72, 135));
 		saveButton.setColorTextHover(new java.awt.Color(51, 51, 51));
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				saveButtonPressedAction(e);
+			}
+		});
 		bottomPanel.add(saveButton);
 
 		add(bottomPanel, java.awt.BorderLayout.PAGE_END);
 	}// </editor-fold>
 
-	private void femaleButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+	private void saveButtonPressedAction(ActionEvent e) {
+		Patient p = new Patient(
+				patient.getDni(),
+				nameField.getText(),
+				lastnameField.getText(),
+				new SimpleDateFormat("yyyy-MM-dd").format(birthSpinner.getValue()),
+				emailField.getText(),
+				phoneField.getText(),
+				getSelectedGender(),
+				(BloodType) bloodComboBox.getSelectedItem(),
+				null,
+				null,
+				-1,
+				passField.getText(),
+				ibanField.getText(),
+				addressField.getText());
+
+		try {
+			ctrl.updatePatient(p);
+			JOptionPane.showMessageDialog(this, "Changes were successfully saved", "", JOptionPane.INFORMATION_MESSAGE);
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(this, e1.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+			e1.printStackTrace();
+		}
 	}
 
-	private void ibanFieldActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	public void open() {
-		// TODO consultas sql para leer los datos de perfil
+	private Gender getSelectedGender() {
+		if (maleButton.isSelected())
+			return Gender.MALE;
+		else
+			return Gender.FEMALE;
 	}
 
 	// Variables declaration - do not modify
 	private javax.swing.JTextField addressField;
 	private javax.swing.JPanel birthPanel;
 	private javax.swing.JSpinner birthSpinner;
-	private javax.swing.JComboBox<String> bloodComboBox;
+	private javax.swing.JComboBox<BloodType> bloodComboBox;
 	private javax.swing.JPanel bloodPanel;
 	private javax.swing.JPanel bottomPanel;
 	private javax.swing.JPanel centerPanel;
