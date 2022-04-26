@@ -50,8 +50,7 @@ public class TreatmentPanel extends JPanel{
 		try {
 			tableModel.open();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

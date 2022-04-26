@@ -48,7 +48,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 			doctorList = ctrl.getDoctorsOf(dni_patient);
 			doctorComboBox.setModel(new DefaultComboBoxModel<>(doctorList));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

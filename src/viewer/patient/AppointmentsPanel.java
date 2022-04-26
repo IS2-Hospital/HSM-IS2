@@ -87,9 +87,12 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 	public void open() {
 		try {
 			tableModel.open();
+			calendarPanel1.open(tableModel.getAppointments());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
+
+
 }

@@ -2,12 +2,12 @@ package viewer.patient;
 
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import control.Controller;
 import model.Appointment;
 
+@SuppressWarnings("serial")
 public class AppointmentsTableModel extends AbstractTableModel {
 
 	private String dni;
@@ -20,12 +20,6 @@ public class AppointmentsTableModel extends AbstractTableModel {
 	public AppointmentsTableModel(String dni, Controller ctrl) {
 		this.dni = dni;
 		this.ctrl = ctrl;
-		try {
-			open();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			e.printStackTrace();
-		}
 	}
 
 	public void open() throws Exception {
@@ -62,6 +56,10 @@ public class AppointmentsTableModel extends AbstractTableModel {
 		default:
 			return null;
 		}
+	}
+
+	public Vector<Appointment> getAppointments() {
+		return v;
 	}
 
 }
