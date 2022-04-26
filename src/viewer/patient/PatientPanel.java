@@ -17,6 +17,7 @@ public class PatientPanel extends javax.swing.JPanel {
 	private String dni_patient;
 	private Controller ctrl;
 
+	HistoryPanel historyPanel;
 	TreatmentPanel treatmentPanel;
 	AppointmentsPanel appointmentsPanel;
 	AskForAppointmentPanel askForAppointmentPanel;
@@ -33,6 +34,7 @@ public class PatientPanel extends javax.swing.JPanel {
 
 		initComponents();
 
+		historyPanel = new HistoryPanel(ctrl, dni_patient);
 		treatmentPanel = new TreatmentPanel(ctrl, dni_patient);
 		appointmentsPanel = new AppointmentsPanel(ctrl, dni_patient);
 		askForAppointmentPanel = new AskForAppointmentPanel(this);
@@ -343,7 +345,8 @@ public class PatientPanel extends javax.swing.JPanel {
 	}
 
 	private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		setCenterPanel(historyPanel);
+		historyPanel.open();
 	}
 
 	private void treatmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {

@@ -7,12 +7,12 @@ import javax.swing.JPanel;
 
 import control.Controller;
 
-public class TreatmentPanel extends JPanel{
+public class HistoryPanel extends JPanel{
 
 	Controller ctrl;
 	String dni_patient;
 
-	public TreatmentPanel(Controller ctrl, String dni_patient) {
+	public HistoryPanel(Controller ctrl, String dni_patient) {
 		this.ctrl = ctrl;
 		this.dni_patient = dni_patient;
 		initComponents();
@@ -27,12 +27,12 @@ public class TreatmentPanel extends JPanel{
 
 		centerPanel.setLayout(new java.awt.BorderLayout());
 
-		tableModel = new TreatmentsTableModel(dni_patient, ctrl);
+		tableModel = new HistoryTableModel(dni_patient, ctrl);
 		jTable1 = new javax.swing.JTable(tableModel);
 		jScrollPane2.setViewportView(jTable1);
 
 		centerPanel.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-		centerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK,5), "My Treatments",
+		centerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK,5), "My History",
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
 		add(centerPanel, java.awt.BorderLayout.CENTER);
@@ -43,7 +43,7 @@ public class TreatmentPanel extends JPanel{
 	private javax.swing.JPanel centerPanel;
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JTable jTable1;
-	private TreatmentsTableModel tableModel;
+	private HistoryTableModel tableModel;
 	// End of variables declaration
 
 	public void open() {

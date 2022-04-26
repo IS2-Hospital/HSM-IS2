@@ -6,18 +6,19 @@ import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import control.Controller;
-import model.Treatment;
+import model.History;
 
-public class TreatmentsTableModel extends AbstractTableModel {
+public class HistoryTableModel extends AbstractTableModel{
+
 
 	private Controller ctrl;
 	private String dni;
 
-	private Vector<Treatment> v;
-	private final String[] colNames = {"NAME", "START", "DESCRIPTION" };
+	private Vector<History> v;
+	private final String[] colNames = {"NAME", "START", "END", "DESCRIPTION" };
 
 
-	public TreatmentsTableModel(String dni, Controller ctrl) {
+	public HistoryTableModel(String dni, Controller ctrl) {
 		this.dni = dni;
 		this.ctrl = ctrl;
 		try {
@@ -31,7 +32,7 @@ public class TreatmentsTableModel extends AbstractTableModel {
 
 
 	void open() throws Exception {
-		v = ctrl.getTreatment(dni);
+		v = ctrl.getHistory(dni);
 		fireTableDataChanged();
 	}
 
@@ -59,10 +60,11 @@ public class TreatmentsTableModel extends AbstractTableModel {
 		case 1:
 			return v.get(rowIndex).getStart_date();
 		case 2:
+			return v.get(rowIndex).getEnd_date();
+		case 3:
 			return v.get(rowIndex).getDescription();
 		default:
 			return null;
 		}
 	}
-
 }

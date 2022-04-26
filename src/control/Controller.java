@@ -10,6 +10,7 @@ import model.AdminApp;
 import model.Appointment;
 import model.Doctor;
 import model.DoctorApp;
+import model.History;
 import model.Patient;
 import model.PatientApp;
 import model.Treatment;
@@ -55,6 +56,9 @@ public class Controller {
 		return patientApp.getAppointments(dni_patient);
 	}
 
+	public Vector<History> getHistory(String dni_patient)throws SQLException{
+		return patientApp.getHistory(dni_patient);
+	}
 	public Vector<Treatment> getTreatment(String dni_patient) throws SQLException{
 		return patientApp.getTreatment(dni_patient);
 	}
