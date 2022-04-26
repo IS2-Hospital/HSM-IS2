@@ -12,6 +12,7 @@ import model.Doctor;
 import model.DoctorApp;
 import model.Patient;
 import model.PatientApp;
+import model.Treatment;
 import model.Enums.UserRole;
 import model.exceptions.LoginException;
 import model.userManagment.UserManager;
@@ -52,6 +53,10 @@ public class Controller {
 
 	public Vector<Appointment> getAppointments(String dni_patient) throws SQLException {
 		return patientApp.getAppointments(dni_patient);
+	}
+
+	public Vector<Treatment> getTreatment(String dni_patient) throws SQLException{
+		return patientApp.getTreatment(dni_patient);
 	}
 
 	public List<Patient> getAllPatients() {
