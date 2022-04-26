@@ -13,10 +13,10 @@ public class GetTreatmentsDAO {
 	public static Vector<Treatment> execute(String dni_patient) throws SQLException{
 		Connection con = DBConnector.connectdb();
 		String SQL = "SELECT * "
-				+ "FROM treatment "
+				+ "FROM treatments "
 				+ "join recieves_treatment using(id_treatment) "
 				+ "WHERE dni_patient = " + dni_patient
-				+ "order by start_date, end_date, name;";
+				+ " ORDER BY start_date, end_date, name;";
 
 		Statement st = con.createStatement();
 		ResultSet resultSet = st.executeQuery(SQL);
