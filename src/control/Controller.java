@@ -12,6 +12,7 @@ import model.Doctor;
 import model.DoctorApp;
 import model.Patient;
 import model.PatientApp;
+import model.Treatment;
 import model.Enums.UserRole;
 import model.exceptions.LoginException;
 import model.userManagment.UserManager;
@@ -116,6 +117,10 @@ public class Controller {
 
 	public List<Patient> getPatientsOfDoctor(String doctor_dni) {
 		return doctorApp.getPatientsOfDoctor(doctor_dni);
+	}
+
+	public void saveTreatment(Treatment t, String patient_dni) throws SQLException {
+		doctorApp.saveTreatment(t, patient_dni);
 	}
 
 }
