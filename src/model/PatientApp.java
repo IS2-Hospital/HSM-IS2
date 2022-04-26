@@ -7,7 +7,9 @@ import java.util.Vector;
 import model.patientDAO.AskForAppointmentDAO;
 import model.patientDAO.GetAppointmentsDAO;
 import model.patientDAO.GetDoctorsOfPatientDAO;
+import model.patientDAO.GetHistoryDAO;
 import model.patientDAO.GetPatientFullDataDAO;
+import model.patientDAO.GetTreatmentsDAO;
 import model.patientDAO.GetUnavailableTakenHoursDAO;
 import model.patientDAO.UpdatePatientDAO;
 
@@ -55,7 +57,15 @@ public class PatientApp {
 		return GetAppointmentsDAO.execute(dni_patient);
 	}
 
-	public Patient getPatientFullData(String dni) {
+	public Vector<History> getHistory(String dni_patient) throws SQLException {
+		return GetHistoryDAO.execute(dni_patient);
+	}
+
+	public Vector<Treatment> getTreatment(String dni_patient) throws SQLException{
+		return GetTreatmentsDAO.execute(dni_patient);
+	}
+
+	public Patient getPatientFullData(String dni) throws SQLException {
 		return GetPatientFullDataDAO.execute(dni);
 	}
 

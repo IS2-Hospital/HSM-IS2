@@ -17,6 +17,8 @@ public class PatientPanel extends javax.swing.JPanel {
 	private String dni_patient;
 	private Controller ctrl;
 
+	HistoryPanel historyPanel;
+	TreatmentPanel treatmentPanel;
 	AppointmentsPanel appointmentsPanel;
 	AskForAppointmentPanel askForAppointmentPanel;
 	PatientHomePanel homePanel;
@@ -32,6 +34,8 @@ public class PatientPanel extends javax.swing.JPanel {
 
 		initComponents();
 
+		historyPanel = new HistoryPanel(ctrl, dni_patient);
+		treatmentPanel = new TreatmentPanel(ctrl, dni_patient);
 		appointmentsPanel = new AppointmentsPanel(ctrl, dni_patient);
 		askForAppointmentPanel = new AskForAppointmentPanel(this);
 		homePanel = new PatientHomePanel();
@@ -332,7 +336,7 @@ public class PatientPanel extends javax.swing.JPanel {
 	}// </editor-fold>
 
 	private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		setCenterPanel(homePanel);
 	}
 
 	private void appointButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,11 +345,13 @@ public class PatientPanel extends javax.swing.JPanel {
 	}
 
 	private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		setCenterPanel(historyPanel);
+		historyPanel.open();
 	}
 
 	private void treatmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		setCenterPanel(treatmentPanel);
+		treatmentPanel.open();
 	}
 
 	private void askForButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,7 +360,7 @@ public class PatientPanel extends javax.swing.JPanel {
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		homeButtonActionPerformed(evt);
 	}
 
 	private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
