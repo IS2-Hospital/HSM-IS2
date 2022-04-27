@@ -55,4 +55,7 @@ public class MainWindow extends JFrame {
 		setFondo();
 	}
 
+	public void signOut() {
+		initGUI();
+	}
 }

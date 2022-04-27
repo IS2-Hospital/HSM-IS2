@@ -7,6 +7,7 @@ package viewer.patient;
 import javax.swing.JPanel;
 
 import control.Controller;
+import viewer.MainWindow;
 
 /**
  *
@@ -17,6 +18,7 @@ public class PatientPanel extends javax.swing.JPanel {
 
 	private String dni_patient;
 	private Controller ctrl;
+	private MainWindow mainWindow;
 
 	AboutUsPanel aboutUsPanel;
 	HistoryPanel historyPanel;
@@ -32,9 +34,10 @@ public class PatientPanel extends javax.swing.JPanel {
 	 * Creates new form PatientPanel
 	 * @param dni
 	 */
-	public PatientPanel(Controller ctrl, String dni_patient) {
+	public PatientPanel(Controller ctrl, String dni_patient, MainWindow mainWindow) {
 		this.ctrl = ctrl;
 		this.dni_patient = dni_patient;
+		this.mainWindow = mainWindow;
 
 		initComponents();
 
@@ -79,6 +82,7 @@ public class PatientPanel extends javax.swing.JPanel {
 		voidCenterPanel = new javax.swing.JPanel();
 		southpanel = new javax.swing.JPanel();
 		aboutUsButton = new misc.RSButtonMetro();
+		signOutButton = new misc.RSButtonMetro();
 
 		setBackground(new java.awt.Color(0, 0, 0));
 		setMinimumSize(new java.awt.Dimension(985, 561));
@@ -347,8 +351,31 @@ public class PatientPanel extends javax.swing.JPanel {
 		});
 		southpanel.add(aboutUsButton);
 
+		signOutButton.setForeground(new java.awt.Color(51, 51, 51));
+		signOutButton.setText("Sign Out");
+		signOutButton.setColorHover(new java.awt.Color(242, 242, 242));
+		signOutButton.setColorNormal(new java.awt.Color(242, 242, 242));
+		signOutButton.setColorPressed(new java.awt.Color(242, 242, 242));
+		signOutButton.setColorTextHover(new java.awt.Color(8, 72, 135));
+		signOutButton.setColorTextNormal(new java.awt.Color(51, 51, 51));
+		signOutButton.setColorTextPressed(new java.awt.Color(8, 72, 135));
+		signOutButton.setFocusPainted(false);
+		signOutButton.setPreferredSize(new java.awt.Dimension(80, 35));
+		signOutButton.setRolloverEnabled(false);
+		signOutButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				signOutButtonActionPerformed(evt);
+			}
+		});
+		southpanel.add(signOutButton);
+
 		add(southpanel, java.awt.BorderLayout.PAGE_END);
 	}// </editor-fold>
+
+	private void signOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		mainWindow.signOut();
+	}
 
 	private void aboutUsButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		setCenterPanel(aboutUsPanel);
@@ -391,6 +418,7 @@ public class PatientPanel extends javax.swing.JPanel {
 
 	// Variables declaration - do not modify
 	private misc.RSButtonMetro aboutUsButton;
+	private misc.RSButtonMetro signOutButton;
 	private misc.RSButtonMetro appointButton;
 	private misc.RSButtonMetro askForButton;
 	private javax.swing.JPanel centerPanel;
