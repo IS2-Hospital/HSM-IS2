@@ -190,10 +190,10 @@ public class LoginPanel extends JPanel{
 				_mainWindow.setContentPane(new PatientPanel(_ctrl, dni, _mainWindow));
 				break;
 			case DOCTOR:
-				_mainWindow.setContentPane(new DoctorPanel(_ctrl, dni));
+				_mainWindow.setContentPane(new DoctorPanel(_ctrl, dni, _mainWindow));
 				break;
 			case ADMIN:
-				_mainWindow.setContentPane(new AdminPanel(_ctrl));
+				_mainWindow.setContentPane(new AdminPanel(_ctrl, _mainWindow));
 				break;
 			}
 

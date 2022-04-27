@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 
@@ -22,13 +21,15 @@ import control.Controller;
 import model.Doctor;
 import model.Patient;
 import model.exceptions.sqlExeptions.SqlConnectionException;
+import viewer.MainWindow;
 
 
 public class AdminPanel extends JPanel {
 
 	Controller _ctrl;
+	MainWindow _mainWindow;
 
-	JButton exitButton;
+	JButton signOut;
 	JButton patientList;
 	JButton doctorList;
 	JButton doctorPatients;
@@ -40,8 +41,9 @@ public class AdminPanel extends JPanel {
 	private JButton ansreqButton;
 
 	private JButton assignDoctor;
-	public AdminPanel(Controller ctrl) throws SqlConnectionException {
+	public AdminPanel(Controller ctrl, MainWindow mainWindow) throws SqlConnectionException {
 		_ctrl = ctrl;
+		_mainWindow = mainWindow;
 		initGUI();
 	}
 
@@ -159,14 +161,12 @@ public class AdminPanel extends JPanel {
 
 		});
 
-		exitButton = new JButton("Exit");
-		exitButton.addActionListener(new ActionListener() {
+		signOut = new JButton("sign Out");
+		signOut.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor (AdminPanel.this),
-						"Are you sure you want to close the program?", "Exit", JOptionPane.YES_NO_OPTION ));
-				System.exit(0);
+				_mainWindow.signOut();
 			}
 
 		});
@@ -184,7 +184,7 @@ public class AdminPanel extends JPanel {
 		add(new JLabel (""));
 
 		add(new JLabel (""));
-		add(exitButton);
+		add(signOut);
 		add(new JLabel (""));
 	}
 
