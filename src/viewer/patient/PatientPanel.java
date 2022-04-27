@@ -24,6 +24,8 @@ public class PatientPanel extends javax.swing.JPanel {
 	PatientHomePanel homePanel;
 	ProfilePanel profilePanel;
 
+	boolean leftPanel;
+
 	/**
 	 * Creates new form PatientPanel
 	 * @param dni
@@ -40,6 +42,8 @@ public class PatientPanel extends javax.swing.JPanel {
 		askForAppointmentPanel = new AskForAppointmentPanel(this);
 		homePanel = new PatientHomePanel();
 		profilePanel = new ProfilePanel(ctrl, dni_patient);
+
+		leftPanel = true;
 	}
 
 	/**
@@ -360,7 +364,8 @@ public class PatientPanel extends javax.swing.JPanel {
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		homeButtonActionPerformed(evt);
+		leftPanel = ! leftPanel;
+		leftpanel.setVisible(leftPanel);
 	}
 
 	private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
