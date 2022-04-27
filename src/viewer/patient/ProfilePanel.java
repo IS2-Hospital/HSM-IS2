@@ -40,18 +40,22 @@ public class ProfilePanel extends javax.swing.JPanel {
 	}
 
 	public void open() {
-		patient = ctrl.getPatientFullData(patient_dni);
+		try {
+			patient = ctrl.getPatientFullData(patient_dni);
+			nameField.setText(patient.getName());
+			lastnameField.setText(patient.getLastname());
+			passField.setText(patient.getPass());
+			birthSpinner.getModel().setValue(getBirthdate());
+			emailField.setText(patient.getEmail());
+			phoneField.setText(patient.getPhone());
+			selectGenderButton();
+			bloodComboBox.setSelectedIndex(patient.getBloodType().ordinal());
+			ibanField.setText(patient.getIban());
+			addressField.setText(patient.getHomeAddress());
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+		}
 
-		nameField.setText(patient.getName());
-		lastnameField.setText(patient.getLastname());
-		passField.setText(patient.getPass());
-		birthSpinner.getModel().setValue(getBirthdate());
-		emailField.setText(patient.getEmail());
-		phoneField.setText(patient.getPhone());
-		selectGenderButton();
-		bloodComboBox.setSelectedIndex(patient.getBloodType().ordinal());
-		ibanField.setText(patient.getIban());
-		addressField.setText(patient.getHomeAddress());
 	}
 
 	private Date getBirthdate() {

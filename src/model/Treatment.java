@@ -1,19 +1,24 @@
+
 package model;
 
 public class Treatment {
 
-	private String start_date;
+	private int id;
 	private String name;
 	private String description;
+	private String startDate;
+	private String endDate;
 
-	public Treatment(String start_date, String name, String description) {
-		this.start_date = start_date;
+	public Treatment(int id, String name, String description, String startDate, String endDate) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
-	public String getStart_date() {
-		return start_date;
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -24,7 +29,16 @@ public class Treatment {
 		return description;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
 
+	public String getEndDate() {
+		return endDate;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
 }

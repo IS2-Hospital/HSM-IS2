@@ -79,7 +79,7 @@ public class Controller {
 		return adminApp.getPatientData(dni);
 	}
 
-	public Patient getPatientFullData(String dni) {
+	public Patient getPatientFullData(String dni) throws SQLException {
 		return patientApp.getPatientFullData(dni);
 	}
 
@@ -125,6 +125,10 @@ public class Controller {
 
 	public List<Patient> getPatientsOfDoctor(String doctor_dni) {
 		return doctorApp.getPatientsOfDoctor(doctor_dni);
+	}
+
+	public void saveTreatment(Treatment t, String patient_dni) throws SQLException {
+		doctorApp.saveTreatment(t, patient_dni);
 	}
 
 }

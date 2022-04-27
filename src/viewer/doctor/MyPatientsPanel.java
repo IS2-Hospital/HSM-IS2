@@ -7,6 +7,8 @@ package viewer.doctor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import control.Controller;
 import model.Patient;
 
@@ -47,6 +49,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 		patientsTable = new javax.swing.JTable(tableModel);
 		bottomPanel = new javax.swing.JPanel();
 		viewMedicHistoryButton = new misc.RSButtonMetro();
+		addTreatmentButton = new misc.RSButtonMetro();
 
 		setLayout(new java.awt.BorderLayout());
 
@@ -71,15 +74,54 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 				viewMedicHistoryButtonActionPerformed(e);
 			}
 		});
+
 		bottomPanel.add(viewMedicHistoryButton);
+
+		addTreatmentButton.setText("Add Treatment");
+		addTreatmentButton.setColorHover(new java.awt.Color(138, 202, 234));
+		addTreatmentButton.setColorNormal(new java.awt.Color(8, 72, 135));
+		addTreatmentButton.setColorPressed(new java.awt.Color(8, 72, 135));
+		addTreatmentButton.setColorTextHover(new java.awt.Color(51, 51, 51));
+		addTreatmentButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addTreatmentButtonActionPerformed(e);
+			}
+
+		});
+
+		bottomPanel.add(addTreatmentButton);
 
 		add(bottomPanel, java.awt.BorderLayout.PAGE_END);
 	}// </editor-fold>
 
 	private void viewMedicHistoryButtonActionPerformed(ActionEvent e) {
-		Patient p = tableModel.getSelectedPatient(patientsTable.getSelectedRow());
-		// TODO panel del historial medico de un paciente p
+		try {
+			Patient p = tableModel.getSelectedPatient(patientsTable.getSelectedRow());
+			// TODO panel del historial medico de un paciente p
+
+		} catch (IndexOutOfBoundsException e1) { // no row selected
+			JOptionPane.showMessageDialog(this, "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);
+		}
 	}
+
+	private void addTreatmentButtonActionPerformed(ActionEvent e) {
+		if (patientsTable.getSelectedRow() == -1) { // no row selected
+			JOptionPane.showMessageDialog(this, "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);
+		}
+		else {
+			AddTreatmentDialog atd = new AddTreatmentDialog(
+					ctrl,
+					tableModel.getSelectedPatient(patientsTable.getSelectedRow()),
+					this);
+			atd.setVisible(true);
+		}
+	}
+
+	public void open() {
+		tableModel.open();
+	}
+
 
 	// Variables declaration - do not modify
 	private javax.swing.JPanel bottomPanel;
@@ -88,9 +130,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 	private javax.swing.JLabel titleLabel;
 	private javax.swing.JPanel topPanel;
 	private misc.RSButtonMetro viewMedicHistoryButton;
+	private misc.RSButtonMetro addTreatmentButton;
 	// End of variables declaration
 
-	public void open() {
-		tableModel.open();
-	}
 }

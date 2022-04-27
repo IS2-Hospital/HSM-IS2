@@ -65,7 +65,7 @@ public class PatientApp {
 		return GetTreatmentsDAO.execute(dni_patient);
 	}
 
-	public Patient getPatientFullData(String dni) {
+	public Patient getPatientFullData(String dni) throws SQLException {
 		return GetPatientFullDataDAO.execute(dni);
 	}
 

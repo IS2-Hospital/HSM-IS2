@@ -14,7 +14,7 @@ public class TreatmentsTableModel extends AbstractTableModel {
 	private String dni;
 
 	private Vector<Treatment> v;
-	private final String[] colNames = {"NAME", "START", "DESCRIPTION" };
+	private final String[] colNames = {"NAME", "DESCRIPTION", "START", "END"};
 
 
 	public TreatmentsTableModel(String dni, Controller ctrl) {
@@ -57,9 +57,11 @@ public class TreatmentsTableModel extends AbstractTableModel {
 		case 0:
 			return v.get(rowIndex).getName();
 		case 1:
-			return v.get(rowIndex).getStart_date();
-		case 2:
 			return v.get(rowIndex).getDescription();
+		case 2:
+			return v.get(rowIndex).getStartDate();
+		case 3:
+			return v.get(rowIndex).getEndDate();
 		default:
 			return null;
 		}
