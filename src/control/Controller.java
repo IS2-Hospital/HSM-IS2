@@ -52,8 +52,9 @@ public class Controller {
 		patientApp.askForAppointment(appointment, dni_patient);
 	}
 
-	public Vector<Appointment> getAppointments(String dni_patient) throws SQLException {
-		return patientApp.getAppointments(dni_patient);
+	public Vector<Appointment> getAppointments(String dni, UserRole role) throws SQLException {
+		if(role == UserRole.PATIENT) return patientApp.getAppointments(dni);
+		else return doctorApp.getAppointments(dni);
 	}
 
 	public Vector<History> getHistory(String dni_patient)throws SQLException{

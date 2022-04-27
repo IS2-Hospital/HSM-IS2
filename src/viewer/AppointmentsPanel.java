@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package viewer.patient;
+package viewer;
 
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
 
 import control.Controller;
+import model.Enums.UserRole;
 
 /**
  *
@@ -18,15 +19,17 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 
 	private Controller ctrl;
 	private String dni;
+	private UserRole role;
 
 	/**
 	 * Creates new form AppointmentsPanel
 	 * @param ctrl
 	 * @param dni
 	 */
-	public AppointmentsPanel(Controller ctrl, String dni) {
+	public AppointmentsPanel(Controller ctrl, String dni, UserRole role) {
 		this.ctrl = ctrl;
 		this.dni = dni;
+		this.role = role;
 
 		initComponents();
 	}
@@ -62,7 +65,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 
 		centerPanel.setLayout(new java.awt.BorderLayout());
 
-		tableModel = new AppointmentsTableModel(dni, ctrl);
+		tableModel = new AppointmentsTableModel(dni, ctrl, role);
 		jTable1 = new javax.swing.JTable(tableModel);
 		jScrollPane2.setViewportView(jTable1);
 

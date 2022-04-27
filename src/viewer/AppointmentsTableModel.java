@@ -1,29 +1,45 @@
-package viewer.patient;
+package viewer;
 
+import java.util.Arrays;
 import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
 import control.Controller;
 import model.Appointment;
+import model.Enums.UserRole;
 
 @SuppressWarnings("serial")
 public class AppointmentsTableModel extends AbstractTableModel {
 
 	private String dni;
 	private Controller ctrl;
+	private UserRole role;
 
-	private final String[] colNames = {"DAY", "HOUR", "DOCTOR", "DESCRIPTION"};
+	private String[] colNames;
+	private final String [] colDocNames = {"DAY", "HOUR", "PATIENT", "DESCRIPTION"};
+	private final String [] colPatNames = {"DAY", "HOUR", "DOCTOR", "DESCRIPTION"};
+
 	private Vector<Appointment> v;
 
-
-	public AppointmentsTableModel(String dni, Controller ctrl) {
+	public AppointmentsTableModel(String dni, Controller ctrl, UserRole role) {
 		this.dni = dni;
 		this.ctrl = ctrl;
+		this.role = role;
+		initColNames();
+	}
+
+	private void initColNames() {
+		if(role == UserRole.PATIENT) {
+			colNames = Arrays.copyOf(colPatNames, colDocNames.length);
+		}
+		else if(role == UserRole.DOCTOR) {
+			colNames = Arrays.copyOf(colDocNames, colDocNames.length);
+		}
 	}
 
 	public void open() throws Exception {
-		v = ctrl.getAppointments(dni);
+		v = ctrl.getAppointments(dni, role);
 		fireTableDataChanged();
 	}
 
@@ -50,7 +66,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 		case 1:
 			return v.get(rowIndex).getHour();
 		case 2:
-			return v.get(rowIndex).getDoctor();
+			return v.get(rowIndex).getPerson();
 		case 3:
 			return v.get(rowIndex).getDescription();
 		default:

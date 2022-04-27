@@ -7,6 +7,8 @@ package viewer.patient;
 import javax.swing.JPanel;
 
 import control.Controller;
+import model.Enums.UserRole;
+import viewer.AppointmentsPanel;
 import viewer.MainWindow;
 
 /**
@@ -44,7 +46,7 @@ public class PatientPanel extends javax.swing.JPanel {
 		aboutUsPanel = new AboutUsPanel();
 		historyPanel = new HistoryPanel(ctrl, dni_patient);
 		treatmentPanel = new TreatmentPanel(ctrl, dni_patient);
-		appointmentsPanel = new AppointmentsPanel(ctrl, dni_patient);
+		appointmentsPanel = new AppointmentsPanel(ctrl, dni_patient, UserRole.PATIENT);
 		askForAppointmentPanel = new AskForAppointmentPanel(this);
 		homePanel = new PatientHomePanel();
 		profilePanel = new ProfilePanel(ctrl, dni_patient);

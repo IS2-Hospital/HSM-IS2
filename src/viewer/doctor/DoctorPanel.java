@@ -7,6 +7,8 @@ package viewer.doctor;
 import javax.swing.JPanel;
 
 import control.Controller;
+import model.Enums.UserRole;
+import viewer.AppointmentsPanel;
 import viewer.MainWindow;
 
 /**
@@ -20,6 +22,8 @@ public class DoctorPanel extends javax.swing.JPanel {
 	private MainWindow mainWindow;
 
 	private MyPatientsPanel myPatientsPanel;
+	private AppointmentsPanel appointmentsPanel;
+
 
 	/**
 	 * Creates new form PatientPanel
@@ -30,6 +34,7 @@ public class DoctorPanel extends javax.swing.JPanel {
 		this.mainWindow = mainWindow;
 
 		myPatientsPanel = new MyPatientsPanel(ctrl, doctor_dni);
+		appointmentsPanel = new AppointmentsPanel(ctrl, doctor_dni, UserRole.DOCTOR);
 
 		initComponents();
 	}
@@ -306,7 +311,8 @@ public class DoctorPanel extends javax.swing.JPanel {
 	}
 
 	private void appointButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		setCenterPanel(appointmentsPanel);
+		appointmentsPanel.open();
 	}
 
 	private void askForButtonActionPerformed(java.awt.event.ActionEvent evt) {
