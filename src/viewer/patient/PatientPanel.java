@@ -18,6 +18,7 @@ public class PatientPanel extends javax.swing.JPanel {
 	private String dni_patient;
 	private Controller ctrl;
 
+	AboutUsPanel aboutUsPanel;
 	HistoryPanel historyPanel;
 	TreatmentPanel treatmentPanel;
 	AppointmentsPanel appointmentsPanel;
@@ -37,6 +38,7 @@ public class PatientPanel extends javax.swing.JPanel {
 
 		initComponents();
 
+		aboutUsPanel = new AboutUsPanel();
 		historyPanel = new HistoryPanel(ctrl, dni_patient);
 		treatmentPanel = new TreatmentPanel(ctrl, dni_patient);
 		appointmentsPanel = new AppointmentsPanel(ctrl, dni_patient);
@@ -45,6 +47,8 @@ public class PatientPanel extends javax.swing.JPanel {
 		profilePanel = new ProfilePanel(ctrl, dni_patient);
 
 		leftPanel = true;
+
+		setCenterPanel(homePanel);
 	}
 
 	/**
@@ -335,10 +339,20 @@ public class PatientPanel extends javax.swing.JPanel {
 		aboutUsButton.setFocusPainted(false);
 		aboutUsButton.setPreferredSize(new java.awt.Dimension(80, 35));
 		aboutUsButton.setRolloverEnabled(false);
+		aboutUsButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				aboutUsButtonActionPerformed(evt);
+			}
+		});
 		southpanel.add(aboutUsButton);
 
 		add(southpanel, java.awt.BorderLayout.PAGE_END);
 	}// </editor-fold>
+
+	private void aboutUsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		setCenterPanel(aboutUsPanel);
+	}
 
 	private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		setCenterPanel(homePanel);
