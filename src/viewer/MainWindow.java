@@ -55,4 +55,9 @@ public class MainWindow extends JFrame {
 		setFondo();
 	}
 
+	public void signOut() {
+		this.setContentPane(new LoginPanel(_ctrl, this));
+		this.revalidate();
+		this.repaint();
+	}
 }

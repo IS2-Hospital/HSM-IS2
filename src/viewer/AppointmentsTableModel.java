@@ -1,56 +1,48 @@
 package viewer;
 
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Vector;
 
-import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
-import model.DBConnector;
+import control.Controller;
+import model.Appointment;
+import model.Enums.UserRole;
 
 @SuppressWarnings("serial")
 public class AppointmentsTableModel extends AbstractTableModel {
+
 	private String dni;
-	private final String[] colNames = {"DAY", "HOUR", "DOCTOR"};
-	private List<String> date;
-	private List<String> hour;
-	private List<String> doctor;
+	private Controller ctrl;
+	private UserRole role;
 
+	private String[] colNames;
+	private final String [] colDocNames = {"DAY", "HOUR", "PATIENT", "DESCRIPTION"};
+	private final String [] colPatNames = {"DAY", "HOUR", "DOCTOR", "DESCRIPTION"};
 
-	public AppointmentsTableModel(String dni) {
-		this.dni =  dni;
-		try {
-			initGUI();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			e.printStackTrace();
+	private Vector<Appointment> v;
+
+	public AppointmentsTableModel(String dni, Controller ctrl, UserRole role) {
+		this.dni = dni;
+		this.ctrl = ctrl;
+		this.role = role;
+		initColNames();
+	}
+
+	private void initColNames() {
+		if(role == UserRole.PATIENT) {
+			colNames = Arrays.copyOf(colPatNames, colDocNames.length);
+		}
+		else if(role == UserRole.DOCTOR) {
+			colNames = Arrays.copyOf(colDocNames, colDocNames.length);
 		}
 	}
 
-	private void initGUI() throws Exception {
-		Connection con = DBConnector.connectdb();
-		String SQL = "SELECT day, hour, name || ' ' || lastname AS doctor FROM appointments join users WHERE dni = dni order by day";
-
-		Statement st = con.createStatement();
-
-		ResultSet resultSet = st.executeQuery(SQL);
-
-		if (resultSet == null)
-			throw new Exception("You don't have appointments");
-
-		Array c1 = resultSet.getArray("day");
-		Array c2 = resultSet.getArray("hour");
-		Array c3 = resultSet.getArray("doctor");
-
-		date = (List<String>) c1.getArray();
-		hour = (List<String>) c2.getArray();
-		doctor = (List<String>) c3.getArray();
-
-
+	public void open() throws Exception {
+		v = ctrl.getAppointments(dni, role);
+		fireTableDataChanged();
 	}
+
 	@Override
 	public String getColumnName(int col) {
 		return colNames[col];
@@ -58,7 +50,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return date.size();
+		return v.size();
 	}
 
 	@Override
@@ -68,20 +60,22 @@ public class AppointmentsTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Object obj = null;
 		switch(columnIndex){
 		case 0:
-			obj = date.get(rowIndex);
-			break;
+			return v.get(rowIndex).getDay();
 		case 1:
-			obj = hour.get(rowIndex);
-			break;
+			return v.get(rowIndex).getHour();
 		case 2:
-			obj = doctor.get(rowIndex);
+			return v.get(rowIndex).getPerson();
+		case 3:
+			return v.get(rowIndex).getDescription();
 		default:
-			break;
+			return null;
 		}
-		return obj;
+	}
+
+	public Vector<Appointment> getAppointments() {
+		return v;
 	}
 
 }
