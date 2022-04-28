@@ -47,7 +47,6 @@ public class GetPatientFullDataDAO {
 		}
 		resultSet.close();
 
-
 		adminConex.close();
 
 		return docs;

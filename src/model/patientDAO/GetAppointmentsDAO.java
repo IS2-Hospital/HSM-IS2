@@ -38,6 +38,7 @@ public class GetAppointmentsDAO {
 
 		resultSet.close();
 		st.close();
+		con.close();
 
 		return v;
 	}

@@ -35,6 +35,7 @@ public class GetHistoryDAO {
 
 		resultSet.close();
 		st.close();
+		con.close();
 
 		return v;
 	}

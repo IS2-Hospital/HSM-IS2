@@ -356,8 +356,8 @@ public class PatientPanel extends javax.swing.JPanel {
 	}
 
 	private void askForButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		askForAppointmentPanel.open();
 		setCenterPanel(askForAppointmentPanel);
+		askForAppointmentPanel.open();
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {

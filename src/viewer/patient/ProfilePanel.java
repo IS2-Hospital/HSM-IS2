@@ -42,6 +42,7 @@ public class ProfilePanel extends javax.swing.JPanel {
 	public void open() {
 		try {
 			patient = ctrl.getPatientFullData(patient_dni);
+
 			nameField.setText(patient.getName());
 			lastnameField.setText(patient.getLastname());
 			passField.setText(patient.getPass());
