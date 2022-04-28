@@ -61,16 +61,19 @@ public class GetTreatmentsDAO {
 		end_dateAux = (end_date.charAt(0) - 48) * 1000 + (end_date.charAt(1) - 48) * 100 + (end_date.charAt(2) - 48) * 10 + (end_date.charAt(3) - 48);
 		//Comparar año
 		if(hoyAux < end_dateAux) { return true; }
+		else if(hoyAux > end_dateAux) { return false; }
 
 		hoyAux = (hoy.charAt(5) - 48) * 10 + (hoy.charAt(6) - 48);
 		end_dateAux = (end_date.charAt(5) - 48) * 10 + (end_date.charAt(6) - 48);
 		//Comparar mes
 		if(hoyAux < end_dateAux) { return true; }
+		else if(hoyAux > end_dateAux) { return false; }
 
 		hoyAux = (hoy.charAt(8) - 48) * 10 + (hoy.charAt(9) - 48);
 		end_dateAux = (end_date.charAt(8) - 48) * 10 + (end_date.charAt(9) - 48);
 		//Comparar dia
 		if(hoyAux < end_dateAux) { return true; }
+		else if(hoyAux > end_dateAux) { return false; }
 
 		return false;
 	}
