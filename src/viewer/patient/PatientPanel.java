@@ -4,9 +4,15 @@
  */
 package viewer.patient;
 
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
+import model.Patient;
 import model.Enums.UserRole;
 import viewer.AppointmentsPanel;
 import viewer.AskForAppointmentPanel;
@@ -22,6 +28,8 @@ public class PatientPanel extends javax.swing.JPanel {
 	private String dni_patient;
 	private Controller ctrl;
 	private MainWindow mainWindow;
+	private String name;
+	private String fullName;
 
 	AboutUsPanel aboutUsPanel;
 	HistoryPanel historyPanel;
@@ -41,6 +49,16 @@ public class PatientPanel extends javax.swing.JPanel {
 		this.ctrl = ctrl;
 		this.dni_patient = dni_patient;
 		this.mainWindow = mainWindow;
+		Patient p;
+		try {
+			p = ctrl.getPatientFullData(dni_patient);
+			this.name = p.getName();
+			this.fullName = p.getFullName();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			if(Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 
 		initComponents();
 
@@ -49,7 +67,7 @@ public class PatientPanel extends javax.swing.JPanel {
 		treatmentPanel = new TreatmentPanel(ctrl, dni_patient);
 		appointmentsPanel = new AppointmentsPanel(ctrl, dni_patient, UserRole.PATIENT);
 		askForAppointmentPanel = new AskForAppointmentPanel(this);
-		homePanel = new PatientHomePanel();
+		homePanel = new PatientHomePanel(name);
 		profilePanel = new ProfilePanel(ctrl, dni_patient);
 
 		leftPanel = true;
@@ -120,7 +138,7 @@ public class PatientPanel extends javax.swing.JPanel {
 		northpanel.add(filler1);
 
 		nameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-		nameLabel.setText("Ramón Ramirez");
+		nameLabel.setText(fullName);
 		northpanel.add(nameLabel);
 
 		jSeparator1.setForeground(new java.awt.Color(242, 242, 242));
