@@ -222,6 +222,9 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 
 		try {
 			String day = calendarPanel1.getSelectedDate();
+			if (day.compareTo(calendarPanel1.getTodaysDate()) <= 0)
+				throw new NullPointerException("You can't select a past day");
+
 			String hour = hourList.getSelectedValue();
 			if (hour == null)
 				throw new NullPointerException("You have to select an hour before asking for the appointment");
@@ -248,6 +251,10 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 		try {
 			Doctor dni_doctor = (Doctor) doctorComboBox.getSelectedItem();
 			String date = calendarPanel1.getSelectedDate();
+
+			if (date.compareTo(calendarPanel1.getTodaysDate()) <= 0)
+				throw new NullPointerException("You can't select a past day");
+
 			v = ctrl.getAvailableHours(dni_doctor, date);
 		} catch (SQLException e) {
 			e.printStackTrace();

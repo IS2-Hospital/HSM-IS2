@@ -145,7 +145,11 @@ public class CalendarPanel extends javax.swing.JPanel {
 		if (selectedDay == -1)
 			throw new NullPointerException("You have to select a day before checking available hours");
 
-		return String.format("%d-%d-%d", year, month + 1, selectedDay);
+		return String.format("%s-%s-%s", year, (month + 1 >= 10 ? month + 1 : ("0" + (month + 1))), (selectedDay >= 10 ? selectedDay : ("0" + (selectedDay))));
+	}
+
+	public String getTodaysDate() {
+		return String.format("%d-%s-%s", year, (month + 1 >= 10 ? month + 1 : ("0" + (month + 1))), (today >= 10 ? today : ("0" + (today))));
 	}
 
 	private String getFirstDateOfMonth() {
