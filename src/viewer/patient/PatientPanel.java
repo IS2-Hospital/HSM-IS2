@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import control.Controller;
 import model.Enums.UserRole;
 import viewer.AppointmentsPanel;
+import viewer.AskForAppointmentPanel;
 import viewer.MainWindow;
 
 /**

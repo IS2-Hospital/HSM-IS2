@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package viewer.patient;
+package viewer;
 
 import java.sql.SQLException;
 import java.util.Vector;
@@ -16,6 +16,7 @@ import control.Controller;
 import launcher.Main;
 import model.Appointment;
 import model.Doctor;
+import viewer.patient.PatientPanel;
 
 /**
  *

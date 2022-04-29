@@ -57,25 +57,22 @@ public class CalendarPanel extends javax.swing.JPanel {
 	}
 
 	public void open(Vector<Appointment> v) {
-		String firstDayOfMonth = getFirstDateOfMonth();
 		String lastDayOfMonth = getLastDateOfMonth();
-		int i = binarySearch(v, 0, v.size(), firstDayOfMonth);
 
-		if (i != -1) {
-			for (misc.RSButtonMetro rb : dayButtons)
-				rb.setIcon(null);
+		// clean buttons
+		for (misc.RSButtonMetro rb : dayButtons)
+			rb.setIcon(null);
 
-			// set image to today
-			dayButtons.get(today - 1).setIcon(new javax.swing.ImageIcon("resources/icons/todayIcon.png"));
+		// set image to today
+		dayButtons.get(today - 1).setIcon(new javax.swing.ImageIcon("resources/icons/todayIcon.png"));
 
-			if (v.get(i).getDay().compareTo(firstDayOfMonth) < 0) // Security check
-				i++;
+		// set dot icon to days with an appointment
+		for (Appointment ap : v) {
+			if (ap.getDay().compareTo(lastDayOfMonth) > 0)
+				break;
 
-			while (i < v.size() && v.get(i).getDay().compareTo(lastDayOfMonth) <= 0) {
-				int day = Integer.parseInt(v.get(i).getDay().substring(8)) - 1;
-				dayButtons.get(day).setIcon(new javax.swing.ImageIcon("resources/icons/calendarDot.png"));
-				i++;
-			}
+			int day = Integer.parseInt(ap.getDay().substring(8)) - 1;
+			dayButtons.get(day).setIcon(new javax.swing.ImageIcon("resources/icons/calendarDot.png"));
 		}
 	}
 
@@ -158,31 +155,6 @@ public class CalendarPanel extends javax.swing.JPanel {
 
 	private String getLastDateOfMonth() {
 		return String.format("%d-%d-%d", year, month + 1, MONTH_DAYS[month]);
-	}
-
-	int binarySearch(Vector<Appointment> v, int l, int r, String firstDayOfMonth) {
-		if (v.size() == 0)
-			return -1;
-
-		if (v.size() == 1)
-			return 0;
-
-		int mid = (l + r + 1) / 2;
-
-		// If the element is present at the middle
-		// itself
-		if (v.get(mid).getDay().compareTo(firstDayOfMonth) == 0)
-			return mid;
-
-		// If element is smaller than mid, then
-		// it can only be present in left subarray
-		if (v.get(mid).getDay().compareTo(firstDayOfMonth) > 0)
-			return binarySearch(v, l, mid - 1, firstDayOfMonth);
-
-		// Else the element can only be present
-		// in right subarray
-		return binarySearch(v, mid + 1, r, firstDayOfMonth);
-
 	}
 
 	/**

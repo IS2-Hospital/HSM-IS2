@@ -17,7 +17,8 @@ public class GetAppointmentsDoctorDAO {
 				+ "FROM appointments a "
 				+ "join users u on a.dni_patient = u.dni "
 				+ "WHERE a.dni_doctor =" + dni_doctor
-				+ " order by a.day, a.hour;";
+				+ " AND a.day >= STR_TO_DATE(CURDATE(), '%Y-%m-%d') "
+				+ "order by a.day, a.hour;";
 
 		Statement st = con.createStatement();
 		ResultSet resultSet = st.executeQuery(SQL);
