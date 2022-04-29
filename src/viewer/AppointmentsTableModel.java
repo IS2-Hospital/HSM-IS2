@@ -77,5 +77,8 @@ public class AppointmentsTableModel extends AbstractTableModel {
 	public Vector<Appointment> getAppointments() {
 		return v;
 	}
+	public Appointment getAppointment(int rowIndex) {
+		return v.get(rowIndex);
+	}
 
 }

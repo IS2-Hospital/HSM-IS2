@@ -5,10 +5,14 @@
 package viewer;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import control.Controller;
+import model.Appointment;
 import model.Enums.UserRole;
 
 /**
@@ -20,7 +24,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 	private Controller ctrl;
 	private String dni;
 	private UserRole role;
-
+	private JButton btnCancel;
 	/**
 	 * Creates new form AppointmentsPanel
 	 * @param ctrl
@@ -49,6 +53,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 		centerPanel = new javax.swing.JPanel();
 		jScrollPane2 = new javax.swing.JScrollPane();
 		jTable1 = new javax.swing.JTable();
+		btnCancel = new javax.swing.JButton("Cancel Appointment");
 
 		jLabel7.setText("jLabel7");
 
@@ -74,6 +79,23 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
 		add(centerPanel, java.awt.BorderLayout.CENTER);
+		centerPanel.add(btnCancel, java.awt.BorderLayout.SOUTH);
+
+		btnCancel.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row = jTable1.getSelectedRow();
+				Appointment p = tableModel.getAppointment(row);
+				new CancelAppointmentPanel(dni, ctrl, role, p);
+				try {
+					tableModel.open();
+				}catch(Exception e1) {
+					//XXX Lo que tenga que hacer
+				}
+			}
+
+		});
 	}// </editor-fold>
 
 
