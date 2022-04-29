@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
 
@@ -50,7 +51,7 @@ public class TreatmentPanel extends JPanel{
 		try {
 			tableModel.open();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

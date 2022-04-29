@@ -1,5 +1,6 @@
 package viewer;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -38,7 +39,7 @@ public class AppointmentsTableModel extends AbstractTableModel {
 		}
 	}
 
-	public void open() throws Exception {
+	public void open() throws SQLException {
 		v = ctrl.getAppointments(dni, role);
 		fireTableDataChanged();
 	}

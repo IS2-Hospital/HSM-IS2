@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
 import model.Appointment;
@@ -48,7 +49,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 			doctorList = ctrl.getDoctorsOf(dni_patient);
 			doctorComboBox.setModel(new DefaultComboBoxModel<>(doctorList));
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -225,11 +226,11 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 			String desc = descriptionTextArea.getText();
 
 			ctrl.askForAppointment(new Appointment(day, hour, dni_doctor, desc), dni_patient);
-			JOptionPane.showMessageDialog(this, "Your appointment has been registered successfully", "", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Your appointment has been registered successfully", "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -244,7 +245,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) { // there is not a day selected
-			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 
 		DefaultListModel<String> m = new DefaultListModel<>();

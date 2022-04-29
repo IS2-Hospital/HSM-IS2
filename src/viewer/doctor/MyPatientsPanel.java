@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
 import model.Patient;
@@ -101,13 +102,13 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 			// TODO panel del historial medico de un paciente p
 
 		} catch (IndexOutOfBoundsException e1) { // no row selected
-			JOptionPane.showMessageDialog(this, "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	private void addTreatmentButtonActionPerformed(ActionEvent e) {
 		if (patientsTable.getSelectedRow() == -1) { // no row selected
-			JOptionPane.showMessageDialog(this, "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);
 		}
 		else {
 			AddTreatmentDialog atd = new AddTreatmentDialog(

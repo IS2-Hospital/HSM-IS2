@@ -141,7 +141,7 @@ public class AdminPanel extends JPanel {
 
 		});
 
-		ansreqButton = new JButton("Doc Change Requests");
+		ansreqButton = new JButton("Doctor Change Requests");
 		ansreqButton.addActionListener(new ActionListener() {
 
 			@Override

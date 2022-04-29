@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
 import model.Patient;
@@ -54,7 +55,7 @@ public class ProfilePanel extends javax.swing.JPanel {
 			ibanField.setText(patient.getIban());
 			addressField.setText(patient.getHomeAddress());
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -267,9 +268,9 @@ public class ProfilePanel extends javax.swing.JPanel {
 
 		try {
 			ctrl.updatePatient(p);
-			JOptionPane.showMessageDialog(this, "Changes were successfully saved", "", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Changes were successfully saved", "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(this, e1.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e1.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
 		}
 	}

@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
 
@@ -59,7 +60,7 @@ public class DoctorChangeRequestAproverDialog extends JDialog {
 
 		}
 		catch(IndexOutOfBoundsException e) {
-			JOptionPane.showMessageDialog(this, "There are no unresponded requests",
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "There are no unresponded requests",
 					"Request Manager", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 			return;

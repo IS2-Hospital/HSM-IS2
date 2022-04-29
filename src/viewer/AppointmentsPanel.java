@@ -7,9 +7,11 @@ package viewer;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
 import model.Appointment;
@@ -24,7 +26,8 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 	private Controller ctrl;
 	private String dni;
 	private UserRole role;
-	private JButton btnCancel;
+	private misc.RSButtonMetro btnCancel;
+	JPanel southPanel;
 	/**
 	 * Creates new form AppointmentsPanel
 	 * @param ctrl
@@ -53,7 +56,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 		centerPanel = new javax.swing.JPanel();
 		jScrollPane2 = new javax.swing.JScrollPane();
 		jTable1 = new javax.swing.JTable();
-		btnCancel = new javax.swing.JButton("Cancel Appointment");
+		btnCancel = new misc.RSButtonMetro();
 
 		jLabel7.setText("jLabel7");
 
@@ -79,23 +82,38 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
 		add(centerPanel, java.awt.BorderLayout.CENTER);
-		centerPanel.add(btnCancel, java.awt.BorderLayout.SOUTH);
 
+		btnCancel.setText("Cancel appointment");
 		btnCancel.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int row = jTable1.getSelectedRow();
-				Appointment p = tableModel.getAppointment(row);
-				new CancelAppointmentPanel(dni, ctrl, role, p);
 				try {
+					int row = jTable1.getSelectedRow();
+					Appointment p = tableModel.getAppointment(row);
+					new CancelAppointmentPanel(dni, ctrl, role, p);
 					tableModel.open();
-				}catch(Exception e1) {
-					//XXX Lo que tenga que hacer
+					calendarPanel1.open(tableModel.getAppointments());
+				} catch(SQLException e1) {
+					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AppointmentsPanel.this), e1.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+				} catch(ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AppointmentsPanel.this), "You have to select an appointments first", "", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 
 		});
+		btnCancel.setColorHover(new java.awt.Color(138, 202, 234));
+		btnCancel.setColorNormal(new java.awt.Color(8, 72, 135));
+		btnCancel.setColorPressed(new java.awt.Color(8, 72, 135));
+		btnCancel.setColorTextHover(new java.awt.Color(51, 51, 51));
+		btnCancel.setColorTextNormal(new java.awt.Color(242, 242, 242));
+		btnCancel.setColorTextPressed(new java.awt.Color(242, 242, 242));
+		btnCancel.setFocusPainted(false);
+		btnCancel.setRolloverEnabled(false);
+
+		southPanel = new JPanel();
+		southPanel.add(btnCancel);
+		centerPanel.add(southPanel, java.awt.BorderLayout.SOUTH);
+
 	}// </editor-fold>
 
 
@@ -114,8 +132,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 			tableModel.open();
 			calendarPanel1.open(tableModel.getAppointments());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

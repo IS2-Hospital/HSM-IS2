@@ -14,6 +14,7 @@ import java.util.Locale;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
 import model.Patient;
@@ -194,10 +195,10 @@ public class AddTreatmentDialog extends javax.swing.JDialog {
 
 		try {
 			ctrl.saveTreatment(t, patient.getDni());
-			JOptionPane.showMessageDialog(this, "Treatment was successfully saved", "", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Treatment was successfully saved", "", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(this, e1.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e1.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

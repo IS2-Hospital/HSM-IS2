@@ -26,7 +26,7 @@ public class GetDNIListFromRequestDAO {
 		ResultSet resultSet = null;
 		try {
 			if(adminConex != null) {
-				PreparedStatement st = adminConex.prepareStatement("SELECT dni_patient, treated_by.dni_doctor, doctor_change_request.dni_doctor FROM doctor_change_request JOIN treated_by ON treated_by.dni_patient = doctor_change_request.dni_patient WHERE id = '" + string + "';", Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement st = adminConex.prepareStatement("SELECT d.dni_patient, t.dni_doctor, d.dni_doctor FROM doctor_change_request d JOIN treated_by t ON t.dni_patient = d.dni_patient WHERE id = '" + string + "';", Statement.RETURN_GENERATED_KEYS);
 				st.execute();
 				resultSet = st.getResultSet();
 			}
