@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 
 public class TreatmentPanel extends JPanel{
 
@@ -52,6 +53,9 @@ public class TreatmentPanel extends JPanel{
 			tableModel.open();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		}
 	}
 }

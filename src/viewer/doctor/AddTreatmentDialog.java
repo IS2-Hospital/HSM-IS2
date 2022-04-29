@@ -17,6 +17,7 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 import model.Patient;
 import model.Treatment;
 
@@ -199,6 +200,9 @@ public class AddTreatmentDialog extends javax.swing.JDialog {
 			dispose();
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e1.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e1.printStackTrace();
 		}
 	}
 

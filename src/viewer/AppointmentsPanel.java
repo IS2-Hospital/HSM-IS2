@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 import model.Appointment;
 import model.Enums.UserRole;
 
@@ -95,6 +96,9 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 					calendarPanel1.open(tableModel.getAppointments());
 				} catch(SQLException e1) {
 					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AppointmentsPanel.this), e1.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+					if (Main.SHOW_EXCEPTIONS_TRACE)
+						e1.printStackTrace();
 				} catch(ArrayIndexOutOfBoundsException e1) {
 					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AppointmentsPanel.this), "You have to select an appointments first", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -133,6 +137,9 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 			calendarPanel1.open(tableModel.getAppointments());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		}
 	}
 

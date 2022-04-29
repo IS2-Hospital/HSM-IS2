@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 import model.Enums.BloodType;
 import model.Enums.Gender;
 import model.Enums.HealthInsuranceType;
@@ -254,6 +255,9 @@ public class PatientModWindow extends JFrame {
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(),
 							"Error on Query", JOptionPane.ERROR_MESSAGE);
+
+					if (Main.SHOW_EXCEPTIONS_TRACE)
+						e1.printStackTrace();
 				}
 				PatientModWindow.this.dispose();
 			}
@@ -288,6 +292,9 @@ public class PatientModWindow extends JFrame {
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(),
 					"Error on data collection", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		}
 		finally{
 			return data;

@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import control.Controller;
+import launcher.Main;
 import model.Treatment;
 
 public class TreatmentsTableModel extends AbstractTableModel {
@@ -24,7 +25,8 @@ public class TreatmentsTableModel extends AbstractTableModel {
 			open();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
-			e.printStackTrace();
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		}
 	}
 

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 import model.Appointment;
 import model.Doctor;
 
@@ -50,6 +51,9 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 			doctorComboBox.setModel(new DefaultComboBoxModel<>(doctorList));
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		}
 	}
 
@@ -229,6 +233,9 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Your appointment has been registered successfully", "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}

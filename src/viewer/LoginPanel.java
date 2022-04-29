@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
+import launcher.Main;
 import model.Enums.UserRole;
 import model.exceptions.LoginException;
 import viewer.admin.AdminPanel;
@@ -202,14 +203,13 @@ public class LoginPanel extends JPanel{
 		catch (SQLException e1) {
 			String title = "Something went wrong:";
 			JOptionPane.showMessageDialog(_mainWindow, e1.getMessage(), title, JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e1.printStackTrace();
 		}
 		catch (LoginException e2) {
 			String title = "Login Error:";
 			JOptionPane.showMessageDialog(_mainWindow, e2.getMessage(), title, JOptionPane.INFORMATION_MESSAGE);
-		}
-		catch(NumberFormatException e3) {
-			String title = "Login Error:";
-			JOptionPane.showMessageDialog(_mainWindow, "Invalid DNI. The ID consist only in the numbers", title, JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}

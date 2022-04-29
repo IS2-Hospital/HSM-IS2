@@ -1,11 +1,13 @@
 package viewer.patient;
 
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import control.Controller;
+import launcher.Main;
 import model.History;
 
 public class HistoryTableModel extends AbstractTableModel{
@@ -25,13 +27,15 @@ public class HistoryTableModel extends AbstractTableModel{
 			open();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
-			e.printStackTrace();
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		}
 	}
 
 
 
-	void open() throws Exception {
+	void open() throws SQLException {
 		v = ctrl.getHistory(dni);
 		fireTableDataChanged();
 	}

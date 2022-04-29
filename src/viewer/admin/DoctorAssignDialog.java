@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import control.Controller;
+import launcher.Main;
 import model.Doctor;
 import model.Patient;
 
@@ -95,6 +96,9 @@ public class DoctorAssignDialog extends JDialog {
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(),
 							"Error while inserting in database", JOptionPane.ERROR_MESSAGE);
+
+					if (Main.SHOW_EXCEPTIONS_TRACE)
+						e1.printStackTrace();
 				}
 			}
 

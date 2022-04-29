@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 
 
 public class PatientModWindowPassword extends PatientModWindow{
@@ -55,6 +56,9 @@ public class PatientModWindowPassword extends PatientModWindow{
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(),
 							"Error on Query", JOptionPane.ERROR_MESSAGE);
+
+					if (Main.SHOW_EXCEPTIONS_TRACE)
+						e1.printStackTrace();
 				}
 				PatientModWindowPassword.this.dispose();
 			}

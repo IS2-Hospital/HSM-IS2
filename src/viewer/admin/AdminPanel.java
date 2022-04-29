@@ -18,6 +18,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
+import launcher.Main;
 import model.Doctor;
 import model.Patient;
 import model.exceptions.sqlExeptions.SqlConnectionException;
@@ -71,6 +72,9 @@ public class AdminPanel extends JPanel {
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(AdminPanel.this, e1.getMessage(),
 							"Database Error", JOptionPane.ERROR_MESSAGE);
+
+					if (Main.SHOW_EXCEPTIONS_TRACE)
+						e1.printStackTrace();
 				}
 				content.setPreferredSize(new Dimension(800,600));
 				content.setSize(new Dimension(800,600));
@@ -100,6 +104,9 @@ public class AdminPanel extends JPanel {
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(AdminPanel.this, e1.getMessage(),
 							"Database Error", JOptionPane.ERROR_MESSAGE);
+
+					if (Main.SHOW_EXCEPTIONS_TRACE)
+						e1.printStackTrace();
 				}
 				content.setPreferredSize(new Dimension(800,600));
 				content.setSize(new Dimension(800,600));

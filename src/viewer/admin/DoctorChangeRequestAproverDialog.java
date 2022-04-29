@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 
 public class DoctorChangeRequestAproverDialog extends JDialog {
 
@@ -169,6 +170,9 @@ public class DoctorChangeRequestAproverDialog extends JDialog {
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(),
 							"Error while confirming", JOptionPane.ERROR_MESSAGE);
+
+					if (Main.SHOW_EXCEPTIONS_TRACE)
+						e1.printStackTrace();
 				}
 				DoctorChangeRequestAproverDialog.this.dispose();
 			}

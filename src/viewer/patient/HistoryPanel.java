@@ -1,12 +1,14 @@
 package viewer.patient;
 
 import java.awt.Color;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 
 public class HistoryPanel extends JPanel{
 
@@ -50,8 +52,11 @@ public class HistoryPanel extends JPanel{
 	public void open() {
 		try {
 			tableModel.open();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		}
 	}
 }

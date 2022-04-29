@@ -157,8 +157,11 @@ public class CalendarPanel extends javax.swing.JPanel {
 	}
 
 	int binarySearch(Vector<Appointment> v, int l, int r, String firstDayOfMonth) {
-		if (v.size() == 0) //
+		if (v.size() == 0)
 			return -1;
+
+		if (v.size() == 1)
+			return 0;
 
 		int mid = (l + r + 1) / 2;
 

@@ -10,6 +10,8 @@ import viewer.MainWindow;
 
 public class Main {
 
+	public static final boolean SHOW_EXCEPTIONS_TRACE = true;
+
 	private static void startGUIMode() throws Exception {
 		UserManager userManager = new UserManager(new LoginAuthenticator(), new UserRegisterer());
 		Controller ctrl = new Controller(userManager);

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 import model.Patient;
 import model.Enums.BloodType;
 import model.Enums.Gender;
@@ -56,6 +57,9 @@ public class ProfilePanel extends javax.swing.JPanel {
 			addressField.setText(patient.getHomeAddress());
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
 		}
 
 	}
@@ -271,7 +275,9 @@ public class ProfilePanel extends javax.swing.JPanel {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Changes were successfully saved", "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e1.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-			e1.printStackTrace();
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e1.printStackTrace();
 		}
 	}
 

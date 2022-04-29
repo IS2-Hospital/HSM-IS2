@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 
 public class DoctorModWindow extends JFrame {
 
@@ -210,6 +211,9 @@ public class DoctorModWindow extends JFrame {
 						} catch (SQLException e1) {
 							JOptionPane.showMessageDialog(null, e1.getMessage(),
 									"Error on Query", JOptionPane.ERROR_MESSAGE);
+
+							if (Main.SHOW_EXCEPTIONS_TRACE)
+								e1.printStackTrace();
 						}
 						DoctorModWindow.this.dispose();
 					}
