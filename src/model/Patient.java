@@ -102,6 +102,11 @@ public class Patient extends User {
 		return colNames;
 	}
 
+	@Override
+	public String toString() {
+		return getFullName();
+	}
+
 
 
 }

@@ -60,7 +60,7 @@ public class AdminApp {
 		return GetAllPatientsDAO.execute();
 	}
 
-	public List<Patient> resultAllPatientsFrom(String dniDoctor) {
+	public List<Patient> resultAllPatientsFrom(String dniDoctor) throws SQLException {
 		return GetAllPatientsFromDAO.execute(dniDoctor);
 	}
 

@@ -6,11 +6,13 @@ package viewer.doctor;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 import model.Patient;
 
 /**
@@ -120,7 +122,14 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 	}
 
 	public void open() {
-		tableModel.open();
+		try {
+			tableModel.open();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 	}
 
 

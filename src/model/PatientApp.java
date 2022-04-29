@@ -19,9 +19,9 @@ public class PatientApp {
 		return GetDoctorsOfPatientDAO.execute(dni);
 	}
 
-	public Vector<String> getAvailableHours(Doctor doctor, String date) throws SQLException {
+	public Vector<String> getAvailableHours(String doctor_dni, String date) throws SQLException {
 
-		List<String> unavailableHours = GetUnavailableTakenHoursDAO.execute(doctor, date);
+		List<String> unavailableHours = GetUnavailableTakenHoursDAO.execute(doctor_dni, date);
 
 		String[] laborableHours = {
 				"08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45",

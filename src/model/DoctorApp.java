@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -13,7 +12,7 @@ import model.doctorDAO.SaveTreatmentDao;
 
 public class DoctorApp {
 
-	public List<Patient> getPatientsOfDoctor(String doctor_dni) {
+	public Vector<Patient> getPatientsOfDoctor(String doctor_dni) throws SQLException {
 		return GetAllPatientsFromDAO.execute(doctor_dni);
 	}
 

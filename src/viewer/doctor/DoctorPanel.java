@@ -23,6 +23,7 @@ public class DoctorPanel extends javax.swing.JPanel {
 
 	private MyPatientsPanel myPatientsPanel;
 	private AppointmentsPanel appointmentsPanel;
+	private AskForAppointmentPanel askForAppointmentPanel;
 
 
 	/**
@@ -35,6 +36,7 @@ public class DoctorPanel extends javax.swing.JPanel {
 
 		myPatientsPanel = new MyPatientsPanel(ctrl, doctor_dni);
 		appointmentsPanel = new AppointmentsPanel(ctrl, doctor_dni, UserRole.DOCTOR);
+		askForAppointmentPanel = new AskForAppointmentPanel(ctrl, doctor_dni);
 
 		initComponents();
 	}
@@ -316,7 +318,8 @@ public class DoctorPanel extends javax.swing.JPanel {
 	}
 
 	private void askForButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		setCenterPanel(askForAppointmentPanel);
+		askForAppointmentPanel.open();
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {

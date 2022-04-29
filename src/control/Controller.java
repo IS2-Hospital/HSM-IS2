@@ -44,8 +44,8 @@ public class Controller {
 		return patientApp.getDoctorsOf(dni);
 	}
 
-	public Vector<String> getAvailableHours(Doctor doctor, String date) throws SQLException {
-		return patientApp.getAvailableHours(doctor, date);
+	public Vector<String> getAvailableHours(String doctor_dni, String date) throws SQLException {
+		return patientApp.getAvailableHours(doctor_dni, date);
 	}
 
 	public void askForAppointment(Appointment appointment, String dni_patient) throws SQLException {
@@ -74,7 +74,7 @@ public class Controller {
 		return adminApp.getDoctorList();
 	}
 
-	public List<Patient> resultAllPatientsFrom(String dniDoctor) {
+	public List<Patient> resultAllPatientsFrom(String dniDoctor) throws SQLException {
 		return adminApp.resultAllPatientsFrom(dniDoctor);
 	}
 
@@ -126,7 +126,7 @@ public class Controller {
 		adminApp.assignPatientDoctor(dniDoc,dniPat);
 	}
 
-	public List<Patient> getPatientsOfDoctor(String doctor_dni) {
+	public Vector<Patient> getPatientsOfDoctor(String doctor_dni) throws SQLException {
 		return doctorApp.getPatientsOfDoctor(doctor_dni);
 	}
 

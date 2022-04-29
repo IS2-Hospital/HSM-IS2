@@ -5,8 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 import model.DBConnector;
 import model.Patient;
@@ -14,17 +13,16 @@ import model.Enums.BloodType;
 import model.Enums.Gender;
 import model.Enums.HealthInsuranceType;
 import model.exceptions.sqlExeptions.SqlConnectionException;
-import viewer.ErrorHandler;
 
 public class GetAllPatientsFromDAO {
 
-	public static List<Patient> execute(String dniDoctor) {
+	public static Vector<Patient> execute(String dniDoctor) throws SQLException{
 		Connection adminConex = null;
 		try {
 			while( adminConex == null)
 				adminConex = DBConnector.connectdb();
 		} catch (SqlConnectionException e) {
-			ErrorHandler.showError("Error connecting to the database","Database Error");
+			throw new SQLException("Database Error");
 		}
 
 		ResultSet resultSet = null;
@@ -35,10 +33,10 @@ public class GetAllPatientsFromDAO {
 				resultSet = st.getResultSet();
 			}
 		} catch (SQLException e1) {
-			ErrorHandler.showError("Query error: " + e1.getMessage(),"Database Error");
+			throw new SQLException("Database Error");
 		}
 
-		List<Patient> docs = new ArrayList<Patient>();
+		Vector<Patient> docs = new Vector<Patient>();
 		try {
 			while(resultSet.next()) {
 				String dni = resultSet.getString("dni");
@@ -56,13 +54,11 @@ public class GetAllPatientsFromDAO {
 			}
 			resultSet.close();
 		} catch (SQLException e) {
-			ErrorHandler.showError(e.getMessage(),"Database Error");
+			throw new SQLException("Database Error");
 		}
-		try {
-			adminConex.close();
-		} catch (SQLException e) {
-			ErrorHandler.showError("Error clossing the conexion to the database","Database Error");
-		}
+
+		adminConex.close();
+
 		return docs;
 	}
 

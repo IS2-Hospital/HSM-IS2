@@ -15,7 +15,6 @@ import launcher.Main;
 import model.Patient;
 import model.Enums.UserRole;
 import viewer.AppointmentsPanel;
-import viewer.AskForAppointmentPanel;
 import viewer.MainWindow;
 
 /**
