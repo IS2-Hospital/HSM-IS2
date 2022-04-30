@@ -3,6 +3,7 @@ package model;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.adminDAO.DeletePatientDAO;
 import model.adminDAO.DeleteRequestDAO;
 import model.adminDAO.GetAllPatientsDAO;
 import model.adminDAO.GetAllPatientsFromDAO;
@@ -66,6 +67,11 @@ public class AdminApp {
 
 	public void assignPatientDoctor(String dniDoc, String dniPat) {
 		InsertRelationPatientDoctorDAO.execute(dniDoc, dniPat);
+	}
+
+	public void deletePatient(String patientDni) throws SQLException {
+		DeletePatientDAO.execute(patientDni);
+
 	}
 
 }

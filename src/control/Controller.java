@@ -138,6 +138,11 @@ public class Controller {
 		doctorApp.saveTreatment(t, patient_dni);
 	}
 
+	public void deletePatient(String patientDni) throws SQLException {
+		adminApp.deletePatient(patientDni);
+
+	}
+
 
 
 }

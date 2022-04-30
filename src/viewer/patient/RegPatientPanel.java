@@ -60,7 +60,7 @@ public class RegPatientPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				if(plan) {
 					if(((RegPanelTemplate) regPanel).getJSONObject() == null) System.out.println("Hubo error");
-					else System.out.println("Todo bien");
+					else((RegPanelTemplate) regPanel).registerUser();
 				}
 				else {
 					((RegPatientTabbedPane) regPanel).getJSONObject();

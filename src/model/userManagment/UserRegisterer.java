@@ -127,7 +127,7 @@ public class UserRegisterer {
 		}
 
 		// Insert info in PATIENTS table
-		String insertPatient = "INSERT INTO patients VALUES (?, ?, ?, ?, ?, ?);";
+		String insertPatient = "INSERT INTO patients (dni_patient, gender, blood_type, insurance_type, dni_insurance_taker, bill) VALUES (?, ?, ?, ?, ?, ?);";
 		PreparedStatement st = connex.prepareStatement(insertPatient, Statement.RETURN_GENERATED_KEYS);
 		st.setString(1, patient.getDni());
 		st.setString(2, patient.getGender().toString());

@@ -42,6 +42,7 @@ public class AdminPanel extends JPanel {
 	private JButton ansreqButton;
 
 	private JButton assignDoctor;
+	private JButton deletePatient;
 	public AdminPanel(Controller ctrl, MainWindow mainWindow) throws SqlConnectionException {
 		_ctrl = ctrl;
 		_mainWindow = mainWindow;
@@ -168,12 +169,22 @@ public class AdminPanel extends JPanel {
 
 		});
 
-		signOut = new JButton("sign Out");
+		signOut = new JButton("Sign Out");
 		signOut.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				_mainWindow.signOut();
+			}
+
+		});
+
+		deletePatient = new JButton("Delete Patient");
+		deletePatient.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new DeleteSelectorDialog(_ctrl);
 			}
 
 		});
@@ -187,7 +198,7 @@ public class AdminPanel extends JPanel {
 		add(ansreqButton);
 
 		add(assignDoctor);
-		add(new JLabel (""));
+		add(deletePatient);
 		add(new JLabel (""));
 
 		add(new JLabel (""));
