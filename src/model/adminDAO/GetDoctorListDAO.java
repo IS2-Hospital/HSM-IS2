@@ -49,7 +49,7 @@ public class GetDoctorListDAO {
 				float salary = resultSet.getFloat("salary");
 				Date start = resultSet.getDate("contract_start_date");
 				Date end = resultSet.getDate("contract_end_date");
-				docs.add(new Doctor(dni, name, lastName, birthDate, email, phone, speciality, salary, start, end));
+				docs.add(new Doctor(dni, name, lastName, birthDate, email, phone, speciality, salary, start, end, null));
 			}
 			resultSet.close();
 		} catch (SQLException e) {

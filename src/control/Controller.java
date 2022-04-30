@@ -102,6 +102,10 @@ public class Controller {
 		adminApp.updateDoctor(colData);
 	}
 
+	public void updateDoctor(Doctor d) throws SQLException {
+		doctorApp.updateDoctor(d);
+	}
+
 	public List<String> getRequestIDList() {
 		return adminApp.getRequestIDList();
 	}
@@ -133,5 +137,7 @@ public class Controller {
 	public void saveTreatment(Treatment t, String patient_dni) throws SQLException {
 		doctorApp.saveTreatment(t, patient_dni);
 	}
+
+
 
 }

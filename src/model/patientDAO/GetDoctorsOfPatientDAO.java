@@ -28,7 +28,7 @@ public class GetDoctorsOfPatientDAO {
 			String name = resultSet.getString("name");
 			String lastname = resultSet.getString("lastname");
 
-			Doctor d = new Doctor(dni_doctor, name, lastname, null, null, null, null, -1, null, null);
+			Doctor d = new Doctor(dni_doctor, name, lastname, null, null, null, null, -1, null, null, null);
 			v.add(d);
 		}
 
