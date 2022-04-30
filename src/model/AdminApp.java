@@ -3,6 +3,7 @@ package model;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.adminDAO.ChangeBillPlanDAO;
 import model.adminDAO.DeletePatientDAO;
 import model.adminDAO.DeleteRequestDAO;
 import model.adminDAO.GetAllPatientsDAO;
@@ -11,6 +12,7 @@ import model.adminDAO.GetDNIListFromRequestDAO;
 import model.adminDAO.GetDoctorDataDAO;
 import model.adminDAO.GetDoctorListDAO;
 import model.adminDAO.GetPatientDataDAO;
+import model.adminDAO.GetPlanListDAO;
 import model.adminDAO.GetRequestIDListDAO;
 import model.adminDAO.GetRequestReasonDAO;
 import model.adminDAO.InsertRelationPatientDoctorDAO;
@@ -72,6 +74,14 @@ public class AdminApp {
 	public void deletePatient(String patientDni) throws SQLException {
 		DeletePatientDAO.execute(patientDni);
 
+	}
+
+	public List<String> getPlanList() {
+		return GetPlanListDAO.execute();
+	}
+
+	public void changeBillPlan(String typeName, String newBill) {
+		ChangeBillPlanDAO.execute(typeName, newBill);
 	}
 
 }

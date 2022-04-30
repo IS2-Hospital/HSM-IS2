@@ -143,6 +143,15 @@ public class Controller {
 
 	}
 
+	public List<String> getPlanList() {
+		return adminApp.getPlanList();
+	}
+
+	public void changeBillPlan(String typeName, String newBill) {
+		adminApp.changeBillPlan(typeName,newBill);
+
+	}
+
 
 
 }

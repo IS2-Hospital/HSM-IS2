@@ -43,6 +43,7 @@ public class AdminPanel extends JPanel {
 
 	private JButton assignDoctor;
 	private JButton deletePatient;
+	private JButton changeBillPlan;
 	public AdminPanel(Controller ctrl, MainWindow mainWindow) throws SqlConnectionException {
 		_ctrl = ctrl;
 		_mainWindow = mainWindow;
@@ -189,6 +190,16 @@ public class AdminPanel extends JPanel {
 
 		});
 
+		changeBillPlan = new JButton("Change Bill Plan");
+		changeBillPlan.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new BillPlanChangerDialog(_ctrl);
+			}
+
+		});
+
 		add(patientList);
 		add(doctorList);
 		add(doctorPatients);
@@ -199,7 +210,7 @@ public class AdminPanel extends JPanel {
 
 		add(assignDoctor);
 		add(deletePatient);
-		add(new JLabel (""));
+		add(changeBillPlan);
 
 		add(new JLabel (""));
 		add(signOut);
