@@ -29,6 +29,7 @@ public class MainWindow extends JFrame {
 		this.setContentPane(new LoginPanel(_ctrl, this));
 		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setMinimumSize(new Dimension(950, 700));
+		this.setPreferredSize(new Dimension(1200, 900));
 
 		// NECESARIO ------------------------------------------------------------
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
