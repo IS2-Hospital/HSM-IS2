@@ -1,6 +1,12 @@
 
 package viewer.patient;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.JPanel;
+
 /**
  *
  * @author Pablopar
@@ -45,7 +51,7 @@ public class AboutUsPanel extends javax.swing.JPanel {
 
 		toolsUsedLabel.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 		toolsUsedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		toolsUsedLabel.setIcon(new javax.swing.ImageIcon("/resources/AboutImages/DatabaseImage.png")); // NOI18N
+		toolsUsedLabel.setIcon(new javax.swing.ImageIcon("resources/AboutImages/DatabaseImage.png")); // NOI18N
 		toolsUsedLabel.setText("Tools Used");
 		toolsUsedLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 		toolsUsedLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -66,6 +72,8 @@ public class AboutUsPanel extends javax.swing.JPanel {
 		whoLabel.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 		whoLabel.setText("Who are we?");
 
+
+
 		jTextArea1.setColumns(20);
 		jTextArea1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
 		jTextArea1.setRows(5);
@@ -73,18 +81,21 @@ public class AboutUsPanel extends javax.swing.JPanel {
 		jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		jScrollPane1.setViewportView(jTextArea1);
 		jTextArea1.getAccessibleContext().setAccessibleName("");
+		jTextArea1.setEditable(false);
 		jTextArea1.getAccessibleContext().setAccessibleDescription("");
 
 		jTextArea2.setColumns(20);
 		jTextArea2.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
 		jTextArea2.setRows(5);
 		jTextArea2.setText("In order to develop this type of app we had to use many different tools for each tipe of developing challenge\nwe have faced. For instance the main app was made using Eclipse's Java tool and Net beans, very useful\nwhen dealing with UI development. \n\nMySql was used for the main part of the database, as well as Modelio forthe diagrams and outline of internal\ndetails.");
+		jTextArea2.setEditable(false);
 		jScrollPane2.setViewportView(jTextArea2);
 
 		jTextArea3.setColumns(20);
 		jTextArea3.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
 		jTextArea3.setRows(5);
 		jTextArea3.setText("Our team is made out of computer science students from the Universidad Complutense de Madrid who are\nmore than eager to develop tools that should help hospital's organize their data in the most efficient way.\n\nWith various degrees of profciency in programming, graphic design and team organization we believe that\nthis task will bring yet another take on health management that will light up some aspects of this type of \ndata management.");
+		jTextArea3.setEditable(false);
 		jScrollPane3.setViewportView(jTextArea3);
 
 		infoPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(153, 153, 153), new java.awt.Color(102, 102, 102), new java.awt.Color(153, 153, 153)));
@@ -180,6 +191,51 @@ public class AboutUsPanel extends javax.swing.JPanel {
 		toolsUsedLabel.getAccessibleContext().setAccessibleDescription("");
 
 		getAccessibleContext().setAccessibleName("");
+		this.setLayout(new BorderLayout());
+		JPanel innerPanel = new JPanel();
+		innerPanel.setLayout(new BorderLayout());
+
+		JPanel withSep = new JPanel();
+		withSep.setLayout(new BorderLayout());
+		withSep.add(jSeparator1, BorderLayout.NORTH);
+		withSep.add(innerPanel, BorderLayout.CENTER);
+
+		JPanel ourTeamPanel = new JPanel();
+		ourTeamPanel.setLayout(new FlowLayout());
+
+		ourTeamPanel.add(ourTeamLabel);
+		ourTeamPanel.add(jScrollPane1);
+		jScrollPane1.setPreferredSize(new Dimension(600, 200));
+
+		innerPanel.add(ourTeamPanel, BorderLayout.NORTH);
+
+		JPanel toolsPanel = new JPanel();
+		toolsPanel.setLayout(new FlowLayout());
+
+		toolsPanel.add(toolsUsedLabel);
+		toolsPanel.add(jScrollPane2);
+		jScrollPane2.setPreferredSize(new Dimension(600, 120));
+
+		innerPanel.add(toolsPanel, BorderLayout.CENTER);
+
+		JPanel whoPanel = new JPanel();
+		whoPanel.setLayout(new FlowLayout());
+
+		whoPanel.add(whoLabel);
+		whoPanel.add(jScrollPane3);
+		jScrollPane3.setPreferredSize(new Dimension(600, 120));
+
+		innerPanel.add(whoPanel, BorderLayout.SOUTH);
+
+		this.add(withSep, BorderLayout.CENTER);
+
+
+		this.add(titleLabel, BorderLayout.NORTH);
+
+		this.add(infoPanel, BorderLayout.SOUTH);
+
+
+
 	}// </editor-fold>
 
 
