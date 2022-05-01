@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 import control.Controller;
 import launcher.Main;
 
+@SuppressWarnings("serial")
 public class TreatmentPanel extends JPanel{
 
 	Controller ctrl;

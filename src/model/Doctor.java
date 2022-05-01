@@ -32,6 +32,22 @@ public class Doctor extends User {
 		return colNames;
 	}
 
+	public String getSpeciality() {
+		return speciality;
+	}
+
+	public float getSalary() {
+		return salary;
+	}
+
+	public Date getContractStartDate() {
+		return contractStartDate;
+	}
+
+	public Date getContractEndDate() {
+		return contractEndDate;
+	}
+
 	@Override
 	public List<String> asStringList() {
 		List<String> list = new ArrayList<String>();

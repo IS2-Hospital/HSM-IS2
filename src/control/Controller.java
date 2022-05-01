@@ -66,11 +66,11 @@ public class Controller {
 		return patientApp.getTreatment(dni_patient);
 	}
 
-	public List<Patient> getAllPatients() {
+	public Vector<Patient> getAllPatients() {
 		return adminApp.getAllPatients();
 	}
 
-	public List<Doctor> getDoctorList() {
+	public Vector<Doctor> getDoctorList() {
 		return adminApp.getDoctorList();
 	}
 

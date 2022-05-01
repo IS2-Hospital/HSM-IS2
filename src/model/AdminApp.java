@@ -2,6 +2,7 @@ package model;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import model.adminDAO.DeleteRequestDAO;
 import model.adminDAO.GetAllPatientsDAO;
@@ -18,7 +19,7 @@ import model.adminDAO.UpdatePatientDataDAO;
 
 public class AdminApp {
 
-	public List<Doctor> getDoctorList() {
+	public Vector<Doctor> getDoctorList() {
 		return GetDoctorListDAO.execute();
 	}
 
@@ -56,7 +57,7 @@ public class AdminApp {
 		InsertRelationPatientDoctorDAO.execute(dni.get(0), dni.get(2));
 	}
 
-	public List<Patient> getAllPatients() {
+	public Vector<Patient> getAllPatients() {
 		return GetAllPatientsDAO.execute();
 	}
 
