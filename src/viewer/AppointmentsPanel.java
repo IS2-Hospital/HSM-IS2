@@ -61,6 +61,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 
 		jLabel7.setText("jLabel7");
 
+		setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new java.awt.BorderLayout());
 
 		rightPanel.setPreferredSize(new java.awt.Dimension(300, 527));
@@ -100,7 +101,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 					if (Main.SHOW_EXCEPTIONS_TRACE)
 						e1.printStackTrace();
 				} catch(ArrayIndexOutOfBoundsException e1) {
-					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AppointmentsPanel.this), "You have to select an appointments first", "", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AppointmentsPanel.this), "You have to select an appointment first", "", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 

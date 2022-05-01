@@ -4,6 +4,7 @@
  */
 package viewer.patient;
 
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
@@ -30,13 +31,16 @@ public class PatientPanel extends javax.swing.JPanel {
 	private String name;
 	private String fullName;
 
-	AboutUsPanel aboutUsPanel;
-	HistoryPanel historyPanel;
-	TreatmentPanel treatmentPanel;
-	AppointmentsPanel appointmentsPanel;
-	AskForAppointmentPanel askForAppointmentPanel;
-	PatientHomePanel homePanel;
-	ProfilePanel profilePanel;
+	private misc.RSButtonMetro myDoctorsButton;
+
+	private AboutUsPanel aboutUsPanel;
+	private HistoryPanel historyPanel;
+	private TreatmentPanel treatmentPanel;
+	private AppointmentsPanel appointmentsPanel;
+	private AskForAppointmentPanel askForAppointmentPanel;
+	private PatientHomePanel homePanel;
+	private ProfilePanel profilePanel;
+	private MyDoctorsPanel myDoctorsPanel;
 
 	boolean leftPanel;
 
@@ -55,6 +59,7 @@ public class PatientPanel extends javax.swing.JPanel {
 			this.fullName = p.getFullName();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
 			if(Main.SHOW_EXCEPTIONS_TRACE)
 				e.printStackTrace();
 		}
@@ -68,6 +73,7 @@ public class PatientPanel extends javax.swing.JPanel {
 		askForAppointmentPanel = new AskForAppointmentPanel(this);
 		homePanel = new PatientHomePanel(name);
 		profilePanel = new ProfilePanel(ctrl, dni_patient);
+		myDoctorsPanel = new MyDoctorsPanel(ctrl, dni_patient);
 
 		leftPanel = true;
 
@@ -103,6 +109,7 @@ public class PatientPanel extends javax.swing.JPanel {
 		southpanel = new javax.swing.JPanel();
 		aboutUsButton = new misc.RSButtonMetro();
 		signOutButton = new misc.RSButtonMetro();
+		myDoctorsButton = new misc.RSButtonMetro();
 
 		setBackground(new java.awt.Color(0, 0, 0));
 		setMinimumSize(new java.awt.Dimension(985, 561));
@@ -228,6 +235,25 @@ public class PatientPanel extends javax.swing.JPanel {
 			}
 		});
 
+		myDoctorsButton.setForeground(new java.awt.Color(51, 51, 51));
+		myDoctorsButton.setIcon(new javax.swing.ImageIcon(("resources/icons/doctor.png"))); // NOI18N
+		myDoctorsButton.setText("My Doctors");
+		myDoctorsButton.setColorHover(new java.awt.Color(138, 202, 234));
+		myDoctorsButton.setColorNormal(new java.awt.Color(214, 214, 214));
+		myDoctorsButton.setColorPressed(new java.awt.Color(138, 202, 234));
+		myDoctorsButton.setColorTextHover(new java.awt.Color(51, 51, 51));
+		myDoctorsButton.setColorTextNormal(new java.awt.Color(51, 51, 51));
+		myDoctorsButton.setColorTextPressed(new java.awt.Color(51, 51, 51));
+		myDoctorsButton.setFocusPainted(false);
+		myDoctorsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		myDoctorsButton.setRolloverEnabled(false);
+		myDoctorsButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				myDocTorsButtonActionPerformed(evt);
+			}
+		});
+
 		javax.swing.GroupLayout leftMenuLayout = new javax.swing.GroupLayout(leftMenu);
 		leftMenu.setLayout(leftMenuLayout);
 		leftMenuLayout.setHorizontalGroup(
@@ -237,7 +263,8 @@ public class PatientPanel extends javax.swing.JPanel {
 						.addGroup(leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 								.addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
 								.addComponent(historyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(appointButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(appointButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(myDoctorsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addContainerGap(35, Short.MAX_VALUE))
 				);
 		leftMenuLayout.setVerticalGroup(
@@ -249,6 +276,8 @@ public class PatientPanel extends javax.swing.JPanel {
 						.addComponent(historyButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 						.addComponent(appointButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(myDoctorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				);
 
@@ -433,6 +462,11 @@ public class PatientPanel extends javax.swing.JPanel {
 	private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		setCenterPanel(profilePanel);
 		profilePanel.open();
+	}
+
+	private void myDocTorsButtonActionPerformed(ActionEvent evt) {
+		setCenterPanel(myDoctorsPanel);
+		myDoctorsPanel.open();
 	}
 
 

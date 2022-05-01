@@ -4,19 +4,26 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import model.patientDAO.AceptDoctorChangeRequestDAO;
 import model.patientDAO.AskForAppointmentDAO;
 import model.patientDAO.GetAppointmentsDAO;
 import model.patientDAO.GetDoctorsOfPatientDAO;
 import model.patientDAO.GetHistoryDAO;
+import model.patientDAO.GetNotDoctorsOfPatientDAO;
 import model.patientDAO.GetPatientFullDataDAO;
 import model.patientDAO.GetTreatmentsDAO;
 import model.patientDAO.GetUnavailableTakenHoursDAO;
+import model.patientDAO.RequestDoctorChangeDAO;
 import model.patientDAO.UpdatePatientDAO;
 
 public class PatientApp {
 
 	public Vector<Doctor> getDoctorsOf(String dni) throws SQLException {
 		return GetDoctorsOfPatientDAO.execute(dni);
+	}
+
+	public Vector<Doctor> getNotDoctorsOf(String dni) throws SQLException {
+		return GetNotDoctorsOfPatientDAO.execute(dni);
 	}
 
 	public Vector<String> getAvailableHours(String doctor_dni, String date) throws SQLException {
@@ -71,6 +78,14 @@ public class PatientApp {
 
 	public void updatePatient(Patient p) throws SQLException {
 		UpdatePatientDAO.execute(p);
+	}
+
+	public void aceptDoctorChangeRequest(String dni_patient, String fromDni_doctor, String toDni_doctor) throws SQLException {
+		AceptDoctorChangeRequestDAO.execute(dni_patient, fromDni_doctor, toDni_doctor);
+	}
+
+	public void requestDoctorChange(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws SQLException {
+		RequestDoctorChangeDAO.execute(dni_patient, from_dni_doctor, to_dni_doctor, reason);
 	}
 
 }

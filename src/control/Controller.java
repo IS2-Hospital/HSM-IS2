@@ -44,6 +44,10 @@ public class Controller {
 		return patientApp.getDoctorsOf(dni);
 	}
 
+	public Vector<Doctor> getNotDoctorsOf(String dni) throws SQLException {
+		return patientApp.getNotDoctorsOf(dni);
+	}
+
 	public Vector<String> getAvailableHours(String doctor_dni, String date) throws SQLException {
 		return patientApp.getAvailableHours(doctor_dni, date);
 	}
@@ -140,7 +144,6 @@ public class Controller {
 
 	public void deletePatient(String patientDni) throws SQLException {
 		adminApp.deletePatient(patientDni);
-
 	}
 
 	public List<String> getPlanList() {
@@ -149,7 +152,14 @@ public class Controller {
 
 	public void changeBillPlan(String typeName, String newBill) {
 		adminApp.changeBillPlan(typeName,newBill);
+	}
 
+	public void aceptDoctorChangeRequest(String dni_patient, String from_dni_doctor, String to_dni_doctor) throws SQLException {
+		patientApp.aceptDoctorChangeRequest(dni_patient, from_dni_doctor, to_dni_doctor);
+	}
+
+	public void requestDoctorChange(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws SQLException {
+		patientApp.requestDoctorChange(dni_patient, from_dni_doctor, to_dni_doctor, reason);
 	}
 
 
