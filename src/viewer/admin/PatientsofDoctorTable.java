@@ -1,5 +1,6 @@
 package viewer.admin;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -70,7 +71,7 @@ public class PatientsofDoctorTable extends AbstractTableModel{
 		}
 	}
 
-	public void open(String dni_doctor) {
+	public void open(String dni_doctor) throws SQLException {
 		patients = ctrl.getPatientsOfDoctor(dni_doctor);
 		fireTableDataChanged();
 	}

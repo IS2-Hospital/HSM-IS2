@@ -14,8 +14,8 @@ public class Doctor extends User {
 	private Date contractStartDate;
 	private Date contractEndDate;
 
-	public Doctor(String dni, String name, String lastname, String birthdate, String email, String phone, String speciality, float salary, Date contractStartDate, Date contractEndDate) {
-		super (dni, name, lastname, birthdate, email, phone, UserRole.DOCTOR, null);
+	public Doctor(String dni, String name, String lastname, String birthdate, String email, String phone, String speciality, float salary, Date contractStartDate, Date contractEndDate, String pass) {
+		super (dni, name, lastname, birthdate, email, phone, UserRole.DOCTOR, pass);
 		this.speciality = speciality;
 		this.salary = salary;
 		this.contractStartDate = contractStartDate;
@@ -30,22 +30,6 @@ public class Doctor extends User {
 	@Override
 	public String[] getColName() {
 		return colNames;
-	}
-
-	public String getSpeciality() {
-		return speciality;
-	}
-
-	public float getSalary() {
-		return salary;
-	}
-
-	public Date getContractStartDate() {
-		return contractStartDate;
-	}
-
-	public Date getContractEndDate() {
-		return contractEndDate;
 	}
 
 	@Override
@@ -66,6 +50,22 @@ public class Doctor extends User {
 			list.add("Undefinded Contract");
 
 		return list;
+	}
+
+	public float getSalary() {
+		return salary;
+	}
+
+	public String getSpeciality() {
+		return speciality;
+	}
+
+	public Date getContractStartDate() {
+		return contractStartDate;
+	}
+
+	public Date getContractEndDate() {
+		return contractEndDate;
 	}
 
 }

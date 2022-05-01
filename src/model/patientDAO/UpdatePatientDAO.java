@@ -12,6 +12,7 @@ public class UpdatePatientDAO {
 
 	public static void execute(Patient p) throws SQLException {
 		Connection con = DBConnector.connectdb();
+
 		String sql = "UPDATE users SET "
 				+ "name = ?, "
 				+ "lastname = ?, "

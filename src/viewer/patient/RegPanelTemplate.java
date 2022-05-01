@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import model.Enums.BloodType;
 import model.Enums.UserRole;
+import model.userManagment.UserRegisterer;
 
 @SuppressWarnings("serial")
 public class RegPanelTemplate extends JPanel {
@@ -313,6 +314,13 @@ public class RegPanelTemplate extends JPanel {
 
 	public boolean validateReg() {
 		return validateIntroducedData();
+	}
+
+	public void registerUser() {
+		if(validateIntroducedData()) {
+			new UserRegisterer().registerUsers(createRegistrationJO());
+		}
+
 	}
 
 }

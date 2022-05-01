@@ -9,17 +9,16 @@ import java.util.Vector;
 import model.DBConnector;
 import model.Doctor;
 
-public class GetDoctorsOfPatientDAO {
+public class GetNotDoctorsOfPatientDAO {
 
 	public static Vector<Doctor> execute(String dni) throws SQLException {
 		Connection con = DBConnector.connectdb();
 		Statement statement = con.createStatement();
 
-		ResultSet resultSet = statement.executeQuery(String.format("select * "
-				+ "from treated_by "
-				+ "join doctors using(dni_doctor) "
-				+ "join users on (doctors.dni_doctor = users.dni) "
-				+ "where dni_patient = '%s'", dni));
+		ResultSet resultSet = statement.executeQuery(String.format("SELECT * "
+				+ "FROM doctors "
+				+ "JOIN users ON (doctors.dni_doctor = users.dni) "
+				+ "where dni not in(SELECT dni_doctor FROM treated_by WHERE dni_patient = %s);", dni));
 
 		Vector<Doctor> v = new Vector<>(); // DTO
 

@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -10,10 +9,11 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import model.adminDAO.GetAllPatientsFromDAO;
 import model.doctorDAO.GetAppointmentsDoctorDAO;
 import model.doctorDAO.SaveTreatmentDao;
+import model.doctorDAO.UpdateDoctorDAO;
 
 public class DoctorApp {
 
-	public List<Patient> getPatientsOfDoctor(String doctor_dni) {
+	public Vector<Patient> getPatientsOfDoctor(String doctor_dni) throws SQLException {
 		return GetAllPatientsFromDAO.execute(doctor_dni);
 	}
 
@@ -32,6 +32,10 @@ public class DoctorApp {
 
 	public Vector<Appointment> getAppointments(String dni_doctor) throws SQLException {
 		return GetAppointmentsDoctorDAO.execute(dni_doctor);
+	}
+
+	public void updateDoctor(Doctor d) throws SQLException {
+		UpdateDoctorDAO.execute(d);
 	}
 
 }

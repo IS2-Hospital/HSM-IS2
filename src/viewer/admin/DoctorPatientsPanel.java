@@ -1,10 +1,12 @@
 package viewer.admin;
 
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 
 import control.Controller;
+import launcher.Main;
 import model.Doctor;
 
 /**
@@ -32,7 +34,13 @@ public class DoctorPatientsPanel extends javax.swing.JPanel{
 
 	public void open() {
 		doctor = (Doctor) doctorComboBox.getSelectedItem();
-		patientsofDoctorTable.open(doctor.getDni());
+		try {
+			patientsofDoctorTable.open(doctor.getDni());
+		} catch (SQLException e) {
+			//TODO dialogo de error
+			if(Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 	}
 	/**
 	 * This method is called from within the constructor to initialize the form.

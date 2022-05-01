@@ -40,6 +40,8 @@ public class GetAppointmentsDoctorDAO {
 		resultSet.close();
 		st.close();
 
+		con.close();
+
 		return v;
 	}
 

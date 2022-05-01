@@ -17,7 +17,7 @@ public class HistoryTableModel extends AbstractTableModel{
 	private String dni;
 
 	private Vector<History> v;
-	private final String[] colNames = {"NAME", "START", "END", "DESCRIPTION" };
+	private static final String[] COL_NAMES = {"NAME", "START", "END", "DESCRIPTION" };
 
 
 	public HistoryTableModel(String dni, Controller ctrl) {
@@ -42,7 +42,7 @@ public class HistoryTableModel extends AbstractTableModel{
 
 	@Override
 	public String getColumnName(int col) {
-		return colNames[col];
+		return COL_NAMES[col];
 	}
 
 
@@ -53,7 +53,7 @@ public class HistoryTableModel extends AbstractTableModel{
 
 	@Override
 	public int getColumnCount() {
-		return colNames.length;
+		return COL_NAMES.length;
 	}
 
 	@Override

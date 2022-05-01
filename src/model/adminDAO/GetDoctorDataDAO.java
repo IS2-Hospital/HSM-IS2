@@ -46,7 +46,8 @@ public class GetDoctorDataDAO {
 				float salary = resultSet.getFloat("salary");
 				Date start = resultSet.getDate("contract_start_date");
 				Date end = resultSet.getDate("contract_end_date");
-				docs = new Doctor(dni, name, lastName, birthDate, email, phone, speciality, salary, start, end);
+				String pass = resultSet.getString("password");
+				docs = new Doctor(dni, name, lastName, birthDate, email, phone, speciality, salary, start, end, pass);
 			}
 			resultSet.close();
 		} catch (SQLException e) {

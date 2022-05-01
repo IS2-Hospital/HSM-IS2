@@ -1,21 +1,20 @@
 package model.adminDAO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.DBConnector;
-import model.Doctor;
 import model.exceptions.sqlExeptions.SqlConnectionException;
 import viewer.ErrorHandler;
 
-public class GetDoctorListDAO {
+public class GetPlanListDAO {
 
-	public static Vector<Doctor> execute(){
+	public static List<String> execute() {
 		Connection adminConex = null;
 		try {
 			while( adminConex == null)
@@ -27,7 +26,7 @@ public class GetDoctorListDAO {
 		ResultSet resultSet = null;
 		try {
 			if(adminConex != null) {
-				PreparedStatement st = adminConex.prepareStatement("SELECT * FROM doctors JOIN users on dni_doctor = dni;", Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement st = adminConex.prepareStatement("SELECT * FROM health_insurances", Statement.RETURN_GENERATED_KEYS);
 				st.execute();
 				resultSet = st.getResultSet();
 			}
@@ -35,20 +34,10 @@ public class GetDoctorListDAO {
 			ErrorHandler.showError("Query error: " + e1.getMessage(),"Database Error");
 		}
 
-		Vector<Doctor> docs = new Vector<Doctor>();
+		List<String> plans = new ArrayList<String>();
 		try {
 			while(resultSet.next()) {
-				String dni = resultSet.getString("dni");
-				String name = resultSet.getString("name");
-				String lastName = resultSet.getString("lastname");
-				String birthDate = resultSet.getString("birthdate");
-				String email = resultSet.getString("email");
-				String phone = resultSet.getString("phone");
-				String speciality = resultSet.getString("speciality");
-				float salary = resultSet.getFloat("salary");
-				Date start = resultSet.getDate("contract_start_date");
-				Date end = resultSet.getDate("contract_end_date");
-				docs.add(new Doctor(dni, name, lastName, birthDate, email, phone, speciality, salary, start, end, null));
+				plans.add(resultSet.getString(1));
 			}
 			resultSet.close();
 		} catch (SQLException e) {
@@ -59,7 +48,7 @@ public class GetDoctorListDAO {
 		} catch (SQLException e) {
 			ErrorHandler.showError("Error clossing the conexion to the database","Database Error");
 		}
-		return docs;
+		return plans;
 	}
 
 }

@@ -98,7 +98,7 @@ public class AdminPanel extends JPanel {
 
 		patientListButton.setBackground(new java.awt.Color(214, 214, 214));
 		patientListButton.setForeground(new java.awt.Color(51, 51, 51));
-		patientListButton.setIcon(new javax.swing.ImageIcon(("resources/icons/home.png"))); // NOI18N
+		patientListButton.setIcon(new javax.swing.ImageIcon(("resources/icons/patient.png"))); // NOI18N
 		patientListButton.setText("Patient List");
 		patientListButton.setColorHover(new java.awt.Color(138, 202, 234));
 		patientListButton.setColorNormal(new java.awt.Color(214, 214, 214));
@@ -136,7 +136,7 @@ public class AdminPanel extends JPanel {
 		});
 
 		doctorPatientsButton.setForeground(new java.awt.Color(51, 51, 51));
-		doctorPatientsButton.setIcon(new javax.swing.ImageIcon(("resources/icons/appointments.png"))); // NOI18N
+		doctorPatientsButton.setIcon(new javax.swing.ImageIcon(("resources/icons/patient.png"))); // NOI18N
 		doctorPatientsButton.setText("Doctor Patients");
 		doctorPatientsButton.setColorHover(new java.awt.Color(138, 202, 234));
 		doctorPatientsButton.setColorNormal(new java.awt.Color(214, 214, 214));
@@ -156,7 +156,7 @@ public class AdminPanel extends JPanel {
 		});
 
 		modifyPatientButton.setForeground(new java.awt.Color(51, 51, 51));
-		modifyPatientButton.setIcon(new javax.swing.ImageIcon("resources/icons/appointments.png")); // NOI18N
+		modifyPatientButton.setIcon(new javax.swing.ImageIcon("resources/icons/modifyPatient.png")); // NOI18N
 		modifyPatientButton.setText("Modify Patient");
 		modifyPatientButton.setColorHover(new java.awt.Color(138, 202, 234));
 		modifyPatientButton.setColorNormal(new java.awt.Color(214, 214, 214));
@@ -171,6 +171,7 @@ public class AdminPanel extends JPanel {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				//new PatientModificatorDialog(_ctrl);
+				modPacientButtonButtonActionPerformed(evt);
 			}
 		});
 
@@ -189,7 +190,6 @@ public class AdminPanel extends JPanel {
 		modDoctorButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				modPacientButtonButtonActionPerformed(evt);
 
 				//new DoctorModificatorDialog(_ctrl);
 			}
@@ -378,7 +378,7 @@ public class AdminPanel extends JPanel {
 		doctorPatientsPanel.open();
 	}
 
-	private void modPatientButtonButtonActionPerformed(java.awt.event.ActionEvent evt){
+	private void modPacientButtonButtonActionPerformed(java.awt.event.ActionEvent evt){
 		setCenterPanel(patientModPanel);
 		patientModPanel.open();
 	}

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package viewer;
+package viewer.patient;
 
 import java.sql.SQLException;
 import java.util.Vector;
@@ -16,7 +16,6 @@ import control.Controller;
 import launcher.Main;
 import model.Appointment;
 import model.Doctor;
-import viewer.patient.PatientPanel;
 
 /**
  *
@@ -250,13 +249,13 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 		Vector<String> v = new Vector<>();
 
 		try {
-			Doctor dni_doctor = (Doctor) doctorComboBox.getSelectedItem();
+			Doctor doctor = (Doctor) doctorComboBox.getSelectedItem();
 			String date = calendarPanel1.getSelectedDate();
 
 			if (date.compareTo(calendarPanel1.getTodaysDate()) <= 0)
 				throw new NullPointerException("You can't select a past day");
 
-			v = ctrl.getAvailableHours(dni_doctor, date);
+			v = ctrl.getAvailableHours(doctor.getDni(), date);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) { // there is not a day selected

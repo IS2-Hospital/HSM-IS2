@@ -4,6 +4,9 @@
  */
 package viewer.doctor;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 
 import control.Controller;
@@ -23,6 +26,8 @@ public class DoctorPanel extends javax.swing.JPanel {
 
 	private MyPatientsPanel myPatientsPanel;
 	private AppointmentsPanel appointmentsPanel;
+	private AskForAppointmentPanel askForAppointmentPanel;
+	private ProfilePanel profilePanel;
 
 
 	/**
@@ -35,6 +40,8 @@ public class DoctorPanel extends javax.swing.JPanel {
 
 		myPatientsPanel = new MyPatientsPanel(ctrl, doctor_dni);
 		appointmentsPanel = new AppointmentsPanel(ctrl, doctor_dni, UserRole.DOCTOR);
+		askForAppointmentPanel = new AskForAppointmentPanel(ctrl, doctor_dni);
+		profilePanel = new ProfilePanel(ctrl, doctor_dni);
 
 		initComponents();
 	}
@@ -116,6 +123,12 @@ public class DoctorPanel extends javax.swing.JPanel {
 		profileButton.setFocusPainted(false);
 		profileButton.setPreferredSize(new java.awt.Dimension(45, 35));
 		profileButton.setRolloverEnabled(false);
+		profileButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				profileButtonActionPerformed(e);
+			}
+		});
 		northpanel.add(profileButton);
 
 		add(northpanel, java.awt.BorderLayout.PAGE_START);
@@ -316,11 +329,17 @@ public class DoctorPanel extends javax.swing.JPanel {
 	}
 
 	private void askForButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		setCenterPanel(askForAppointmentPanel);
+		askForAppointmentPanel.open();
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+	}
+
+	private void profileButtonActionPerformed(ActionEvent e) {
+		setCenterPanel(profilePanel);
+		profilePanel.open();
 	}
 
 	public void setCenterPanel(JPanel p) {

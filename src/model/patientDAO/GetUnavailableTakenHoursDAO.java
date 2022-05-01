@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.DBConnector;
-import model.Doctor;
 
 public class GetUnavailableTakenHoursDAO {
 
-	public static List<String> execute(Doctor doctor, String date) throws SQLException {
+	public static List<String> execute(String doctor_dni, String date) throws SQLException {
 		Connection con = DBConnector.connectdb();
 
 		String select = "select hour "
@@ -22,7 +21,7 @@ public class GetUnavailableTakenHoursDAO {
 				+ "and day = STR_TO_DATE(?, '%Y-%m-%d') "
 				+ "order by hour;";
 		PreparedStatement st = con.prepareStatement(select, Statement.RETURN_GENERATED_KEYS);
-		st.setString(1, doctor.getDni());
+		st.setString(1, doctor_dni);
 		st.setString(2, date);
 
 		st.execute();

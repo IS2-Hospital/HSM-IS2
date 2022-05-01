@@ -4,13 +4,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import model.patientDAO.AceptDoctorChangeRequestDAO;
 import model.patientDAO.AskForAppointmentDAO;
 import model.patientDAO.GetAppointmentsDAO;
 import model.patientDAO.GetDoctorsOfPatientDAO;
 import model.patientDAO.GetHistoryDAO;
+import model.patientDAO.GetNotDoctorsOfPatientDAO;
 import model.patientDAO.GetPatientFullDataDAO;
 import model.patientDAO.GetTreatmentsDAO;
 import model.patientDAO.GetUnavailableTakenHoursDAO;
+import model.patientDAO.RequestDoctorChangeDAO;
 import model.patientDAO.UpdatePatientDAO;
 
 public class PatientApp {
@@ -19,9 +22,13 @@ public class PatientApp {
 		return GetDoctorsOfPatientDAO.execute(dni);
 	}
 
-	public Vector<String> getAvailableHours(Doctor doctor, String date) throws SQLException {
+	public Vector<Doctor> getNotDoctorsOf(String dni) throws SQLException {
+		return GetNotDoctorsOfPatientDAO.execute(dni);
+	}
 
-		List<String> unavailableHours = GetUnavailableTakenHoursDAO.execute(doctor, date);
+	public Vector<String> getAvailableHours(String doctor_dni, String date) throws SQLException {
+
+		List<String> unavailableHours = GetUnavailableTakenHoursDAO.execute(doctor_dni, date);
 
 		String[] laborableHours = {
 				"08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45",
@@ -71,6 +78,14 @@ public class PatientApp {
 
 	public void updatePatient(Patient p) throws SQLException {
 		UpdatePatientDAO.execute(p);
+	}
+
+	public void aceptDoctorChangeRequest(String dni_patient, String fromDni_doctor, String toDni_doctor) throws SQLException {
+		AceptDoctorChangeRequestDAO.execute(dni_patient, fromDni_doctor, toDni_doctor);
+	}
+
+	public void requestDoctorChange(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws SQLException {
+		RequestDoctorChangeDAO.execute(dni_patient, from_dni_doctor, to_dni_doctor, reason);
 	}
 
 }
