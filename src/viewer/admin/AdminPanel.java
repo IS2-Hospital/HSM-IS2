@@ -62,7 +62,7 @@ public class AdminPanel extends JPanel {
 
 		logoButton.setBackground(new java.awt.Color(242, 242, 242));
 		logoButton.setForeground(new java.awt.Color(8, 72, 135));
-		logoButton.setIcon(new javax.swing.ImageIcon(("resources/icons/logo45x45.png"))); // NOI18N
+		logoButton.setIcon(new javax.swing.ImageIcon(("resources/icons/logo45x45.png")));
 		logoButton.setText("Pablo's Clinic");
 		logoButton.setColorHover(new java.awt.Color(242, 242, 242));
 		logoButton.setColorNormal(new java.awt.Color(242, 242, 242));
@@ -71,7 +71,7 @@ public class AdminPanel extends JPanel {
 		logoButton.setColorTextNormal(new java.awt.Color(8, 72, 135));
 		logoButton.setColorTextPressed(new java.awt.Color(8, 72, 135));
 		logoButton.setFocusPainted(false);
-		logoButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+		logoButton.setFont(new java.awt.Font("Tahoma", 1, 24));
 		logoButton.setMaximumSize(new java.awt.Dimension(300, 45));
 		logoButton.setPreferredSize(new java.awt.Dimension(220, 35));
 		logoButton.setRolloverEnabled(false);
@@ -151,12 +151,11 @@ public class AdminPanel extends JPanel {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				doctorPatientsButtonActionPerformed(evt);
-				//new DoctorSelectorDialog(_ctrl);
 			}
 		});
 
 		modifyPatientButton.setForeground(new java.awt.Color(51, 51, 51));
-		modifyPatientButton.setIcon(new javax.swing.ImageIcon("resources/icons/modifyPatient.png")); // NOI18N
+		modifyPatientButton.setIcon(new javax.swing.ImageIcon("resources/icons/modifyPatient.png"));
 		modifyPatientButton.setText("Modify Patient");
 		modifyPatientButton.setColorHover(new java.awt.Color(138, 202, 234));
 		modifyPatientButton.setColorNormal(new java.awt.Color(214, 214, 214));
