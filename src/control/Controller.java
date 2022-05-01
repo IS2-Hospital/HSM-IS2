@@ -32,6 +32,8 @@ public class Controller {
 		this.doctorApp = new DoctorApp();
 	}
 
+
+	//Login Maçade
 	public UserRole login(String dni, String password) throws LoginException, SQLException {
 		return _userManager.get_loginAuthenticator().login(dni, password);
 	}
@@ -39,6 +41,8 @@ public class Controller {
 	public void registerUsers(JSONObject usersToRegister) {
 		_userManager.get_patientRegisterer().registerUsers(usersToRegister);
 	}
+
+	//Patient facade
 
 	public Vector<Doctor> getDoctorsOf(String dni) throws SQLException {
 		return patientApp.getDoctorsOf(dni);
@@ -66,6 +70,16 @@ public class Controller {
 		return patientApp.getTreatment(dni_patient);
 	}
 
+	public Patient getPatientFullData(String dni) throws SQLException {
+		return patientApp.getPatientFullData(dni);
+	}
+
+	public void updatePatient(Patient p) throws SQLException {
+		patientApp.updatePatient(p);
+	}
+
+	//Admin facade
+
 	public List<Patient> getAllPatients() {
 		return adminApp.getAllPatients();
 	}
@@ -82,16 +96,8 @@ public class Controller {
 		return adminApp.getPatientData(dni);
 	}
 
-	public Patient getPatientFullData(String dni) throws SQLException {
-		return patientApp.getPatientFullData(dni);
-	}
-
 	public void updatePatient(List<String> colData) throws SQLException {
 		adminApp.updatePatient(colData);
-	}
-
-	public void updatePatient(Patient p) throws SQLException {
-		patientApp.updatePatient(p);
 	}
 
 	public Doctor getDoctorData(String dni) {
@@ -100,10 +106,6 @@ public class Controller {
 
 	public void updateDoctor(List<String> colData) throws SQLException {
 		adminApp.updateDoctor(colData);
-	}
-
-	public void updateDoctor(Doctor d) throws SQLException {
-		doctorApp.updateDoctor(d);
 	}
 
 	public List<String> getRequestIDList() {
@@ -130,14 +132,6 @@ public class Controller {
 		adminApp.assignPatientDoctor(dniDoc,dniPat);
 	}
 
-	public Vector<Patient> getPatientsOfDoctor(String doctor_dni) throws SQLException {
-		return doctorApp.getPatientsOfDoctor(doctor_dni);
-	}
-
-	public void saveTreatment(Treatment t, String patient_dni) throws SQLException {
-		doctorApp.saveTreatment(t, patient_dni);
-	}
-
 	public void deletePatient(String patientDni) throws SQLException {
 		adminApp.deletePatient(patientDni);
 
@@ -150,6 +144,20 @@ public class Controller {
 	public void changeBillPlan(String typeName, String newBill) {
 		adminApp.changeBillPlan(typeName,newBill);
 
+	}
+
+	//Doctor Facade
+
+	public void updateDoctor(Doctor d) throws SQLException {
+		doctorApp.updateDoctor(d);
+	}
+
+	public Vector<Patient> getPatientsOfDoctor(String doctor_dni) throws SQLException {
+		return doctorApp.getPatientsOfDoctor(doctor_dni);
+	}
+
+	public void saveTreatment(Treatment t, String patient_dni) throws SQLException {
+		doctorApp.saveTreatment(t, patient_dni);
 	}
 
 
