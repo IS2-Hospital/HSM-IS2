@@ -405,6 +405,7 @@ public class PatientPanel extends javax.swing.JPanel {
 	}// </editor-fold>
 
 	private void signOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		AppointmentsPanel.setNull();
 		mainWindow.signOut();
 	}
 

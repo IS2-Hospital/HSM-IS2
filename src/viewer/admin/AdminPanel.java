@@ -1,9 +1,12 @@
 package viewer.admin;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.JPanel;
 
 import control.Controller;
 import model.exceptions.sqlExeptions.SqlConnectionException;
+import viewer.AppointmentsPanel;
 import viewer.MainWindow;
 
 
@@ -11,12 +14,13 @@ public class AdminPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	Controller _ctrl;
-	MainWindow _mainWindow;
+	Controller ctrl;
+	MainWindow mainWindow;
+
 
 	public AdminPanel(Controller ctrl, MainWindow mainWindow) throws SqlConnectionException {
-		_ctrl = ctrl;
-		_mainWindow = mainWindow;
+		this.ctrl = ctrl;
+		this.mainWindow = mainWindow;
 
 		initGUI();
 	}
@@ -41,7 +45,6 @@ public class AdminPanel extends JPanel {
 		centerPanel = new javax.swing.JPanel();
 		voidCenterPanel = new javax.swing.JPanel();
 		southpanel = new javax.swing.JPanel();
-		aboutUsButton = new misc.RSButtonMetro();
 		signOutButton = new misc.RSButtonMetro();
 
 		setBackground(new java.awt.Color(0, 0, 0));
@@ -181,7 +184,7 @@ public class AdminPanel extends JPanel {
 		modDoctorButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-
+				modDoctorButtonButtonActionPerformed(evt);
 				//new DoctorModificatorDialog(_ctrl);
 			}
 		});
@@ -221,6 +224,7 @@ public class AdminPanel extends JPanel {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				//new DoctorAssignDialog(_ctrl);
+				assignDoctorButtonActionPerformed(evt);
 			}
 		});
 
@@ -305,25 +309,6 @@ public class AdminPanel extends JPanel {
 		flowLayout1.setAlignOnBaseline(true);
 		southpanel.setLayout(flowLayout1);
 
-		aboutUsButton.setForeground(new java.awt.Color(51, 51, 51));
-		aboutUsButton.setText("About Us");
-		aboutUsButton.setColorHover(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorNormal(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorPressed(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorTextHover(new java.awt.Color(8, 72, 135));
-		aboutUsButton.setColorTextNormal(new java.awt.Color(51, 51, 51));
-		aboutUsButton.setColorTextPressed(new java.awt.Color(8, 72, 135));
-		aboutUsButton.setFocusPainted(false);
-		aboutUsButton.setPreferredSize(new java.awt.Dimension(80, 35));
-		aboutUsButton.setRolloverEnabled(false);
-		aboutUsButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				aboutUsButtonActionPerformed(evt);
-			}
-		});
-		southpanel.add(aboutUsButton);
-
 		signOutButton.setForeground(new java.awt.Color(51, 51, 51));
 		signOutButton.setText("Sign Out");
 		signOutButton.setColorHover(new java.awt.Color(242, 242, 242));
@@ -347,36 +332,40 @@ public class AdminPanel extends JPanel {
 	}// </editor-fold>
 
 	private void signOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
-	}
-
-	private void aboutUsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		//setCenterPanel(aboutUsPanel);
+		AppointmentsPanel.setNull();
+		mainWindow.signOut();
 	}
 
 	private void patientListButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(PatientListPanel.getInstace(_ctrl));
+		setCenterPanel(PatientListPanel.getInstace(ctrl));
 	}
 
 	private void doctorListButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(DoctorListPanel.getInstace(_ctrl));
+		setCenterPanel(DoctorListPanel.getInstace(ctrl));
 	}
 
 	private void doctorPatientsButtonActionPerformed(java.awt.event.ActionEvent evt){
-		setCenterPanel(DoctorPatientsPanel.getInstace(_ctrl));
+		setCenterPanel(DoctorPatientsPanel.getInstace(ctrl));
 	}
 
 	private void modPacientButtonButtonActionPerformed(java.awt.event.ActionEvent evt){
-		setCenterPanel(PacientModPanel.getInstace(_ctrl));
+		setCenterPanel(PacientModPanel.getInstace(ctrl));
+	}
+
+	private void modDoctorButtonButtonActionPerformed(java.awt.event.ActionEvent evt){
+		setCenterPanel(DoctorModPanel.getInstace(ctrl));
+	}
+
+	protected void assignDoctorButtonActionPerformed(ActionEvent evt) {
+		setCenterPanel(DoctorAssignPanel.getInstace(ctrl));
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		_mainWindow.signOut();
+		mainWindow.signOut();
 	}
 
 
 	// Variables declaration - do not modify
-	private misc.RSButtonMetro aboutUsButton;
 	private misc.RSButtonMetro signOutButton;
 	private misc.RSButtonMetro doctorPatientsButton;
 	private misc.RSButtonMetro doctorListButton;

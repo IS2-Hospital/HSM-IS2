@@ -132,7 +132,7 @@ public class Controller {
 		adminApp.aproveChange(string);
 	}
 
-	public void assignPatientDoctor(String dniDoc, String dniPat) throws SQLException {
+	public void assignPatientDoctor(String dniDoc, String dniPat) throws SQLException, IllegalArgumentException{
 		adminApp.assignPatientDoctor(dniDoc,dniPat);
 	}
 

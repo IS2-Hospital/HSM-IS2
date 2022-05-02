@@ -28,14 +28,11 @@ public class PacientModPanel extends javax.swing.JPanel {
 	private static PacientModPanel instance = null;
 
 	private Controller ctrl;
-	// dni, lastname,name, birthdate, email, phone, gender, blood_type, insurance_type, dni_insurance_taker, bill
 	private Vector<Patient> patientList;
 	private List<String> info;
-	private Patient patient;
 
 	private PacientModPanel(Controller ctrl) {
 		this.ctrl = ctrl;
-		patientList = ctrl.getAllPatients();
 		initComponents();
 
 	}
@@ -49,8 +46,10 @@ public class PacientModPanel extends javax.swing.JPanel {
 	}
 
 	private void open() {
-		patient = (Patient) patientComboBox.getSelectedItem();
-		info = ctrl.getPatientData(patient.getDni()).asStringList();
+		patientList = ctrl.getAllPatients();
+		patientComboBox.setModel(new DefaultComboBoxModel<>(patientList));
+
+		info = ctrl.getPatientData(((Patient) patientComboBox.getSelectedItem()).getDni()).asStringList();
 		textName.setText(info.get(2));
 		textLastName.setText(info.get(1));
 		textBDay.setText(info.get(3));
@@ -59,7 +58,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 		textGender.setSelectedItem(Gender.valueOf(info.get(6)));
 		bloodText.setSelectedItem(BloodType.getEnum(info.get(7)));
 		textGender.setSelectedItem(HealthInsuranceType.valueOf(info.get(8)));
-		takerText.setText(info.get(9) == null ? patient.getDni() : info.get(9));
+		takerText.setText(info.get(9) == null ? ((Patient) patientComboBox.getSelectedItem()).getDni() : info.get(9));
 		billText.setText(info.get(10) == null ? "0.000" : info.get(10));
 	}
 
@@ -120,11 +119,12 @@ public class PacientModPanel extends javax.swing.JPanel {
 		LabelPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 1, 1, 1));
 
 		jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-		jLabel1.setText("Select a doctor");
+		jLabel1.setText("Select a patient");
 		LabelPanel.add(jLabel1);
 
 		NorthPanel.add(LabelPanel);
 
+		patientList = new Vector<>();
 		patientComboBox.setModel(new DefaultComboBoxModel<>(patientList));
 
 		ComboBoxPanel.add(patientComboBox);
@@ -161,7 +161,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 		NamePanel.add(jLabel10);
 
 		textName.setText("jTextField1");
-		textName.setPreferredSize(new Dimension(60, 20));
+		textName.setPreferredSize(new Dimension(120, 20));
 		NamePanel.add(textName);
 
 		CenterPanel.add(NamePanel);
@@ -172,7 +172,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 		LastNamePanel.add(jLabel11);
 
 		textLastName.setText("jTextField1");
-		textLastName.setPreferredSize(new Dimension(60, 20));
+		textLastName.setPreferredSize(new Dimension(120, 20));
 		LastNamePanel.add(textLastName);
 
 		CenterPanel.add(LastNamePanel);
@@ -183,7 +183,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 		BithDatePanel.add(jLabel12);
 
 		textBDay.setText("jTextField1");
-		textBDay.setPreferredSize(new Dimension(80, 20));
+		textBDay.setPreferredSize(new Dimension(120, 20));
 		BithDatePanel.add(textBDay);
 
 		CenterPanel.add(BithDatePanel);
@@ -205,7 +205,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 		EmailPanel1.add(jLabel19);
 
 		textPhone.setText("jTextField1");
-		textPhone.setPreferredSize(new Dimension(60, 20));
+		textPhone.setPreferredSize(new Dimension(120, 20));
 		EmailPanel1.add(textPhone);
 
 		CenterPanel.add(EmailPanel1);
@@ -246,7 +246,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 		InsuranceTakerPanel.add(jLabel17);
 
 		takerText.setText("jTextField1");
-		takerText.setPreferredSize(new Dimension(60, 20));
+		takerText.setPreferredSize(new Dimension(120, 20));
 		InsuranceTakerPanel.add(takerText);
 
 		CenterPanel.add(InsuranceTakerPanel);
@@ -257,7 +257,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 		BillPanel.add(jLabel18);
 
 		billText.setText("jTextField1");
-		billText.setPreferredSize(new Dimension(60, 20));
+		billText.setPreferredSize(new Dimension(120, 20));
 		BillPanel.add(billText);
 
 		CenterPanel.add(BillPanel);
@@ -288,9 +288,6 @@ public class PacientModPanel extends javax.swing.JPanel {
 		open();
 	}
 
-	private void cancelActionPerformed(ActionEvent e) {
-	}
-
 	private void commitActionPerformed(ActionEvent e) {
 		List<String> colData = getIntroducedData();
 		if (colData.size() != 11) {
@@ -314,7 +311,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 	public List<String> getIntroducedData(){
 		ArrayList<String> data = new ArrayList<String>();
 		try {
-			data.add(patient.getDni());
+			data.add(((Patient) patientComboBox.getSelectedItem()).getDni());
 			data.add(textLastName.getText());
 			data.add(textName.getText());
 			data.add(textBDay.getText());
@@ -327,7 +324,7 @@ public class PacientModPanel extends javax.swing.JPanel {
 				data.add(takerText.getText());
 			}
 			catch (NullPointerException e1) {
-				data.add(patient.getDni());
+				data.add(((Patient) patientComboBox.getSelectedItem()).getDni());
 			}
 			try {
 				data.add(billText.getText());

@@ -18,7 +18,7 @@ public class GetDoctorDataDAO {
 		ResultSet resultSet = null;
 
 
-		PreparedStatement st = adminConex.prepareStatement("SELECT * FROM users JOIN doctors ON dni = dni_doctor WHERE "+dni+" = dni", Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement st = adminConex.prepareStatement("SELECT * FROM users JOIN doctors ON dni = dni_doctor WHERE dni = '" + dni + "';", Statement.RETURN_GENERATED_KEYS);
 		st.execute();
 		resultSet = st.getResultSet();
 

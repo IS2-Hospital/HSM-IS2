@@ -68,7 +68,7 @@ public class AdminApp {
 		return GetAllPatientsFromDAO.execute(dniDoctor);
 	}
 
-	public void assignPatientDoctor(String dniDoc, String dniPat) {
+	public void assignPatientDoctor(String dniDoc, String dniPat) throws SQLException, IllegalArgumentException {
 		InsertRelationPatientDoctorDAO.execute(dniDoc, dniPat);
 	}
 

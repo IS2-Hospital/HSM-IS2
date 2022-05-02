@@ -60,7 +60,6 @@ public class DoctorPanel extends javax.swing.JPanel {
 		centerPanel = new javax.swing.JPanel();
 		voidCenterPanel = new javax.swing.JPanel();
 		southpanel = new javax.swing.JPanel();
-		aboutUsButton = new misc.RSButtonMetro();
 		signOutButton = new misc.RSButtonMetro();
 
 		setBackground(new java.awt.Color(0, 0, 0));
@@ -269,19 +268,6 @@ public class DoctorPanel extends javax.swing.JPanel {
 		flowLayout1.setAlignOnBaseline(true);
 		southpanel.setLayout(flowLayout1);
 
-		aboutUsButton.setForeground(new java.awt.Color(51, 51, 51));
-		aboutUsButton.setText("About Us");
-		aboutUsButton.setColorHover(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorNormal(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorPressed(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorTextHover(new java.awt.Color(8, 72, 135));
-		aboutUsButton.setColorTextNormal(new java.awt.Color(51, 51, 51));
-		aboutUsButton.setColorTextPressed(new java.awt.Color(8, 72, 135));
-		aboutUsButton.setFocusPainted(false);
-		aboutUsButton.setPreferredSize(new java.awt.Dimension(80, 35));
-		aboutUsButton.setRolloverEnabled(false);
-		southpanel.add(aboutUsButton);
-
 		signOutButton.setForeground(new java.awt.Color(51, 51, 51));
 		signOutButton.setText("Sign Out");
 		signOutButton.setColorHover(new java.awt.Color(242, 242, 242));
@@ -335,8 +321,7 @@ public class DoctorPanel extends javax.swing.JPanel {
 		p.repaint();
 	}
 
-	// Variables declaration - do not modify
-	private misc.RSButtonMetro aboutUsButton;
+	// Variables declaration - do not modifys
 	private misc.RSButtonMetro signOutButton;
 	private misc.RSButtonMetro appointButton;
 	private misc.RSButtonMetro askForButton;
