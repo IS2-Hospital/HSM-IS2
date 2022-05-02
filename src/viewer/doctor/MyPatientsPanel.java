@@ -25,23 +25,25 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 	private static MyPatientsPanel instance = null;
 
 	private Controller ctrl;
+	private DoctorPanel doctorPanel;
 
 	private MyPatientsTableModel tableModel;
 
 	/**
 	 * Creates new form MyPatientsPanel
 	 */
-	private MyPatientsPanel(Controller ctrl, String doctor_dni) {
+	private MyPatientsPanel(Controller ctrl, String doctor_dni, DoctorPanel doctorPanel) {
 		this.ctrl = ctrl;
 		this.tableModel = new MyPatientsTableModel(ctrl, doctor_dni);
+		this.doctorPanel = doctorPanel;
 
 		initComponents();
 	}
 
 	// Singleton
-	public static MyPatientsPanel getInstance(Controller ctrl, String doctor_dni) {
+	public static MyPatientsPanel getInstance(Controller ctrl, String doctor_dni, DoctorPanel doctorPanel) {
 		if (instance == null)
-			instance = new MyPatientsPanel(ctrl, doctor_dni);
+			instance = new MyPatientsPanel(ctrl, doctor_dni, doctorPanel);
 		instance.open();
 
 		return instance;
@@ -73,6 +75,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 		bottomPanel = new javax.swing.JPanel();
 		viewMedicHistoryButton = new misc.RSButtonMetro();
 		addTreatmentButton = new misc.RSButtonMetro();
+		viewTreatmentsButton = new misc.RSButtonMetro();
 
 		setLayout(new java.awt.BorderLayout());
 
@@ -110,10 +113,23 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 			public void actionPerformed(ActionEvent e) {
 				addTreatmentButtonActionPerformed(e);
 			}
-
 		});
 
 		bottomPanel.add(addTreatmentButton);
+
+		viewTreatmentsButton.setText("View treatments");
+		viewTreatmentsButton.setColorHover(new java.awt.Color(138, 202, 234));
+		viewTreatmentsButton.setColorNormal(new java.awt.Color(8, 72, 135));
+		viewTreatmentsButton.setColorPressed(new java.awt.Color(8, 72, 135));
+		viewTreatmentsButton.setColorTextHover(new java.awt.Color(51, 51, 51));
+		viewTreatmentsButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewTreatmentsButtonActionPerformed(e);
+			}
+		});
+
+		bottomPanel.add(viewTreatmentsButton);
 
 		add(bottomPanel, java.awt.BorderLayout.PAGE_END);
 	}// </editor-fold>
@@ -141,7 +157,15 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 		}
 	}
 
+	private void viewTreatmentsButtonActionPerformed(ActionEvent e) {
+		try {
+			Patient p = tableModel.getSelectedPatient(patientsTable.getSelectedRow());
+			TreatmentsDialog d = new TreatmentsDialog(ctrl, p.getDni(), SwingUtilities.getWindowAncestor(this));
 
+		} catch (IndexOutOfBoundsException e1) { // no row selected
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 
 	// Variables declaration - do not modify
@@ -152,6 +176,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 	private javax.swing.JPanel topPanel;
 	private misc.RSButtonMetro viewMedicHistoryButton;
 	private misc.RSButtonMetro addTreatmentButton;
+	private misc.RSButtonMetro viewTreatmentsButton;
 	// End of variables declaration
 
 }

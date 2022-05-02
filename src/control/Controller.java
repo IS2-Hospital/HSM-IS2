@@ -162,6 +162,10 @@ public class Controller {
 		patientApp.requestDoctorChange(req);
 	}
 
+	public double[] getInsurancePrices() throws SQLException {
+		return adminApp.getInsurancePrices();
+	}
+
 	//Doctor Facade
 
 	public void updateDoctor(Doctor d) throws SQLException {
@@ -176,14 +180,9 @@ public class Controller {
 		doctorApp.saveTreatment(t, patient_dni);
 	}
 
-
-	public double[] getInsurancePrices() throws SQLException {
-		return adminApp.getInsurancePrices();
+	public void deleteTreatment(Treatment t, String dni_patient) throws SQLException {
+		doctorApp.deleteTreatment(t, dni_patient);
 	}
-
-
-
-
 
 
 }
