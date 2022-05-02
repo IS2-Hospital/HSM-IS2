@@ -43,7 +43,7 @@ public class MainWindow extends JFrame {
 
 	void setFondo() {
 		try {
-			Fondo fondo = new Fondo(ImageIO.read(new File("resources/HomeImages/CentroDeSalud.png")));
+			Fondo fondo = new Fondo(ImageIO.read(new File("resources/HomeImages/CentroDeSaludBlur.png")));
 			JPanel panel = (JPanel) this.getContentPane();
 			panel.setBorder(fondo);
 		} catch (IOException e) {
