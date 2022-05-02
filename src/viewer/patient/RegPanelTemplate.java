@@ -349,7 +349,7 @@ public class RegPanelTemplate extends JPanel {
 
 	public boolean registerUser(String dniInsuranceTaker) {
 		if(validateIntroducedData()) {
-			if(dniInsuranceTaker.equals("")) {
+			if(this.getIbanTF().equals("") && dniInsuranceTaker.equals("")) {
 				JOptionPane.showMessageDialog(this, "IBAN required for Main Account",
 						"Unfulfilled requirements", JOptionPane.INFORMATION_MESSAGE);
 				return false;
