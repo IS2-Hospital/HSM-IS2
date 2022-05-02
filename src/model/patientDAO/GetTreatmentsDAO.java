@@ -37,12 +37,13 @@ public class GetTreatmentsDAO {
 
 		Vector<Treatment> v = new Vector<>(); // DTO
 		while(resultSet.next()) {
+			int id = resultSet.getInt("id_treatment");
 			String start_date = resultSet.getString("start_date");
 			String end_date = resultSet.getString("end_date");
 			String name = resultSet.getString("name");
 			String description = resultSet.getString("description");
 			if(compareDates(hoy, end_date)) {
-				Treatment tr = new Treatment(-1, name, description, start_date, end_date);
+				Treatment tr = new Treatment(id, name, description, start_date, end_date);
 				v.add(tr);
 			}
 		}
@@ -59,7 +60,7 @@ public class GetTreatmentsDAO {
 
 		hoyAux = (hoy.charAt(0) - 48) * 1000 + (hoy.charAt(1) - 48) * 100 + (hoy.charAt(2) - 48) * 10 + (hoy.charAt(3) - 48);
 		end_dateAux = (end_date.charAt(0) - 48) * 1000 + (end_date.charAt(1) - 48) * 100 + (end_date.charAt(2) - 48) * 10 + (end_date.charAt(3) - 48);
-		//Comparar año
+		//Comparar aï¿½o
 		if(hoyAux < end_dateAux) { return true; }
 		else if(hoyAux > end_dateAux) { return false; }
 

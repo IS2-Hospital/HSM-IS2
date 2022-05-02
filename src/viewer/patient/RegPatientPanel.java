@@ -126,8 +126,6 @@ public class RegPatientPanel extends JPanel{
 		c.gridy = 3;
 		mainPanel.add(selectPanel, c);
 
-
-
 		this.add(mainPanel);
 	}
 

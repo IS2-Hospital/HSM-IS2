@@ -45,7 +45,7 @@ public class DoctorPanel extends javax.swing.JPanel {
 				e.printStackTrace();
 		}
 
-		setCenterPanel(MyPatientsPanel.getInstance(ctrl, doctor_dni));
+		setCenterPanel(MyPatientsPanel.getInstance(ctrl, doctor_dni, this));
 	}
 
 	/**
@@ -308,7 +308,7 @@ public class DoctorPanel extends javax.swing.JPanel {
 		mainWindow.signOut();
 	}
 	private void myPatientsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(MyPatientsPanel.getInstance(ctrl, doctor_dni));
+		setCenterPanel(MyPatientsPanel.getInstance(ctrl, doctor_dni, this));
 	}
 
 	private void appointButtonActionPerformed(java.awt.event.ActionEvent evt) {

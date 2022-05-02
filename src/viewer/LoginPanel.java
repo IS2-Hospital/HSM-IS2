@@ -24,6 +24,7 @@ import javax.swing.border.TitledBorder;
 
 import control.Controller;
 import launcher.Main;
+import model.Enums.RegState;
 import model.Enums.UserRole;
 import model.exceptions.LoginException;
 import viewer.admin.AdminPanel;
@@ -191,7 +192,16 @@ public class LoginPanel extends JPanel{
 				_mainWindow.setContentPane(new PatientPanel(_ctrl, dni, _mainWindow));
 				break;
 			case DOCTOR:
-				_mainWindow.setContentPane(new DoctorPanel(_ctrl, dni, _mainWindow));
+				RegState regState = _ctrl.getDoctorData(dni).getRegState();
+				if(regState == RegState.ACCEPTED) {
+					_mainWindow.setContentPane(new DoctorPanel(_ctrl, dni, _mainWindow));
+				}
+				else if(regState == RegState.INPROCESS) {
+					JOptionPane.showMessageDialog(_mainWindow, "<html>Hello there! We are still checking your application for the clinic. <br>Come back later ;) .", "In process", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else if(regState == RegState.DENEGATED){
+					JOptionPane.showMessageDialog(_mainWindow, "<html>Hello there! We are sorry, but we have to dennied your application<br> for the clinic. Would you like to delete your application?", "Application dennied", JOptionPane.OK_CANCEL_OPTION);
+				}
 				break;
 			case ADMIN:
 				_mainWindow.setContentPane(new AdminPanel(_ctrl, _mainWindow));

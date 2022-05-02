@@ -91,14 +91,14 @@ public class UserRegisterer {
 		// (if there are several patients registered with the familiar plan, the first one will be the only who pays)
 
 		try {
-			registerUser(connex, patients.get(0).getPatient(), patients.get(0).getPassword());
+			registerUser(connex, patients.get(0).getPatient(), patients.get(0).getPassword(), UserRole.PATIENT);
 			registerPatient(connex, patients.get(0).getPatient(), bill);
 
 			// register the rest of the patients
 			final float NOT_PAYS = 0;
 			if (patients.size() >= 2)
 				for (PacientRegisterData p : patients.subList(1, patients.size())) {
-					registerUser(connex, p.getPatient(), p.getPassword());
+					registerUser(connex, p.getPatient(), p.getPassword(), UserRole.PATIENT);
 					registerPatient(connex, patients.get(0).getPatient(), NOT_PAYS);
 				}
 
@@ -119,7 +119,7 @@ public class UserRegisterer {
 		Connection connex = DBConnector.connectdb();
 
 		try {
-			registerUser(connex, doctors.get(0).getDoctor(), doctors.get(0).getPassword());
+			registerUser(connex, doctors.get(0).getDoctor(), doctors.get(0).getPassword(), UserRole.DOCTOR);
 			registerDoctor(connex, doctors.get(0).getDoctor());
 			connex.close();
 
@@ -143,7 +143,7 @@ public class UserRegisterer {
 		return result.getFloat("price");
 	}
 
-	private void registerUser(Connection connex, User user, String password) throws IllegalArgumentException, SQLException {
+	private void registerUser(Connection connex, User user, String password, UserRole role) throws IllegalArgumentException, SQLException {
 
 		// Insert info in USERS table
 		String insertUser = "INSERT INTO users VALUES (?, ?, ?, STR_TO_DATE(?, \"%Y-%m-%d\"), ?, ?, ?, ?);";
@@ -155,7 +155,7 @@ public class UserRegisterer {
 		st.setString(5, password);
 		st.setString(6, user.getEmail());
 		st.setString(7, user.getPhone());
-		st.setString(8, UserRole.PATIENT.toString());
+		st.setString(8, role.toString());
 
 		st.execute();
 	}

@@ -1,5 +1,6 @@
 package viewer.patient;
 
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -32,10 +33,13 @@ public class TreatmentsTableModel extends AbstractTableModel {
 	}
 
 
-
-	public void open() throws Exception {
+	public void open() throws SQLException {
 		v = ctrl.getTreatment(dni);
 		fireTableDataChanged();
+	}
+
+	public Treatment getTreatment(int i) {
+		return v.get(i);
 	}
 
 	@Override

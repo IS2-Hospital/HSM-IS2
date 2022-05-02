@@ -2,11 +2,11 @@ package viewer.doctor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 
 import control.Controller;
-import viewer.patient.TreatmentsTableModel;
 
 public class DoctorTreatmentWindow extends JFrame {
 
@@ -15,21 +15,23 @@ public class DoctorTreatmentWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static DoctorTreatmentWindow instance = null;
-	private TreatmentsTableModel tableModel;
 	private Controller ctrl;
 	private DoctorHistoryPanel table;
 	private String dni;
 
-	public DoctorTreatmentWindow(Controller ctrl, String dni) {
+	public DoctorTreatmentWindow(Controller ctrl, String dni, Window window) {
 		this.ctrl = ctrl;
 		this.dni = dni;
+
 		initComponents();
+
+		setLocationRelativeTo(window);
 	}
 
 	//Singleton
-	public static DoctorTreatmentWindow getInstance(Controller ctrl, String dni) {
+	public static DoctorTreatmentWindow getInstance(Controller ctrl, String dni, Window window) {
 		if (instance == null)
-			instance = new DoctorTreatmentWindow(ctrl, dni);
+			instance = new DoctorTreatmentWindow(ctrl, dni, window);
 		else
 			instance.refreshTable(dni);
 		return instance;
@@ -45,7 +47,6 @@ public class DoctorTreatmentWindow extends JFrame {
 		this.setLayout(new BorderLayout());
 		table = new DoctorHistoryPanel(ctrl, dni);
 		this.add(table, BorderLayout.CENTER);
-		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(500, 400));
 		this.setPreferredSize(new Dimension(600, 500));
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
