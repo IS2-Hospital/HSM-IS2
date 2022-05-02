@@ -33,15 +33,6 @@ public class PatientPanel extends javax.swing.JPanel {
 
 	private misc.RSButtonMetro myDoctorsButton;
 
-	private AboutUsPanel aboutUsPanel;
-	private HistoryPanel historyPanel;
-	private TreatmentPanel treatmentPanel;
-	private AppointmentsPanel appointmentsPanel;
-	private AskForAppointmentPanel askForAppointmentPanel;
-	private PatientHomePanel homePanel;
-	private ProfilePanel profilePanel;
-	private MyDoctorsPanel myDoctorsPanel;
-
 	boolean leftPanel;
 
 	/**
@@ -66,18 +57,9 @@ public class PatientPanel extends javax.swing.JPanel {
 
 		initComponents();
 
-		aboutUsPanel = new AboutUsPanel();
-		historyPanel = new HistoryPanel(ctrl, dni_patient);
-		treatmentPanel = new TreatmentPanel(ctrl, dni_patient);
-		appointmentsPanel = new AppointmentsPanel(ctrl, dni_patient, UserRole.PATIENT);
-		askForAppointmentPanel = new AskForAppointmentPanel(this);
-		homePanel = new PatientHomePanel(name);
-		profilePanel = new ProfilePanel(ctrl, dni_patient);
-		myDoctorsPanel = new MyDoctorsPanel(ctrl, dni_patient);
-
 		leftPanel = true;
 
-		setCenterPanel(homePanel);
+		setCenterPanel(PatientHomePanel.getInstance(name));
 	}
 
 	/**
@@ -423,35 +405,32 @@ public class PatientPanel extends javax.swing.JPanel {
 	}// </editor-fold>
 
 	private void signOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		AppointmentsPanel.setNull();
 		mainWindow.signOut();
 	}
 
 	private void aboutUsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(aboutUsPanel);
+		setCenterPanel(AboutUsPanel.getInstace());
 	}
 
 	private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(homePanel);
+		setCenterPanel(PatientHomePanel.getInstance(name));
 	}
 
 	private void appointButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(appointmentsPanel);
-		appointmentsPanel.open();
+		setCenterPanel(AppointmentsPanel.getInstance(ctrl, dni_patient, UserRole.PATIENT));
 	}
 
 	private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(historyPanel);
-		historyPanel.open();
+		setCenterPanel(HistoryPanel.getInstance(ctrl, dni_patient));
 	}
 
 	private void treatmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(treatmentPanel);
-		treatmentPanel.open();
+		setCenterPanel(TreatmentPanel.getInstance(ctrl, dni_patient));
 	}
 
 	private void askForButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(askForAppointmentPanel);
-		askForAppointmentPanel.open();
+		setCenterPanel(AskForAppointmentPanel.getInstance(this));
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -460,13 +439,11 @@ public class PatientPanel extends javax.swing.JPanel {
 	}
 
 	private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(profilePanel);
-		profilePanel.open();
+		setCenterPanel(ProfilePanel.getInstance(ctrl, dni_patient));
 	}
 
 	private void myDocTorsButtonActionPerformed(ActionEvent evt) {
-		setCenterPanel(myDoctorsPanel);
-		myDoctorsPanel.open();
+		setCenterPanel(MyDoctorsPanel.getInstance(ctrl, dni_patient));
 	}
 
 
@@ -499,10 +476,6 @@ public class PatientPanel extends javax.swing.JPanel {
 
 	public Controller getCtrl() {
 		return ctrl;
-	}
-
-	public PatientHomePanel getHomePanel() {
-		return homePanel;
 	}
 
 	public void setCenterPanel(JPanel p) {

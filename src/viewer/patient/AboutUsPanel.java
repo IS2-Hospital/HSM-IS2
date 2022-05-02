@@ -13,11 +13,19 @@ import javax.swing.JPanel;
  */
 public class AboutUsPanel extends javax.swing.JPanel {
 
+	private static AboutUsPanel instance = null;
+
 	/**
 	 * Creates new form AboutUsPanel
 	 */
-	public AboutUsPanel() {
+	private AboutUsPanel() {
 		initComponents();
+	}
+
+	public static AboutUsPanel getInstace() {
+		if (instance == null)
+			instance = new AboutUsPanel();
+		return instance;
 	}
 
 	/**
@@ -255,4 +263,5 @@ public class AboutUsPanel extends javax.swing.JPanel {
 	private javax.swing.JLabel toolsUsedLabel;
 	private javax.swing.JLabel whoLabel;
 	// End of variables declaration
+
 }

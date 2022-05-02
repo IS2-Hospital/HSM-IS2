@@ -17,6 +17,7 @@ import viewer.ErrorHandler;
 public class GetPatientDataDAO {
 
 	public static Patient execute(String dni) {
+
 		Connection adminConex = null;
 		try {
 			while( adminConex == null)
@@ -28,7 +29,7 @@ public class GetPatientDataDAO {
 		ResultSet resultSet = null;
 		try {
 			if(adminConex != null) {
-				PreparedStatement st = adminConex.prepareStatement("SELECT * FROM users JOIN patients ON dni = dni_patient WHERE "+dni+" = dni", Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement st = adminConex.prepareStatement("SELECT * FROM users JOIN patients ON dni = dni_patient WHERE dni = '" + dni + "';", Statement.RETURN_GENERATED_KEYS);
 				st.execute();
 				resultSet = st.getResultSet();
 			}

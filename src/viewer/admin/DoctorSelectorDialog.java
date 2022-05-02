@@ -86,7 +86,7 @@ public class DoctorSelectorDialog extends JDialog {
 					JPanel content = new JPanel();
 					content.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Doctors", TitledBorder.CENTER, TitledBorder.TOP));
 
-					JTable table = new JTable (new UserListTableModel(resultSet));
+					JTable table = new JTable ();//new UserListTableModel(resultSet));
 					table.setPreferredSize(new Dimension(700,700));
 					JScrollPane scroll = new JScrollPane(table);
 					scroll.setPreferredSize(new Dimension (800, 700));

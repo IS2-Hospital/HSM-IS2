@@ -40,7 +40,14 @@ public class DoctorModWindow extends JFrame {
 		this._ctrl = _ctrl;
 		this._dni = dni;
 		//dni, lastname,name, birthdate, email, phone, speciality, salary, contract_start_date, contract_end_date
-		_dataList = this._ctrl.getDoctorData(dni).asStringList();
+		try {
+			_dataList = this._ctrl.getDoctorData(dni).asStringList();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error on delete", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 		InitGUI();
 	}
 

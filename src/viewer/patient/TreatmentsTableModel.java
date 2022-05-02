@@ -9,6 +9,7 @@ import control.Controller;
 import launcher.Main;
 import model.Treatment;
 
+@SuppressWarnings("serial")
 public class TreatmentsTableModel extends AbstractTableModel {
 
 	private Controller ctrl;

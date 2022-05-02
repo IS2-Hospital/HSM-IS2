@@ -22,24 +22,52 @@ import model.Enums.UserRole;
  *
  * @author reven
  */
+@SuppressWarnings("serial")
 public class AppointmentsPanel extends javax.swing.JPanel {
+
+	private static AppointmentsPanel instance = null;
 
 	private Controller ctrl;
 	private String dni;
 	private UserRole role;
 	private misc.RSButtonMetro btnCancel;
 	JPanel southPanel;
+
 	/**
 	 * Creates new form AppointmentsPanel
 	 * @param ctrl
 	 * @param dni
 	 */
-	public AppointmentsPanel(Controller ctrl, String dni, UserRole role) {
+	private AppointmentsPanel(Controller ctrl, String dni, UserRole role) {
 		this.ctrl = ctrl;
 		this.dni = dni;
 		this.role = role;
 
 		initComponents();
+	}
+
+	public static AppointmentsPanel getInstance(Controller ctrl, String dni_patient, UserRole role) {
+		if (instance == null)
+			instance = new AppointmentsPanel(ctrl, dni_patient, role);
+		instance.open();
+
+		return instance;
+	}
+
+	public static void setNull() {
+		instance = null;
+	}
+
+	private void open() {
+		try {
+			tableModel.open();
+			calendarPanel1.open(tableModel.getAppointments());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 	}
 
 	/**
@@ -132,17 +160,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 	private javax.swing.JPanel rightPanel;
 	// End of variables declaration
 
-	public void open() {
-		try {
-			tableModel.open();
-			calendarPanel1.open(tableModel.getAppointments());
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 
-			if (Main.SHOW_EXCEPTIONS_TRACE)
-				e.printStackTrace();
-		}
-	}
 
 
 }

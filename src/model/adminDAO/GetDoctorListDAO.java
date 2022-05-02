@@ -6,8 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 import model.DBConnector;
 import model.Doctor;
@@ -16,7 +15,7 @@ import viewer.ErrorHandler;
 
 public class GetDoctorListDAO {
 
-	public static List<Doctor> execute(){
+	public static Vector<Doctor> execute(){
 		Connection adminConex = null;
 		try {
 			while( adminConex == null)
@@ -36,7 +35,7 @@ public class GetDoctorListDAO {
 			ErrorHandler.showError("Query error: " + e1.getMessage(),"Database Error");
 		}
 
-		List<Doctor> docs = new ArrayList<Doctor>();
+		Vector<Doctor> docs = new Vector<Doctor>();
 		try {
 			while(resultSet.next()) {
 				String dni = resultSet.getString("dni");

@@ -23,6 +23,8 @@ import model.Patient;
  */
 public class AskForAppointmentPanel extends javax.swing.JPanel {
 
+	private static AskForAppointmentPanel instance = null;
+
 	private String dni_doctor;
 	private Controller ctrl;
 
@@ -33,7 +35,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 	 * @param ctrl
 	 * @param dni
 	 */
-	public AskForAppointmentPanel(Controller ctrl, String dni_doctor) {
+	private AskForAppointmentPanel(Controller ctrl, String dni_doctor) {
 		this.ctrl = ctrl;
 		this.dni_doctor = dni_doctor;
 		patientList = new Vector<>();
@@ -43,7 +45,15 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 		centerScrollPane.getVerticalScrollBar().setUnitIncrement(10);
 	}
 
-	public void open() {
+	public static AskForAppointmentPanel getInstance(Controller ctrl, String doctor_dni) {
+		if (instance == null)
+			instance = new AskForAppointmentPanel(ctrl, doctor_dni);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
 		try {
 			patientList = ctrl.getPatientsOfDoctor(dni_doctor);
 			doctorComboBox.setModel(new DefaultComboBoxModel<>(patientList));
@@ -97,7 +107,8 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 
 		doctorLabel.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 		doctorLabel.setForeground(new java.awt.Color(51, 51, 51));
-		doctorLabel.setText("Select a doctor");
+
+		doctorLabel.setText("Select a patient");
 		doctorLablePanel.add(doctorLabel);
 
 		topPanel.add(doctorLablePanel);

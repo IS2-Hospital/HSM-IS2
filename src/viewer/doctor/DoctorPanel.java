@@ -24,12 +24,6 @@ public class DoctorPanel extends javax.swing.JPanel {
 	private String doctor_dni;
 	private MainWindow mainWindow;
 
-	private MyPatientsPanel myPatientsPanel;
-	private AppointmentsPanel appointmentsPanel;
-	private AskForAppointmentPanel askForAppointmentPanel;
-	private ProfilePanel profilePanel;
-
-
 	/**
 	 * Creates new form PatientPanel
 	 */
@@ -37,11 +31,6 @@ public class DoctorPanel extends javax.swing.JPanel {
 		this.ctrl = ctrl;
 		this.doctor_dni = doctor_dni;
 		this.mainWindow = mainWindow;
-
-		myPatientsPanel = new MyPatientsPanel(ctrl, doctor_dni);
-		appointmentsPanel = new AppointmentsPanel(ctrl, doctor_dni, UserRole.DOCTOR);
-		askForAppointmentPanel = new AskForAppointmentPanel(ctrl, doctor_dni);
-		profilePanel = new ProfilePanel(ctrl, doctor_dni);
 
 		initComponents();
 	}
@@ -71,7 +60,6 @@ public class DoctorPanel extends javax.swing.JPanel {
 		centerPanel = new javax.swing.JPanel();
 		voidCenterPanel = new javax.swing.JPanel();
 		southpanel = new javax.swing.JPanel();
-		aboutUsButton = new misc.RSButtonMetro();
 		signOutButton = new misc.RSButtonMetro();
 
 		setBackground(new java.awt.Color(0, 0, 0));
@@ -280,19 +268,6 @@ public class DoctorPanel extends javax.swing.JPanel {
 		flowLayout1.setAlignOnBaseline(true);
 		southpanel.setLayout(flowLayout1);
 
-		aboutUsButton.setForeground(new java.awt.Color(51, 51, 51));
-		aboutUsButton.setText("About Us");
-		aboutUsButton.setColorHover(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorNormal(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorPressed(new java.awt.Color(242, 242, 242));
-		aboutUsButton.setColorTextHover(new java.awt.Color(8, 72, 135));
-		aboutUsButton.setColorTextNormal(new java.awt.Color(51, 51, 51));
-		aboutUsButton.setColorTextPressed(new java.awt.Color(8, 72, 135));
-		aboutUsButton.setFocusPainted(false);
-		aboutUsButton.setPreferredSize(new java.awt.Dimension(80, 35));
-		aboutUsButton.setRolloverEnabled(false);
-		southpanel.add(aboutUsButton);
-
 		signOutButton.setForeground(new java.awt.Color(51, 51, 51));
 		signOutButton.setText("Sign Out");
 		signOutButton.setColorHover(new java.awt.Color(242, 242, 242));
@@ -316,21 +291,19 @@ public class DoctorPanel extends javax.swing.JPanel {
 	}// </editor-fold>
 
 	private void signOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		AppointmentsPanel.setNull();
 		mainWindow.signOut();
 	}
 	private void myPatientsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(myPatientsPanel);
-		myPatientsPanel.open();
+		setCenterPanel(MyPatientsPanel.getInstance(ctrl, doctor_dni));
 	}
 
 	private void appointButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(appointmentsPanel);
-		appointmentsPanel.open();
+		setCenterPanel(AppointmentsPanel.getInstance(ctrl, doctor_dni, UserRole.DOCTOR));
 	}
 
 	private void askForButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(askForAppointmentPanel);
-		askForAppointmentPanel.open();
+		setCenterPanel(AskForAppointmentPanel.getInstance(ctrl, doctor_dni));
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -338,8 +311,7 @@ public class DoctorPanel extends javax.swing.JPanel {
 	}
 
 	private void profileButtonActionPerformed(ActionEvent e) {
-		setCenterPanel(profilePanel);
-		profilePanel.open();
+		setCenterPanel(ProfilePanel.getInstance(ctrl, doctor_dni));
 	}
 
 	public void setCenterPanel(JPanel p) {
@@ -349,8 +321,7 @@ public class DoctorPanel extends javax.swing.JPanel {
 		p.repaint();
 	}
 
-	// Variables declaration - do not modify
-	private misc.RSButtonMetro aboutUsButton;
+	// Variables declaration - do not modifys
 	private misc.RSButtonMetro signOutButton;
 	private misc.RSButtonMetro appointButton;
 	private misc.RSButtonMetro askForButton;

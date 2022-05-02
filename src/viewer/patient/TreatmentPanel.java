@@ -9,15 +9,37 @@ import javax.swing.SwingUtilities;
 import control.Controller;
 import launcher.Main;
 
+@SuppressWarnings("serial")
 public class TreatmentPanel extends JPanel{
+
+	private static TreatmentPanel instance;
 
 	Controller ctrl;
 	String dni_patient;
 
-	public TreatmentPanel(Controller ctrl, String dni_patient) {
+	private TreatmentPanel(Controller ctrl, String dni_patient) {
 		this.ctrl = ctrl;
 		this.dni_patient = dni_patient;
 		initComponents();
+	}
+
+	public static TreatmentPanel getInstance(Controller ctrl, String dni_patient) {
+		if (instance == null)
+			instance = new TreatmentPanel(ctrl, dni_patient);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
+		try {
+			tableModel.open();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 	}
 
 	private void initComponents() {
@@ -48,14 +70,5 @@ public class TreatmentPanel extends JPanel{
 	private TreatmentsTableModel tableModel;
 	// End of variables declaration
 
-	public void open() {
-		try {
-			tableModel.open();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 
-			if (Main.SHOW_EXCEPTIONS_TRACE)
-				e.printStackTrace();
-		}
-	}
 }

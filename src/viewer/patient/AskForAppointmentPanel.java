@@ -23,6 +23,8 @@ import model.Doctor;
  */
 public class AskForAppointmentPanel extends javax.swing.JPanel {
 
+	private static AskForAppointmentPanel instance = null;
+
 	private String dni_patient;
 	private Controller ctrl;
 	private PatientPanel patientPanel;
@@ -34,7 +36,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 	 * @param ctrl
 	 * @param dni
 	 */
-	public AskForAppointmentPanel(PatientPanel p) {
+	private AskForAppointmentPanel(PatientPanel p) {
 		this.ctrl = p.getCtrl();
 		this.dni_patient = p.getDniPatient();
 		this.patientPanel = p;
@@ -45,7 +47,15 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 		centerScrollPane.getVerticalScrollBar().setUnitIncrement(10);
 	}
 
-	public void open() {
+	public static AskForAppointmentPanel getInstance(PatientPanel p) {
+		if (instance == null)
+			instance = new AskForAppointmentPanel(p);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
 		try {
 			doctorList = ctrl.getDoctorsOf(dni_patient);
 			doctorComboBox.setModel(new DefaultComboBoxModel<>(doctorList));
@@ -215,7 +225,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 	}// </editor-fold>
 
 	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		patientPanel.setCenterPanel(patientPanel.getHomePanel());
+		patientPanel.setCenterPanel(PatientHomePanel.getInstance(null));
 	}
 
 	private void askButtonActionPerformed(java.awt.event.ActionEvent evt) {

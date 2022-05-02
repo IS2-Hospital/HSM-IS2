@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
-import model.patientDAO.AceptDoctorChangeRequestDAO;
 import model.patientDAO.AskForAppointmentDAO;
 import model.patientDAO.GetAppointmentsDAO;
 import model.patientDAO.GetDoctorsOfPatientDAO;
@@ -80,12 +79,8 @@ public class PatientApp {
 		UpdatePatientDAO.execute(p);
 	}
 
-	public void aceptDoctorChangeRequest(String dni_patient, String fromDni_doctor, String toDni_doctor) throws SQLException {
-		AceptDoctorChangeRequestDAO.execute(dni_patient, fromDni_doctor, toDni_doctor);
-	}
-
-	public void requestDoctorChange(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws SQLException {
-		RequestDoctorChangeDAO.execute(dni_patient, from_dni_doctor, to_dni_doctor, reason);
+	public void requestDoctorChange(DoctorChangeRequest req) throws IllegalArgumentException, SQLException {
+		RequestDoctorChangeDAO.execute(req);
 	}
 
 }
