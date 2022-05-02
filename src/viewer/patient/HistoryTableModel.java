@@ -71,4 +71,11 @@ public class HistoryTableModel extends AbstractTableModel{
 			return null;
 		}
 	}
+
+
+
+	public void open(String dni2) throws SQLException {
+		dni = dni2;
+		open();
+	}
 }

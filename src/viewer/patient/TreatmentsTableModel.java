@@ -33,7 +33,7 @@ public class TreatmentsTableModel extends AbstractTableModel {
 
 
 
-	void open() throws Exception {
+	public void open() throws Exception {
 		v = ctrl.getTreatment(dni);
 		fireTableDataChanged();
 	}
