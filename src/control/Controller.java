@@ -33,12 +33,12 @@ public class Controller {
 	}
 
 
-	//Login Maçade
+	//Login Maï¿½ade
 	public UserRole login(String dni, String password) throws LoginException, SQLException {
 		return _userManager.get_loginAuthenticator().login(dni, password);
 	}
 
-	public void registerUsers(JSONObject usersToRegister) {
+	public void registerUsers(JSONObject usersToRegister) throws Exception {
 		_userManager.get_patientRegisterer().registerUsers(usersToRegister);
 	}
 
