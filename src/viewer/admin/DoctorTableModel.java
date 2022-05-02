@@ -15,7 +15,7 @@ public class DoctorTableModel extends AbstractTableModel {
 	private Controller ctrl;
 
 	private List<Doctor> doctorList;
-	private final String[] colNames = {"DNI", "LASTNAME", "NAME", "BIRTHDATE", "EMAIL", "PHONE", "SPECIALITY", "SALARY", "CONTRACT START DATE", "CONTRACT END DATE"};
+	private final String[] COL_NAMES = {"DNI", "LASTNAME", "NAME", "BIRTHDATE", "EMAIL", "PHONE", "SPECIALITY", "SALARY", "CONTRACT START DATE", "CONTRACT END DATE"};
 
 
 	public DoctorTableModel(Controller ctrl) {
@@ -38,7 +38,7 @@ public class DoctorTableModel extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int col) {
-		return colNames[col];
+		return COL_NAMES[col];
 	}
 
 
@@ -49,7 +49,7 @@ public class DoctorTableModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return colNames.length;
+		return COL_NAMES.length;
 	}
 
 	@Override
