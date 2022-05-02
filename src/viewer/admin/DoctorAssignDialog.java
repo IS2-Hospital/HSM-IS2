@@ -94,8 +94,7 @@ public class DoctorAssignDialog extends JDialog {
 				try {
 					_ctrl.assignPatientDoctor(selection.getSelectedItem().toString(), selectionpac.getSelectedItem().toString());
 				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage(),
-							"Error while inserting in database", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Error while inserting in database", JOptionPane.ERROR_MESSAGE);
 
 					if (Main.SHOW_EXCEPTIONS_TRACE)
 						e1.printStackTrace();

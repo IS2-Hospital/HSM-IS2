@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import control.Controller;
 
+@SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 
 	Controller _ctrl;

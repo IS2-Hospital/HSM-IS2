@@ -15,6 +15,8 @@ import javax.swing.SwingUtilities;
 import control.Controller;
 import launcher.Main;
 import model.Doctor;
+import model.DoctorChangeRequest;
+import model.Patient;
 
 /**
  *
@@ -154,10 +156,17 @@ public class DoctorChangeDialog extends javax.swing.JDialog {
 	private void requestButtonActionPerformed(ActionEvent e) {
 		try {
 			int row = doctorsTable.getSelectedRow();
-			Doctor d = notMyDoctorsTableModel.getDoctor(row);
+			Doctor toDoctor = notMyDoctorsTableModel.getDoctor(row);
 
-			ctrl.requestDoctorChange(dni_patient, fromDni_doctor, d.getDni(), reasonTextArea.getText());
+			DoctorChangeRequest req = new DoctorChangeRequest(
+					new Patient(dni_patient, null, null, null, null, null, null, null, null, null),
+					new Doctor(fromDni_doctor, null, null, null, null, null, null, -1, null, null, null),
+					toDoctor,
+					reasonTextArea.getText());
+			ctrl.requestDoctorChange(req);
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "The request has been registered sucessfully", "", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+
 		} catch (ArrayIndexOutOfBoundsException e1) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "You have to select a doctor first", "", JOptionPane.ERROR_MESSAGE);
 		} catch (IllegalArgumentException e1) {

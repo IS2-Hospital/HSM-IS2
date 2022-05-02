@@ -10,6 +10,7 @@ import model.AdminApp;
 import model.Appointment;
 import model.Doctor;
 import model.DoctorApp;
+import model.DoctorChangeRequest;
 import model.History;
 import model.Patient;
 import model.PatientApp;
@@ -112,9 +113,6 @@ public class Controller {
 		adminApp.updateDoctor(colData);
 	}
 
-	public List<String> getRequestIDList() {
-		return adminApp.getRequestIDList();
-	}
 
 	public List<String> getDNIFromRequest(String string) throws SQLException {
 		return adminApp.getDNIFromRequest(string);
@@ -148,12 +146,20 @@ public class Controller {
 		adminApp.changeBillPlan(typeName,newBill);
 	}
 
-	public void aceptDoctorChangeRequest(String dni_patient, String from_dni_doctor, String to_dni_doctor) throws SQLException {
-		patientApp.aceptDoctorChangeRequest(dni_patient, from_dni_doctor, to_dni_doctor);
+	public List<DoctorChangeRequest> getDoctorChangeRequests() throws SQLException {
+		return adminApp.getDoctorChangeRequests();
 	}
 
-	public void requestDoctorChange(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws IllegalArgumentException, SQLException {
-		patientApp.requestDoctorChange(dni_patient, from_dni_doctor, to_dni_doctor, reason);
+	public void aceptDoctorChangeRequest(DoctorChangeRequest req) throws SQLException {
+		adminApp.aceptDoctorChangeRequest(req);
+	}
+
+	public void denyDoctorChangeRequest(DoctorChangeRequest req) throws SQLException {
+		adminApp.denyDoctorChangeRequest(req);
+	}
+
+	public void requestDoctorChange(DoctorChangeRequest req) throws IllegalArgumentException, SQLException {
+		patientApp.requestDoctorChange(req);
 	}
 
 	//Doctor Facade
@@ -169,6 +175,9 @@ public class Controller {
 	public void saveTreatment(Treatment t, String patient_dni) throws SQLException {
 		doctorApp.saveTreatment(t, patient_dni);
 	}
+
+
+
 
 
 
