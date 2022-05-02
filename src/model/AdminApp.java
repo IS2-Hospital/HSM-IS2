@@ -15,6 +15,7 @@ import model.adminDAO.GetDNIListFromRequestDAO;
 import model.adminDAO.GetDoctorChangeRequestsDAO;
 import model.adminDAO.GetDoctorDataDAO;
 import model.adminDAO.GetDoctorListDAO;
+import model.adminDAO.GetInsurancePricesDAO;
 import model.adminDAO.GetPatientDataDAO;
 import model.adminDAO.GetPlanListDAO;
 import model.adminDAO.GetRequestReasonDAO;
@@ -82,7 +83,7 @@ public class AdminApp {
 		return GetPlanListDAO.execute();
 	}
 
-	public void changeBillPlan(String typeName, String newBill) {
+	public void changeBillPlan(String typeName, double newBill) throws SQLException {
 		ChangeBillPlanDAO.execute(typeName, newBill);
 	}
 
@@ -92,6 +93,10 @@ public class AdminApp {
 
 	public void denyDoctorChangeRequest(DoctorChangeRequest req) throws SQLException {
 		DenyDoctorChangeRequestDAO.execute(req);
+	}
+
+	public double[] getInsurancePrices() throws SQLException {
+		return GetInsurancePricesDAO.execute();
 	}
 
 }
