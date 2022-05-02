@@ -11,7 +11,6 @@ public class AdminPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private PacientModPanel patientModPanel;
 	Controller _ctrl;
 	MainWindow _mainWindow;
 
@@ -20,7 +19,6 @@ public class AdminPanel extends JPanel {
 		_mainWindow = mainWindow;
 
 		initGUI();
-		patientModPanel = new PacientModPanel(ctrl);
 	}
 
 	private void initGUI() {
@@ -169,7 +167,7 @@ public class AdminPanel extends JPanel {
 		});
 
 		modDoctorButton.setForeground(new java.awt.Color(51, 51, 51));
-		modDoctorButton.setIcon(new javax.swing.ImageIcon(("resources/icons/appointments.png"))); // NOI18N
+		modDoctorButton.setIcon(new javax.swing.ImageIcon(("resources/icons/ModifyDoctor.png"))); // NOI18N
 		modDoctorButton.setText("Modify Doctor");
 		modDoctorButton.setColorHover(new java.awt.Color(138, 202, 234));
 		modDoctorButton.setColorNormal(new java.awt.Color(214, 214, 214));
@@ -189,8 +187,8 @@ public class AdminPanel extends JPanel {
 		});
 
 		ansreqButton.setForeground(new java.awt.Color(51, 51, 51));
-		ansreqButton.setIcon(new javax.swing.ImageIcon(("resources/icons/appointments.png"))); // NOI18N
-		ansreqButton.setText("Doctor Change Requests");
+		ansreqButton.setIcon(new javax.swing.ImageIcon(("resources/icons/doctorChangeRequest.png"))); // NOI18N
+		ansreqButton.setText("DR Change Request");
 		ansreqButton.setColorHover(new java.awt.Color(138, 202, 234));
 		ansreqButton.setColorNormal(new java.awt.Color(214, 214, 214));
 		ansreqButton.setColorPressed(new java.awt.Color(138, 202, 234));
@@ -208,7 +206,7 @@ public class AdminPanel extends JPanel {
 		});
 
 		assignDoctorButton.setForeground(new java.awt.Color(51, 51, 51));
-		assignDoctorButton.setIcon(new javax.swing.ImageIcon(("resources/icons/appointments.png"))); // NOI18N
+		assignDoctorButton.setIcon(new javax.swing.ImageIcon(("resources/icons/assignDoctor.png"))); // NOI18N
 		assignDoctorButton.setText("Assign Doctor");
 		assignDoctorButton.setColorHover(new java.awt.Color(138, 202, 234));
 		assignDoctorButton.setColorNormal(new java.awt.Color(214, 214, 214));
@@ -369,8 +367,7 @@ public class AdminPanel extends JPanel {
 	}
 
 	private void modPacientButtonButtonActionPerformed(java.awt.event.ActionEvent evt){
-		setCenterPanel(patientModPanel);
-		patientModPanel.open();
+		setCenterPanel(PacientModPanel.getInstace(_ctrl));
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
