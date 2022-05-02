@@ -11,9 +11,6 @@ public class AdminPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private PatientListPanel patientListPanel;
-	private DoctorListPanel doctorListPanel;
-	private DoctorPatientsPanel doctorPatientsPanel;
 	private PacientModPanel patientModPanel;
 	Controller _ctrl;
 	MainWindow _mainWindow;
@@ -23,9 +20,6 @@ public class AdminPanel extends JPanel {
 		_mainWindow = mainWindow;
 
 		initGUI();
-		patientListPanel = new PatientListPanel(ctrl);
-		doctorListPanel = new DoctorListPanel(ctrl);
-		doctorPatientsPanel = new DoctorPatientsPanel(ctrl);
 		patientModPanel = new PacientModPanel(ctrl);
 	}
 
@@ -363,18 +357,15 @@ public class AdminPanel extends JPanel {
 	}
 
 	private void patientListButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(patientListPanel);
-		patientListPanel.open();
+		setCenterPanel(PatientListPanel.getInstace(_ctrl));
 	}
 
 	private void doctorListButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		setCenterPanel(doctorListPanel);
-		doctorListPanel.open();
+		setCenterPanel(DoctorListPanel.getInstace(_ctrl));
 	}
 
 	private void doctorPatientsButtonActionPerformed(java.awt.event.ActionEvent evt){
-		setCenterPanel(doctorPatientsPanel);
-		doctorPatientsPanel.open();
+		setCenterPanel(DoctorPatientsPanel.getInstace(_ctrl));
 	}
 
 	private void modPacientButtonButtonActionPerformed(java.awt.event.ActionEvent evt){

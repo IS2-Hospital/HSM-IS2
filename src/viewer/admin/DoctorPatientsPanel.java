@@ -16,23 +16,30 @@ import model.Doctor;
 
 @SuppressWarnings("serial")
 public class DoctorPatientsPanel extends javax.swing.JPanel{
-	/**
-	 * Creates new form PatientsDoctorPanel
-	 */
+
+	private static DoctorPatientsPanel instance = null;
+
 	private Vector<Doctor> doctorList;
 	private PatientsofDoctorTable patientsofDoctorTable;
 	private Doctor doctor;
 
 
-	public DoctorPatientsPanel(Controller ctrl) {
+	private DoctorPatientsPanel(Controller ctrl) {
 		doctorList = ctrl.getDoctorList();
 
 		patientsofDoctorTable = new PatientsofDoctorTable(ctrl);
 		initComponents();
-
 	}
 
-	public void open() {
+	public static DoctorPatientsPanel getInstace(Controller ctrl) {
+		if (instance == null)
+			instance = new DoctorPatientsPanel(ctrl);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
 		doctor = (Doctor) doctorComboBox.getSelectedItem();
 		try {
 			patientsofDoctorTable.open(doctor.getDni());
