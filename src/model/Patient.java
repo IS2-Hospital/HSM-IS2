@@ -16,8 +16,8 @@ public class Patient extends User {
 	private HealthInsuranceType _insuranceType;
 	private String _dniInsuranceTaker;
 	private double bill;
-	private String iban;
-	private String homeAddress;
+	private String iban = "";
+	private String homeAddress = "";
 
 
 	public Patient(String dni, String name, String lastname, String birthdate, String email, String phone, Gender gender, BloodType bloodType,
@@ -65,11 +65,11 @@ public class Patient extends User {
 	}
 
 	public String getIban() {
-		return iban == null ? "" : iban;
+		return iban;
 	}
 
 	public String getHomeAddress() {
-		return homeAddress == null ? "" : homeAddress;
+		return homeAddress;
 	}
 
 	public double getBill() {

@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
@@ -60,11 +61,18 @@ public class RegPatientPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(plan) {
-					if(((RegPanelTemplate) regPanel).getJSONObject() == null) System.out.println("Hubo error");
-					else((RegPanelTemplate) regPanel).registerUser();
+					if(((RegPanelTemplate) regPanel).registerUser("")) {
+						JOptionPane.showMessageDialog(_mainWindow, "Your regsitration process finished successfully.", "Registration succeed", JOptionPane.INFORMATION_MESSAGE);
+						_mainWindow.setContentPane(new PatientPanel(_ctrl, ((RegPanelTemplate) regPanel).getDNITF(), _mainWindow));
+						_mainWindow.revalidate();
+					}
 				}
 				else {
-					((RegPatientTabbedPane) regPanel).getJSONObject();
+					if(((RegPatientTabbedPane) regPanel).registerUserList()) {
+						JOptionPane.showMessageDialog(_mainWindow, "Your regsitration process finished successfully.", "Registration succeed", JOptionPane.INFORMATION_MESSAGE);
+						_mainWindow.setContentPane(new PatientPanel(_ctrl, ((RegPatientTabbedPane) regPanel).getDNIInsurance(), _mainWindow));
+						_mainWindow.revalidate();
+					}
 				}
 			}
 		});

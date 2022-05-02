@@ -23,7 +23,7 @@ import model.userManagment.registerData.PacientRegisterData;
 
 public class UserRegisterer {
 
-	public void registerUsers(JSONObject usersToRegister) {
+	public void registerUsers(JSONObject usersToRegister) throws Exception {
 
 		UserRole role = UserRole.valueOf(usersToRegister.getString("role"));
 
@@ -35,12 +35,15 @@ public class UserRegisterer {
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				throw new Exception(e);
 			} catch (SqlConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				throw new Exception("Something went wrong when connecting to de DataBase");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				throw new Exception("We already have one person with that DNI.");
 			}
 			break;
 		case DOCTOR:
@@ -127,7 +130,7 @@ public class UserRegisterer {
 		}
 
 		// Insert info in PATIENTS table
-		String insertPatient = "INSERT INTO patients (dni_patient, gender, blood_type, insurance_type, dni_insurance_taker, bill) VALUES (?, ?, ?, ?, ?, ?);";
+		String insertPatient = "INSERT INTO patients (dni_patient, gender, blood_type, insurance_type, dni_insurance_taker, bill, iban, home_address) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		PreparedStatement st = connex.prepareStatement(insertPatient, Statement.RETURN_GENERATED_KEYS);
 		st.setString(1, patient.getDni());
 		st.setString(2, patient.getGender().toString());
@@ -135,6 +138,8 @@ public class UserRegisterer {
 		st.setString(4, patient.getInsuranceType().toString());
 		st.setString(5, patient.getDniInsuranceTaker());
 		st.setDouble(6, bill);
+		st.setString(7, patient.getIban());
+		st.setString(8, patient.getHomeAddress());
 
 		st.execute();
 	}
@@ -155,13 +160,18 @@ public class UserRegisterer {
 			Gender gender = Gender.valueOf(jo.getJSONObject("roleData").getString("gender"));
 			BloodType bloodtype = BloodType.getEnum(jo.getJSONObject("roleData").getString("bloodType"));
 			HealthInsuranceType insuranceType = HealthInsuranceType.valueOf(jo.getJSONObject("roleData").getString("insuranceType"));
+			String home = jo.getJSONObject("roleData").getString("home");
+			String iban = jo.getJSONObject("roleData").getString("iban");
 
 			String dniInsuranceTaker = jo.getJSONObject("roleData").getString("dniInsuranceTaker");
 			if (dniInsuranceTaker == "")
 				dniInsuranceTaker = null;
 
 			String pass = jo.getString("password");
-			Patient patient = new Patient(dni, name, lastname, birthdate, email, phone, gender, bloodtype, insuranceType, dniInsuranceTaker);
+			int bill;
+			if(insuranceType == HealthInsuranceType.SINGLE) bill = 50;
+			else bill = 30;
+			Patient patient = new Patient(dni, name, lastname, birthdate, email, phone, gender, bloodtype, insuranceType, dniInsuranceTaker, bill, pass, iban, home);
 
 			patients.add(new PacientRegisterData(patient, pass));
 		}

@@ -25,11 +25,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import org.json.JSONObject;
-
 public class RegPatientTabbedPane extends JPanel{
 
 	private JTabbedPane _tabbedPane;
+	private String _dniInsuranceTaker;
 	private ArrayList<RegPanelTemplate> _regPanelList = new ArrayList<RegPanelTemplate>();
 
 	public RegPatientTabbedPane() {
@@ -141,20 +140,54 @@ public class RegPatientTabbedPane extends JPanel{
 
 	}
 
-	public JSONObject getJSONObject() {
+	private boolean validateUserList() {
 		boolean valid = true;
 		int nMember = _tabbedPane.getTabCount(), i = 2;
-		if(nMember < 5) JOptionPane.showMessageDialog(_tabbedPane, "Sorry but less than 3 members can't apply for this plan.",
-				"Unfulfilled requirements", JOptionPane.INFORMATION_MESSAGE);
+		if(nMember < 5) {
+			JOptionPane.showMessageDialog(_tabbedPane, "Sorry but less than 3 members can't apply for this plan.",
+					"Unfulfilled requirements", JOptionPane.INFORMATION_MESSAGE);
+			valid = false;
+		}
 		else {
+			if(_regPanelList.get(0).getIbanTF() == null || _regPanelList.get(0).getIbanTF().equals("")) {
+				JOptionPane.showMessageDialog(_tabbedPane, "IBAN required for Main Account",
+						"Unfulfilled requirements", JOptionPane.INFORMATION_MESSAGE);
+				valid = false;
+			}
 			while(valid && i < nMember) {
 				valid = _regPanelList.get(i-2).validateReg();
 				if(!valid) _tabbedPane.setSelectedIndex(i);
 				++i;
 			}
-			if(valid) ; // TODO construir JSONArray
+			if(valid) valid = checkHomeAdress();
 		}
-		return null;
+		return valid;
+	}
+
+	private boolean checkHomeAdress() {
+		String home = _regPanelList.get(0).getHomeTF();
+		boolean check = true;
+		for(RegPanelTemplate reg : _regPanelList) {
+			if(!reg.getHomeTF().equals(home)) check = false;
+		}
+		if(!check) JOptionPane.showMessageDialog(_tabbedPane, "Please, it is important that all the members share home address<br>for applying this plan. Check the correctness of the data.",
+				"Unfulfilled requirements", JOptionPane.INFORMATION_MESSAGE);
+		return check;
+	}
+
+	public boolean registerUserList() {
+		if(validateUserList()) {
+			_dniInsuranceTaker =_regPanelList.get(0).getDNITF();
+			for(RegPanelTemplate pan : _regPanelList) {
+				pan.registerUser(_dniInsuranceTaker);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public String getDNIInsurance() {
+		return _dniInsuranceTaker;
 	}
 }
 
