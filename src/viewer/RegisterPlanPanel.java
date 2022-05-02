@@ -5,10 +5,10 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 import control.Controller;
+import viewer.doctor.RegPanelDoctor;
 import viewer.patient.RegPatientPanel;
 
 /**
@@ -284,8 +284,9 @@ public class RegisterPlanPanel extends javax.swing.JPanel{
 	}
 
 	private void doctorPlanActionPerformed(java.awt.event.ActionEvent evt) {
-		JOptionPane.showMessageDialog(_mainWindow, "Looks like you are trying to access unfinished functionality. Come back later ;)", "UPS...", JOptionPane.INFORMATION_MESSAGE);
-	}
+		_mainWindow.setContentPane(new RegPanelDoctor(_ctrl, _mainWindow));
+		_mainWindow.revalidate();
+		_mainWindow.repaint();	}
 
 	private void loginActionPerformed(java.awt.event.ActionEvent evt) {
 		_mainWindow.setContentPane(new LoginPanel(_ctrl, _mainWindow));

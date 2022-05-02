@@ -32,8 +32,8 @@ public class GetDoctorChangeRequestsDAO {
 
 		while(resultSet.next()) {
 			Patient p = new Patient(resultSet.getString("dni_patient"), null, null, null, null, null, null, null, null, null, -1, null, null, null);
-			Doctor fromD = new Doctor(resultSet.getString("from_dni_doctor"), null, null, null, null, null, resultSet.getString("fromD.speciality"), 0, null, null, null);
-			Doctor toD = new Doctor(resultSet.getString("to_dni_doctor"), null, null, null, null, null, resultSet.getString("toD.speciality"), 0, null, null, null);
+			Doctor fromD = new Doctor(resultSet.getString("from_dni_doctor"), null, null, null, null, null, null, null, resultSet.getString("fromD.speciality"), null, null, null);
+			Doctor toD = new Doctor(resultSet.getString("to_dni_doctor"), null, null, null, null, null, null, null, resultSet.getString("toD.speciality"), null, null, null);
 			String reason = resultSet.getString("reason");
 
 			reqs.add(new DoctorChangeRequest(p, fromD, toD, reason));

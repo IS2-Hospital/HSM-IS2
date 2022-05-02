@@ -12,13 +12,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import model.DBConnector;
+import model.Doctor;
 import model.Patient;
 import model.User;
 import model.Enums.BloodType;
 import model.Enums.Gender;
 import model.Enums.HealthInsuranceType;
+import model.Enums.RegState;
 import model.Enums.UserRole;
 import model.exceptions.sqlExeptions.SqlConnectionException;
+import model.userManagment.registerData.DoctorRegisterData;
 import model.userManagment.registerData.PacientRegisterData;
 
 public class UserRegisterer {
@@ -47,6 +50,22 @@ public class UserRegisterer {
 			}
 			break;
 		case DOCTOR:
+			List<DoctorRegisterData> doctors = parseDoctorJSON(usersToRegister);
+			try {
+				registerDoctors(doctors);
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new Exception(e);
+			} catch (SqlConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new Exception("Something went wrong when connecting to de DataBase");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new Exception("We already have one person with that DNI.");
+			}
 			break;
 		case ADMIN:
 			break;
@@ -84,6 +103,26 @@ public class UserRegisterer {
 				}
 
 			connex.close();
+		} catch (IllegalArgumentException e) {
+			connex.close();
+			throw e;
+		} catch (SqlConnectionException e) {
+			connex.close();
+			throw e;
+		} catch (SQLException e) {
+			connex.close();
+			throw e;
+		}
+	}
+
+	private void registerDoctors(List<DoctorRegisterData> doctors) throws IllegalArgumentException, SqlConnectionException, SQLException {
+		Connection connex = DBConnector.connectdb();
+
+		try {
+			registerUser(connex, doctors.get(0).getDoctor(), doctors.get(0).getPassword());
+			registerDoctor(connex, doctors.get(0).getDoctor());
+			connex.close();
+
 		} catch (IllegalArgumentException e) {
 			connex.close();
 			throw e;
@@ -144,6 +183,23 @@ public class UserRegisterer {
 		st.execute();
 	}
 
+	private void registerDoctor(Connection connex, Doctor doctor) throws IllegalArgumentException, SQLException  {
+
+		// Insert info in Doctors table
+		String insertDoctor = "INSERT INTO doctors (dni_doctor, speciality, salary, contract_start_date, contract_end_date, regState, notes) VALUES (?, ?, ?, ?, ?, ?, ?);";
+		PreparedStatement st = connex.prepareStatement(insertDoctor, Statement.RETURN_GENERATED_KEYS);
+
+		st.setString(1, doctor.getDni());
+		st.setString(2, doctor.getSpeciality());
+		st.setFloat(3, Float.parseFloat(doctor.getSalary()));
+		st.setDate(4, doctor.getContractStartDate());
+		st.setDate(5, doctor.getContractEndDate());
+		st.setString(6, RegState.INPROCESS.name());
+		st.setString(7, doctor.getNotes());
+
+		st.execute();
+	}
+
 	private List<PacientRegisterData> parsePatientJSON(JSONObject usersToRegister) {
 		List<PacientRegisterData> patients = new ArrayList<>();
 
@@ -178,4 +234,34 @@ public class UserRegisterer {
 
 		return patients;
 	}
+
+	private List<DoctorRegisterData> parseDoctorJSON(JSONObject usersToRegister) {
+		List<DoctorRegisterData> doctors = new ArrayList<>();
+
+		JSONArray reg = usersToRegister.getJSONArray("registerList");
+		for (Object p : reg) {
+			JSONObject jo = (JSONObject) p;
+			String dni = jo.getJSONObject("userData").getString("dni");
+			String name = jo.getJSONObject("userData").getString("name");
+			String lastname = jo.getJSONObject("userData").getString("lastname");
+			String birthdate = jo.getJSONObject("userData").getString("birthdate");
+			String email = jo.getJSONObject("userData").getString("email");
+			String phone = jo.getJSONObject("userData").getString("phone");
+
+			String salary = jo.getJSONObject("roleData").getString("salary");
+			String contractExpiration = jo.getJSONObject("roleData").getString("contractExpiration");
+			String speciality = jo.getJSONObject("roleData").getString("speciality");
+			String regState = jo.getJSONObject("roleData").getString("regState");
+			String notes = jo.getJSONObject("roleData").getString("notes");
+
+			String pass = jo.getString("password");
+
+			Doctor doctor = new Doctor(dni, name, lastname, birthdate, email, phone, salary, contractExpiration, speciality, regState, notes, pass);
+
+			doctors.add(new DoctorRegisterData(doctor, pass));
+		}
+
+		return doctors;
+	}
+
 }

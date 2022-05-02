@@ -361,7 +361,7 @@ public class AdminPanel extends JPanel {
 	}
 
 	private void ansreqButtonactionPerformed(ActionEvent evt) {
-		setCenterPanel(DoctorChangeRequestAproverPanel.getInstance(_ctrl));
+		setCenterPanel(DoctorChangeRequestAproverPanel.getInstance(ctrl));
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
