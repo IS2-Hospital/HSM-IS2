@@ -25,23 +25,30 @@ import model.Enums.HealthInsuranceType;
  */
 public class PacientModPanel extends javax.swing.JPanel {
 
-	/**
-	 * Creates new form DoctorModPanel
-	 */
+	private static PacientModPanel instance = null;
+
 	private Controller ctrl;
 	// dni, lastname,name, birthdate, email, phone, gender, blood_type, insurance_type, dni_insurance_taker, bill
 	private Vector<Patient> patientList;
 	private List<String> info;
 	private Patient patient;
 
-	public PacientModPanel(Controller ctrl) {
+	private PacientModPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		patientList = ctrl.getAllPatients();
 		initComponents();
 
 	}
 
-	void open() {
+	public static PacientModPanel getInstace(Controller ctrl) {
+		if (instance == null)
+			instance = new PacientModPanel(ctrl);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
 		patient = (Patient) patientComboBox.getSelectedItem();
 		info = ctrl.getPatientData(patient.getDni()).asStringList();
 		textName.setText(info.get(2));
@@ -104,7 +111,6 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel18 = new javax.swing.JLabel();
 		billText = new javax.swing.JTextField();
 		ButtonsPanel = new javax.swing.JPanel();
-		cancel = new misc.RSButtonMetro();
 		save = new misc.RSButtonMetro();
 
 		setLayout(new java.awt.BorderLayout());
@@ -256,25 +262,6 @@ public class PacientModPanel extends javax.swing.JPanel {
 
 		CenterPanel.add(BillPanel);
 
-		cancel.setText("Cancel");
-		cancel.setColorHover(new java.awt.Color(138, 202, 234));
-		cancel.setColorNormal(new java.awt.Color(8, 72, 135));
-		cancel.setColorPressed(new java.awt.Color(8, 72, 135));
-		cancel.setColorTextHover(new java.awt.Color(51, 51, 51));
-		cancel.setColorTextNormal(new java.awt.Color(242, 242, 242));
-		cancel.setColorTextPressed(new java.awt.Color(242, 242, 242));
-		cancel.setFocusPainted(false);
-		cancel.setRolloverEnabled(false);
-		cancel.setRolloverEnabled(false);
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cancelActionPerformed(e);
-			}
-		});
-
-		ButtonsPanel.add(cancel);
-
 		save.setText("Save");
 		save.setColorHover(new java.awt.Color(138, 202, 234));
 		save.setColorNormal(new java.awt.Color(8, 72, 135));
@@ -380,7 +367,6 @@ public class PacientModPanel extends javax.swing.JPanel {
 	private javax.swing.JPanel LastNamePanel;
 	private javax.swing.JPanel NamePanel;
 	private javax.swing.JPanel NorthPanel;
-	private misc.RSButtonMetro cancel;
 	private misc.RSButtonMetro save;
 	private javax.swing.JComboBox<Patient> patientComboBox;
 	private javax.swing.JComboBox<Gender> textGender;
