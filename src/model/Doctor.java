@@ -23,7 +23,8 @@ public class Doctor extends User {
 		super (dni, name, lastname, birthdate, email, phone, UserRole.DOCTOR, pass);
 		this.speciality = speciality;
 		this.salary = salary;
-		this.regState = RegState.valueOf(regState);
+		if(regState == null) this.regState = RegState.ACCEPTED;
+		else this.regState = RegState.valueOf(regState);
 		this.notes = notes;
 
 		LocalDateTime ldt = LocalDateTime.now();
@@ -36,7 +37,8 @@ public class Doctor extends User {
 		super (dni, name, lastname, birthdate, email, phone, UserRole.DOCTOR, pass);
 		this.speciality = speciality;
 		this.salary = salary;
-		this.regState = RegState.valueOf(regState);
+		if(regState == null) this.regState = RegState.ACCEPTED;
+		else this.regState = RegState.valueOf(regState);
 		this.notes = notes;
 		this.contractEndDate = contractExpiration;
 		this.contractStartDate = contractStart;

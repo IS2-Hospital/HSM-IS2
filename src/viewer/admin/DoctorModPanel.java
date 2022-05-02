@@ -15,7 +15,6 @@ import javax.swing.SwingUtilities;
 import control.Controller;
 import launcher.Main;
 import model.Doctor;
-import model.Patient;
 
 /**
  *
@@ -308,7 +307,7 @@ public class DoctorModPanel extends javax.swing.JPanel {
 
 	public List<String> getIntroducedData(){
 		ArrayList<String> data = new ArrayList<String>();
-		data.add(((Patient) doctorComboBox.getSelectedItem()).getDni());
+		data.add(((Doctor) doctorComboBox.getSelectedItem()).getDni());
 		data.add(textLastName.getText());
 		data.add(textName.getText());
 		data.add(textBDay.getText());
