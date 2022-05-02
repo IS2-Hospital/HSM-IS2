@@ -11,6 +11,7 @@ import model.Appointment;
 import model.Doctor;
 import model.DoctorApp;
 import model.DoctorChangeRequest;
+import model.DoctorRegisterApplication;
 import model.History;
 import model.Patient;
 import model.PatientApp;
@@ -150,12 +151,24 @@ public class Controller {
 		return adminApp.getDoctorChangeRequests();
 	}
 
+	public List<DoctorRegisterApplication> getDoctorRegisterApplication() throws SQLException {
+		return adminApp.getDoctorRegisterApplication();
+	}
+
 	public void aceptDoctorChangeRequest(DoctorChangeRequest req) throws SQLException {
 		adminApp.aceptDoctorChangeRequest(req);
 	}
 
 	public void denyDoctorChangeRequest(DoctorChangeRequest req) throws SQLException {
 		adminApp.denyDoctorChangeRequest(req);
+	}
+
+	public void aceptDoctorApplication(DoctorRegisterApplication req) throws SQLException {
+		adminApp.aceptDoctorApplication(req);
+	}
+
+	public void denyDoctorApplication(DoctorRegisterApplication req) throws SQLException {
+		adminApp.denyDoctorApplication(req);
 	}
 
 	public void requestDoctorChange(DoctorChangeRequest req) throws IllegalArgumentException, SQLException {

@@ -4,10 +4,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import model.adminDAO.AceptDoctorApplicationDAO;
 import model.adminDAO.AceptDoctorChangeRequestDAO;
 import model.adminDAO.ChangeBillPlanDAO;
 import model.adminDAO.DeletePatientDAO;
 import model.adminDAO.DeleteRequestDAO;
+import model.adminDAO.DenyDoctorApplicationDAO;
 import model.adminDAO.DenyDoctorChangeRequestDAO;
 import model.adminDAO.GetAllPatientsDAO;
 import model.adminDAO.GetAllPatientsFromDAO;
@@ -15,6 +17,7 @@ import model.adminDAO.GetDNIListFromRequestDAO;
 import model.adminDAO.GetDoctorChangeRequestsDAO;
 import model.adminDAO.GetDoctorDataDAO;
 import model.adminDAO.GetDoctorListDAO;
+import model.adminDAO.GetDoctorRegisterApplicationDAO;
 import model.adminDAO.GetInsurancePricesDAO;
 import model.adminDAO.GetPatientDataDAO;
 import model.adminDAO.GetPlanListDAO;
@@ -47,6 +50,10 @@ public class AdminApp {
 
 	public List<DoctorChangeRequest> getDoctorChangeRequests() throws SQLException {
 		return GetDoctorChangeRequestsDAO.execute();
+	}
+
+	public List<DoctorRegisterApplication> getDoctorRegisterApplication() throws SQLException {
+		return GetDoctorRegisterApplicationDAO.execute();
 	}
 
 	public List<String> getDNIFromRequest(String string) throws SQLException {
@@ -94,6 +101,15 @@ public class AdminApp {
 	public void denyDoctorChangeRequest(DoctorChangeRequest req) throws SQLException {
 		DenyDoctorChangeRequestDAO.execute(req);
 	}
+
+	public void aceptDoctorApplication(DoctorRegisterApplication req) throws SQLException {
+		AceptDoctorApplicationDAO.execute(req);
+	}
+
+	public void denyDoctorApplication(DoctorRegisterApplication req) throws SQLException {
+		DenyDoctorApplicationDAO.execute(req);
+	}
+
 
 	public double[] getInsurancePrices() throws SQLException {
 		return GetInsurancePricesDAO.execute();
