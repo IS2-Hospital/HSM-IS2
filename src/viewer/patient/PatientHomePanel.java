@@ -8,16 +8,23 @@ package viewer.patient;
  *
  * @author rodri
  */
+@SuppressWarnings("serial")
 public class PatientHomePanel extends javax.swing.JPanel {
 
-	/**
-	 * Creates new form PatientHomePanel
-	 */
+	private static PatientHomePanel instance = null;
+
 	private String name;
 
-	public PatientHomePanel(String name) {
+	private PatientHomePanel(String name) {
 		this.name = name;
 		initComponents();
+	}
+
+	public static PatientHomePanel getInstance(String name) {
+		if (instance == null)
+			instance = new PatientHomePanel(name);
+
+		return instance;
 	}
 
 	/**

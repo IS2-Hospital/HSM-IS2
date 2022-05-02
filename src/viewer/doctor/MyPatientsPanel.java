@@ -22,20 +22,39 @@ import model.Patient;
 @SuppressWarnings("serial")
 public class MyPatientsPanel extends javax.swing.JPanel {
 
+	private static MyPatientsPanel instance = null;
+
 	private Controller ctrl;
-	private String doctor_dni;
 
 	private MyPatientsTableModel tableModel;
 
 	/**
 	 * Creates new form MyPatientsPanel
 	 */
-	public MyPatientsPanel(Controller ctrl, String doctor_dni) {
+	private MyPatientsPanel(Controller ctrl, String doctor_dni) {
 		this.ctrl = ctrl;
-		this.doctor_dni = doctor_dni;
 		this.tableModel = new MyPatientsTableModel(ctrl, doctor_dni);
 
 		initComponents();
+	}
+
+	public static MyPatientsPanel getInstance(Controller ctrl, String doctor_dni) {
+		if (instance == null)
+			instance = new MyPatientsPanel(ctrl, doctor_dni);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
+		try {
+			tableModel.open();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 	}
 
 	/**
@@ -121,16 +140,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 		}
 	}
 
-	public void open() {
-		try {
-			tableModel.open();
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 
-			if (Main.SHOW_EXCEPTIONS_TRACE)
-				e.printStackTrace();
-		}
-	}
 
 
 	// Variables declaration - do not modify

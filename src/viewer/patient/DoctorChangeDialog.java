@@ -41,7 +41,7 @@ public class DoctorChangeDialog extends javax.swing.JDialog {
 		open();
 
 		setVisible(true);
-		setLocationRelativeTo(parent);
+		setLocationRelativeTo(SwingUtilities.getWindowAncestor(parent));
 	}
 
 	public void open() {
@@ -157,9 +157,11 @@ public class DoctorChangeDialog extends javax.swing.JDialog {
 			Doctor d = notMyDoctorsTableModel.getDoctor(row);
 
 			ctrl.requestDoctorChange(dni_patient, fromDni_doctor, d.getDni(), reasonTextArea.getText());
-			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "The request has been registeres sucessfully", "", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "The request has been registered sucessfully", "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException e1) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "You have to select a doctor first", "", JOptionPane.ERROR_MESSAGE);
+		} catch (IllegalArgumentException e1) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e1.getMessage(), "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(this, e1.getMessage(),"Database Error", JOptionPane.ERROR_MESSAGE);
 

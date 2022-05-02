@@ -12,13 +12,34 @@ import launcher.Main;
 
 public class HistoryPanel extends JPanel{
 
+	private static HistoryPanel instance = null;
+
 	Controller ctrl;
 	String dni_patient;
 
-	public HistoryPanel(Controller ctrl, String dni_patient) {
+	private HistoryPanel(Controller ctrl, String dni_patient) {
 		this.ctrl = ctrl;
 		this.dni_patient = dni_patient;
 		initComponents();
+	}
+
+	public static HistoryPanel getInstance(Controller ctrl, String dni_patient) {
+		if (instance == null)
+			instance = new HistoryPanel(ctrl, dni_patient);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
+		try {
+			tableModel.open();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 	}
 
 	private void initComponents() {
@@ -49,14 +70,5 @@ public class HistoryPanel extends JPanel{
 	private HistoryTableModel tableModel;
 	// End of variables declaration
 
-	public void open() {
-		try {
-			tableModel.open();
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 
-			if (Main.SHOW_EXCEPTIONS_TRACE)
-				e.printStackTrace();
-		}
-	}
 }

@@ -92,11 +92,21 @@ public class DoctorChangeRequestAproverDialog extends JDialog {
 						doctorLabel.setText("Prev Doctor: " + _ctrl.getDoctorData(dni.get(1)).getFullName());
 					} catch (NullPointerException e1) {
 						doctorLabel.setText("Prev Doctor: None");
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error on delete", JOptionPane.ERROR_MESSAGE);
+
+						if (Main.SHOW_EXCEPTIONS_TRACE)
+							e1.printStackTrace();
 					}
 					try {
 						newLabel.setText("New Doctor: " + _ctrl.getDoctorData(dni.get(2)).getFullName());
 					} catch (NullPointerException e1) {
 						newLabel.setText("New Doctor: None");
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error on delete", JOptionPane.ERROR_MESSAGE);
+
+						if (Main.SHOW_EXCEPTIONS_TRACE)
+							e1.printStackTrace();
 					}
 					descText.setText(_ctrl.getReason(selection.getSelectedItem().toString()));
 
@@ -127,6 +137,11 @@ public class DoctorChangeRequestAproverDialog extends JDialog {
 			doctorLabel.setText("Prev Doctor: " + _ctrl.getDoctorData(dni.get(1)).getFullName());
 		} catch (NullPointerException e1) {
 			doctorLabel.setText("Prev Doctor: None");
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error on delete", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e1.printStackTrace();
 		}
 		inside.add(doctorLabel,BorderLayout.CENTER);
 
@@ -136,6 +151,11 @@ public class DoctorChangeRequestAproverDialog extends JDialog {
 			newLabel.setText("New Doctor: " + _ctrl.getDoctorData(dni.get(2)).getFullName());
 		} catch (NullPointerException e1) {
 			newLabel.setText("New Doctor: None");
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error on delete", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e1.printStackTrace();
 		}
 		inside.add(newLabel,BorderLayout.SOUTH);
 

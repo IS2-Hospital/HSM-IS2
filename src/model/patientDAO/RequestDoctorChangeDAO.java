@@ -10,7 +10,7 @@ import model.DBConnector;
 
 public class RequestDoctorChangeDAO {
 
-	public static void execute(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws SQLException {
+	public static void execute(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws IllegalArgumentException, SQLException {
 		try {
 			Connection con = DBConnector.connectdb();
 
@@ -25,7 +25,7 @@ public class RequestDoctorChangeDAO {
 
 			con.close();
 		} catch (SQLIntegrityConstraintViolationException e) {
-			throw new SQLException("You have made this request alredy. Wait for it to be acepted or denied");
+			throw new IllegalArgumentException("You have made this request alredy. Wait for it to be acepted or denied");
 		}
 	}
 }

@@ -33,7 +33,7 @@ public class Controller {
 	}
 
 
-	//Login Maçade
+	//Login Maï¿½ade
 	public UserRole login(String dni, String password) throws LoginException, SQLException {
 		return _userManager.get_loginAuthenticator().login(dni, password);
 	}
@@ -104,7 +104,7 @@ public class Controller {
 		adminApp.updatePatient(colData);
 	}
 
-	public Doctor getDoctorData(String dni) {
+	public Doctor getDoctorData(String dni) throws SQLException {
 		return adminApp.getDoctorData(dni);
 	}
 
@@ -152,7 +152,7 @@ public class Controller {
 		patientApp.aceptDoctorChangeRequest(dni_patient, from_dni_doctor, to_dni_doctor);
 	}
 
-	public void requestDoctorChange(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws SQLException {
+	public void requestDoctorChange(String dni_patient, String from_dni_doctor, String to_dni_doctor, String reason) throws IllegalArgumentException, SQLException {
 		patientApp.requestDoctorChange(dni_patient, from_dni_doctor, to_dni_doctor, reason);
 	}
 

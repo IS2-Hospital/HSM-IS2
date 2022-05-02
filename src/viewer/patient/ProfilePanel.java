@@ -28,21 +28,28 @@ import model.Enums.Gender;
  */
 public class ProfilePanel extends javax.swing.JPanel {
 
+	private static ProfilePanel instance = null;
+
 	private Controller ctrl;
 	private String patient_dni;
 	private Patient patient;
 
-	/**
-	 * Creates new form ProfilePanel
-	 */
-	public ProfilePanel(Controller ctrl, String patient_dni) {
+	private ProfilePanel(Controller ctrl, String patient_dni) {
 		this.ctrl = ctrl;
 		this.patient_dni = patient_dni;
 
 		initComponents();
 	}
 
-	public void open() {
+	public static ProfilePanel getInstance(Controller ctrl, String dni_patient) {
+		if (instance == null)
+			instance = new ProfilePanel(ctrl, dni_patient);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
 		try {
 			patient = ctrl.getPatientFullData(patient_dni);
 
