@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
 import launcher.Main;
@@ -125,14 +126,14 @@ public class DoctorAssignPanel extends javax.swing.JPanel {
 	protected void okActionPerformed(ActionEvent e) {
 		try {
 			ctrl.assignPatientDoctor(((Doctor) doctorComboBox.getSelectedItem()).getDni(), ((Patient) patientComboBox.getSelectedItem()).getDni());
-			JOptionPane.showMessageDialog(null, "Changes were saved sucessfully", "", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Changes were saved sucessfully", "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error while inserting in database", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e1.getMessage(), "Error while inserting in database", JOptionPane.ERROR_MESSAGE);
 			if (Main.SHOW_EXCEPTIONS_TRACE)
 				e1.printStackTrace();
 		}
 		catch (IllegalArgumentException e2) {
-			JOptionPane.showMessageDialog(null, e2.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e2.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

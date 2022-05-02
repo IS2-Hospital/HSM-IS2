@@ -19,6 +19,7 @@ import model.Doctor;
  *
  * @author reven
  */
+@SuppressWarnings("serial")
 public class MyDoctorsPanel extends javax.swing.JPanel {
 
 	private static MyDoctorsPanel instance = null;
@@ -38,6 +39,7 @@ public class MyDoctorsPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// Singleton
 	public static MyDoctorsPanel getInstance(Controller ctrl, String dni_patient) {
 		if (instance == null)
 			instance = new MyDoctorsPanel(ctrl, dni_patient);
@@ -111,6 +113,7 @@ public class MyDoctorsPanel extends javax.swing.JPanel {
 			int row = doctorsTable.getSelectedRow();
 			Doctor d = doctorsTableModel.getDoctor(row);
 
+			@SuppressWarnings("unused")
 			DoctorChangeDialog dcd = new DoctorChangeDialog(ctrl, dni_patient, d.getDni(), this);
 
 		} catch (ArrayIndexOutOfBoundsException e1) {

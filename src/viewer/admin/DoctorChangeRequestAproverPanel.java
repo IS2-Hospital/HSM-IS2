@@ -37,6 +37,7 @@ public class DoctorChangeRequestAproverPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// Singleton
 	public static DoctorChangeRequestAproverPanel getInstance(Controller ctrl) {
 		if (instance == null)
 			instance = new DoctorChangeRequestAproverPanel(ctrl);

@@ -23,6 +23,8 @@ public class AdminPanel extends JPanel {
 		this.mainWindow = mainWindow;
 
 		initGUI();
+
+		setCenterPanel(PatientListPanel.getInstace(ctrl));
 	}
 
 	private void initGUI() {
@@ -41,6 +43,7 @@ public class AdminPanel extends JPanel {
 		modDoctorButton = new misc.RSButtonMetro();
 		ansreqButton = new misc.RSButtonMetro();
 		assignDoctorButton = new misc.RSButtonMetro();
+		changeInsurancesBillButton = new misc.RSButtonMetro();
 
 		centerPanel = new javax.swing.JPanel();
 		voidCenterPanel = new javax.swing.JPanel();
@@ -89,7 +92,7 @@ public class AdminPanel extends JPanel {
 		leftSubPanel.setLayout(new java.awt.BorderLayout());
 
 		leftMenu.setBackground(new java.awt.Color(214, 214, 214));
-		leftMenu.setPreferredSize(new java.awt.Dimension(220, 364));
+		leftMenu.setPreferredSize(new java.awt.Dimension(220, 400));
 
 		patientListButton.setBackground(new java.awt.Color(214, 214, 214));
 		patientListButton.setForeground(new java.awt.Color(51, 51, 51));
@@ -164,7 +167,6 @@ public class AdminPanel extends JPanel {
 		modifyPatientButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				//new PatientModificatorDialog(_ctrl);
 				modPacientButtonButtonActionPerformed(evt);
 			}
 		});
@@ -185,7 +187,6 @@ public class AdminPanel extends JPanel {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				modDoctorButtonButtonActionPerformed(evt);
-				//new DoctorModificatorDialog(_ctrl);
 			}
 		});
 
@@ -223,8 +224,26 @@ public class AdminPanel extends JPanel {
 		assignDoctorButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				//new DoctorAssignDialog(_ctrl);
 				assignDoctorButtonActionPerformed(evt);
+			}
+		});
+
+		changeInsurancesBillButton.setForeground(new java.awt.Color(51, 51, 51));
+		changeInsurancesBillButton.setIcon(new javax.swing.ImageIcon(("resources/icons/bill.png"))); // NOI18N
+		changeInsurancesBillButton.setText("Insurance bills");
+		changeInsurancesBillButton.setColorHover(new java.awt.Color(138, 202, 234));
+		changeInsurancesBillButton.setColorNormal(new java.awt.Color(214, 214, 214));
+		changeInsurancesBillButton.setColorPressed(new java.awt.Color(138, 202, 234));
+		changeInsurancesBillButton.setColorTextHover(new java.awt.Color(51, 51, 51));
+		changeInsurancesBillButton.setColorTextNormal(new java.awt.Color(51, 51, 51));
+		changeInsurancesBillButton.setColorTextPressed(new java.awt.Color(51, 51, 51));
+		changeInsurancesBillButton.setFocusPainted(false);
+		changeInsurancesBillButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		changeInsurancesBillButton.setRolloverEnabled(false);
+		changeInsurancesBillButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				changeInsurancesBillButtonActionPerformed(evt);
 			}
 		});
 
@@ -242,6 +261,7 @@ public class AdminPanel extends JPanel {
 								.addComponent(modDoctorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(ansreqButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(assignDoctorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(changeInsurancesBillButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								)
 						.addContainerGap(35, Short.MAX_VALUE))
 				);
@@ -262,6 +282,8 @@ public class AdminPanel extends JPanel {
 						.addComponent(ansreqButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(assignDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(changeInsurancesBillButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						)
 				);
@@ -368,6 +390,10 @@ public class AdminPanel extends JPanel {
 		mainWindow.signOut();
 	}
 
+	private void changeInsurancesBillButtonActionPerformed(ActionEvent evt) {
+		setCenterPanel(BillPlanChangerPanel.getInstance(ctrl));
+	}
+
 
 	// Variables declaration - do not modify
 	private misc.RSButtonMetro signOutButton;
@@ -378,6 +404,7 @@ public class AdminPanel extends JPanel {
 	private misc.RSButtonMetro modDoctorButton;
 	private misc.RSButtonMetro ansreqButton;
 	private misc.RSButtonMetro assignDoctorButton;
+	private misc.RSButtonMetro changeInsurancesBillButton;
 	private javax.swing.JPanel centerPanel;
 	private javax.swing.Box.Filler filler1;
 	private javax.swing.JPanel leftMenu;

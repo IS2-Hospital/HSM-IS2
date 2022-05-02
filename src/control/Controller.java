@@ -142,7 +142,7 @@ public class Controller {
 		return adminApp.getPlanList();
 	}
 
-	public void changeBillPlan(String typeName, String newBill) {
+	public void changeBillPlan(String typeName, double newBill) throws SQLException {
 		adminApp.changeBillPlan(typeName,newBill);
 	}
 
@@ -174,6 +174,11 @@ public class Controller {
 
 	public void saveTreatment(Treatment t, String patient_dni) throws SQLException {
 		doctorApp.saveTreatment(t, patient_dni);
+	}
+
+
+	public double[] getInsurancePrices() throws SQLException {
+		return adminApp.getInsurancePrices();
 	}
 
 

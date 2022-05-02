@@ -25,6 +25,7 @@ import model.Treatment;
  *
  * @author reven
  */
+@SuppressWarnings("serial")
 public class AddTreatmentDialog extends javax.swing.JDialog {
 
 	private Controller ctrl;

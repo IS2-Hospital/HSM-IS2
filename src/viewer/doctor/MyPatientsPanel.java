@@ -38,6 +38,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// Singleton
 	public static MyPatientsPanel getInstance(Controller ctrl, String doctor_dni) {
 		if (instance == null)
 			instance = new MyPatientsPanel(ctrl, doctor_dni);
