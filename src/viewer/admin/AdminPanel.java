@@ -23,6 +23,8 @@ public class AdminPanel extends JPanel {
 		this.mainWindow = mainWindow;
 
 		initGUI();
+
+		setCenterPanel(PatientListPanel.getInstace(ctrl));
 	}
 
 	private void initGUI() {

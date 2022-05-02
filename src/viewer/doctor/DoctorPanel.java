@@ -44,6 +44,8 @@ public class DoctorPanel extends javax.swing.JPanel {
 			if (Main.SHOW_EXCEPTIONS_TRACE)
 				e.printStackTrace();
 		}
+
+		setCenterPanel(MyPatientsPanel.getInstance(ctrl, doctor_dni));
 	}
 
 	/**
