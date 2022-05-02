@@ -160,7 +160,7 @@ public class DoctorChangeDialog extends javax.swing.JDialog {
 
 			DoctorChangeRequest req = new DoctorChangeRequest(
 					new Patient(dni_patient, null, null, null, null, null, null, null, null, null),
-					new Doctor(fromDni_doctor, null, null, null, null, null, null, -1, null, null, null),
+					new Doctor(fromDni_doctor, null, null, null, null, null, null, null, null, null, null, null),
 					toDoctor,
 					reasonTextArea.getText());
 			ctrl.requestDoctorChange(req);
