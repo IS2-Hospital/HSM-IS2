@@ -12,11 +12,32 @@ import launcher.Main;
 @SuppressWarnings("serial")
 public class DoctorListPanel extends JPanel{
 
+	private static DoctorListPanel instance = null;
+
 	Controller ctrl;
 
-	public DoctorListPanel(Controller ctrl) {
+	private DoctorListPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		initComponents();
+	}
+
+	public static DoctorListPanel getInstace(Controller ctrl) {
+		if (instance == null)
+			instance = new DoctorListPanel(ctrl);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
+		try {
+			tableModel.open();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 	}
 
 	private void initComponents() {
@@ -47,14 +68,5 @@ public class DoctorListPanel extends JPanel{
 	private DoctorTableModel tableModel;
 	// End of variables declaration
 
-	public void open() {
-		try {
-			tableModel.open();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 
-			if (Main.SHOW_EXCEPTIONS_TRACE)
-				e.printStackTrace();
-		}
-	}
 }

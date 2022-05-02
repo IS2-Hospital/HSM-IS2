@@ -34,7 +34,7 @@ public class AdminApp {
 		UpdatePatientDataDAO.execute(colData);
 	}
 
-	public Doctor getDoctorData(String dni) {
+	public Doctor getDoctorData(String dni) throws SQLException {
 		return GetDoctorDataDAO.execute(dni);
 	}
 

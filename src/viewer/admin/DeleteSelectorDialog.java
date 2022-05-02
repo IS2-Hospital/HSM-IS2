@@ -81,8 +81,7 @@ public class DeleteSelectorDialog extends JDialog {
 					}
 				}
 				catch(SQLException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage(),
-							"Error on delete", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Error on delete", JOptionPane.ERROR_MESSAGE);
 				}
 				DeleteSelectorDialog.this.dispose();
 			}

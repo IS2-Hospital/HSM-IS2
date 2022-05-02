@@ -26,6 +26,8 @@ import model.Doctor;
 @SuppressWarnings("serial")
 public class ProfilePanel extends javax.swing.JPanel {
 
+	private static ProfilePanel instance = null;
+
 	private Controller ctrl;
 	private String doctor_dni;
 	private Doctor doctor;
@@ -33,26 +35,42 @@ public class ProfilePanel extends javax.swing.JPanel {
 	/**
 	 * Creates new form ProfilePanel
 	 */
-	public ProfilePanel(Controller ctrl, String doctor_dni) {
+	private ProfilePanel(Controller ctrl, String doctor_dni) {
 		this.ctrl= ctrl;
 		this.doctor_dni = doctor_dni;
 
 		initComponents();
 	}
 
-	public void open() {
-		doctor = ctrl.getDoctorData(doctor_dni);
+	public static ProfilePanel getInstance(Controller ctrl, String doctor_dni) {
+		if (instance == null)
+			instance = new ProfilePanel(ctrl, doctor_dni);
+		instance.open();
 
-		nameField.setText(doctor.getName());
-		lastnameField.setText(doctor.getLastname());
-		passField.setText(doctor.getPass());
-		birthSpinner.getModel().setValue(getBirthdate());
-		emailField.setText(doctor.getEmail());
-		phoneField.setText(doctor.getPhone());
-		specialityField.setText(doctor.getSpeciality());
-		salaryField.setText(Float.toString(doctor.getSalary()));
-		contractStartField.setText(doctor.getContractStartDate().toString());
-		contractEndField.setText(doctor.getContractEndDate().toString());
+		return instance;
+	}
+
+	private void open() {
+		try {
+			doctor = ctrl.getDoctorData(doctor_dni);
+
+			nameField.setText(doctor.getName());
+			lastnameField.setText(doctor.getLastname());
+			passField.setText(doctor.getPass());
+			birthSpinner.getModel().setValue(getBirthdate());
+			emailField.setText(doctor.getEmail());
+			phoneField.setText(doctor.getPhone());
+			specialityField.setText(doctor.getSpeciality());
+			salaryField.setText(Float.toString(doctor.getSalary()));
+			contractStartField.setText(doctor.getContractStartDate().toString());
+			contractEndField.setText(doctor.getContractEndDate().toString());
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error on delete", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
+
 	}
 
 	private Date getBirthdate() {

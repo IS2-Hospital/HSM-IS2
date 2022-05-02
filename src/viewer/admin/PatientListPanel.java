@@ -11,13 +11,34 @@ import launcher.Main;
 
 public class PatientListPanel extends JPanel {
 
+	private static PatientListPanel instance = null;
+
 	private static final long serialVersionUID = 1L;
 
 	Controller ctrl;
 
-	public PatientListPanel(Controller ctrl) {
+	private PatientListPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		initComponents();
+	}
+
+	public static PatientListPanel getInstace(Controller ctrl) {
+		if (instance == null)
+			instance = new PatientListPanel(ctrl);
+		instance.open();
+
+		return instance;
+	}
+
+	private void open() {
+		try {
+			tableModel.open();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
 	}
 
 	private void initComponents() {
@@ -48,14 +69,5 @@ public class PatientListPanel extends JPanel {
 	private PatientTableModel tableModel;
 	// End of variables declaration
 
-	public void open() {
-		try {
-			tableModel.open();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 
-			if (Main.SHOW_EXCEPTIONS_TRACE)
-				e.printStackTrace();
-		}
-	}
 }
