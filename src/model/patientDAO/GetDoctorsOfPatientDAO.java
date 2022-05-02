@@ -32,7 +32,6 @@ public class GetDoctorsOfPatientDAO {
 
 			Doctor d = new Doctor(dni_doctor, name, lastname, null, null, null, null, contractEndDate, speciality, null, null, null);
 			v.add(d);
-
 		}
 
 		con.close();
