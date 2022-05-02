@@ -269,9 +269,9 @@ public class ProfilePanel extends javax.swing.JPanel {
 				phoneField.getText(),
 				getSelectedGender(),
 				(BloodType) bloodComboBox.getSelectedItem(),
-				null,
-				null,
-				-1,
+				patient.getInsuranceType(),
+				patient.getDniInsuranceTaker(),
+				patient.getBill(),
 				passField.getText(),
 				ibanField.getText(),
 				addressField.getText());

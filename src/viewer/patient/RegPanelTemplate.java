@@ -39,7 +39,7 @@ public class RegPanelTemplate extends JPanel {
 	private static final String TITLE = "User registration";
 	private static final Border JTEXTFIELDBORDER = new JTextField().getBorder();
 
-	private JTextField _dniTF, _nameTF, _lastnameTF, _emailTF, _phoneTF, _homeAdressTF;
+	private JTextField _dniTF, _nameTF, _lastnameTF, _emailTF, _phoneTF, _homeAdressTF, _IBAN;
 	JPasswordField _passTF;
 	private JSpinner _birthdateSelector;
 	private JRadioButton _maleRB, _femaleRB;
@@ -205,8 +205,25 @@ public class RegPanelTemplate extends JPanel {
 		infoHomeAdress.setFont(new Font("Arial", Font.PLAIN, 10));
 		centerPanel.add(infoHomeAdress, c);
 
-		// JLabel Password
+		// IBAN JLabel
 		c.gridx = 0; c.gridy = 10;
+		JLabel iban = new JLabel("IBAN: ");
+		centerPanel.add(iban, c);
+
+		// IBAN JTextField
+		_IBAN = new JTextField("", 20);
+		_IBAN.setFont(new Font("Arial", Font.PLAIN, 13));
+		c.gridx = 1;
+		centerPanel.add(_IBAN, c);
+
+		// IBAN JLabel
+		c.gridy = 11;
+		JLabel infoIban = new JLabel("<html> Only necessary for main account (payment).");
+		infoIban.setFont(new Font("Arial", Font.PLAIN, 10));
+		centerPanel.add(infoIban, c);
+
+		// JLabel Password
+		c.gridx = 0; c.gridy = 12;
 		JLabel pass = new JLabel("Password: ");
 		centerPanel.add(pass, c);
 
@@ -218,6 +235,18 @@ public class RegPanelTemplate extends JPanel {
 		centerPanel.add(_passTF, c);
 
 		mainPanel.add(centerPanel);
+	}
+
+	public String getDNITF() {
+		return this._dniTF.getText();
+	}
+
+	public String getIbanTF() {
+		return this._IBAN.getText();
+	}
+
+	public String getHomeTF() {
+		return this._homeAdressTF.getText();
 	}
 
 	private boolean isSelection(ButtonGroup buttonGroup) {
@@ -247,7 +276,9 @@ public class RegPanelTemplate extends JPanel {
 		else {
 			try {
 				// Parseo numero telefono
-				if(!_phoneTF.getText().equals("")) Integer.parseInt(_phoneTF.getText());
+				if(!_phoneTF.getText().equals("")) Long.parseLong(_phoneTF.getText());
+				// Parseo correo
+				if(_emailTF.getText().indexOf('@') == -1) throw new Exception("Invalid email. Character @ was not found.");
 				// Parseo género
 				if(!isSelection(_genderGroup)) throw new Exception("Please, select your gender.");
 				// Parseo fecha
@@ -256,7 +287,9 @@ public class RegPanelTemplate extends JPanel {
 				DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 				int compare = formmat1.format(ldt).compareTo(introducedDate);
 				if(compare == 0) JOptionPane.showMessageDialog(_parentPanel,  "Congratulations to the newborn " +_nameTF.getText()+ " and to you, parents.", "Happy birthday", JOptionPane.PLAIN_MESSAGE);
-				else if(compare < 0) throw new Exception("According to our calculations, you haven´t born yet. Congratulations, you have surpass the matrix's Laws of Physics.");
+				else if(compare < 0) throw new Exception("<html>According to our calculations, you haven´t born yet. <br>Congratulations, you have surpass the matrix's Laws of Physics.<br> Being serious, introduce a valid date, please.");
+				// Parseo contraseña
+				if(String.valueOf(_passTF.getPassword()).length() < 5) throw new Exception("Short password. Introduce at least 5 characters.");
 			}
 			catch(NumberFormatException ex) {
 				_phoneTF.setBorder(new LineBorder(Color.RED, 1));
@@ -272,7 +305,7 @@ public class RegPanelTemplate extends JPanel {
 		return valid;
 	}
 
-	private JSONObject createRegistrationJO() {
+	private JSONObject createRegistrationJO(String dniInsuranceTaker) {
 		//TODO Incluir el home adress en la base de datos y en la creacion del JSON
 		JSONObject jo = new JSONObject();
 		jo.put("role", UserRole.PATIENT.toString());
@@ -298,7 +331,10 @@ public class RegPanelTemplate extends JPanel {
 		roleData.put("gender", _genderGroup.getSelection().getActionCommand());
 		roleData.put("bloodType", _bloodType.getSelectedItem().toString());
 		roleData.put("insuranceType", _insuranceGroup);
-		roleData.put("dniInsuranceTaker", "");
+		if(dniInsuranceTaker.equals("")) roleData.put("dniInsuranceTaker", _dniTF.getText());
+		else roleData.put("dniInsuranceTaker", dniInsuranceTaker);
+		roleData.put("home", _homeAdressTF.getText());
+		roleData.put("iban", _IBAN.getText());
 		patientJO.put("roleData", roleData);
 
 		registerList.put(patientJO);
@@ -307,20 +343,26 @@ public class RegPanelTemplate extends JPanel {
 		return jo;
 	}
 
-	public JSONObject getJSONObject() {
-		if(validateIntroducedData()) return createRegistrationJO();
-		else return null;
-	}
-
 	public boolean validateReg() {
 		return validateIntroducedData();
 	}
 
-	public void registerUser() {
+	public boolean registerUser(String dniInsuranceTaker) {
 		if(validateIntroducedData()) {
-			new UserRegisterer().registerUsers(createRegistrationJO());
+			if(dniInsuranceTaker.equals("")) {
+				JOptionPane.showMessageDialog(this, "IBAN required for Main Account",
+						"Unfulfilled requirements", JOptionPane.INFORMATION_MESSAGE);
+				return false;
+			}
+			else {
+				try {new UserRegisterer().registerUsers(createRegistrationJO(dniInsuranceTaker)); return true;}
+				catch (Exception e) {
+					JOptionPane.showMessageDialog(_parentPanel, e.getMessage(), "Error in registration", JOptionPane.ERROR_MESSAGE);
+					return false;
+				}
+			}
 		}
-
+		return false;
 	}
 
 }
