@@ -137,7 +137,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 	private void viewMedicHistoryButtonActionPerformed(ActionEvent e) {
 		try {
 			Patient p = tableModel.getSelectedPatient(patientsTable.getSelectedRow());
-			// TODO panel del historial medico de un paciente p
+			DoctorTreatmentWindow.getInstance(ctrl, p.getDni(), SwingUtilities.getWindowAncestor(this)).setVisible(true);
 
 		} catch (IndexOutOfBoundsException e1) { // no row selected
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);

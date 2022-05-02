@@ -32,6 +32,7 @@ public class TreatmentsTableModel extends AbstractTableModel {
 		}
 	}
 
+
 	public void open() throws SQLException {
 		v = ctrl.getTreatment(dni);
 		fireTableDataChanged();

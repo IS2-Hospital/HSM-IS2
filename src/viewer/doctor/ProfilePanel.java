@@ -62,7 +62,7 @@ public class ProfilePanel extends javax.swing.JPanel {
 			emailField.setText(doctor.getEmail());
 			phoneField.setText(doctor.getPhone());
 			specialityField.setText(doctor.getSpeciality());
-			salaryField.setText(Float.toString(doctor.getSalary()));
+			salaryField.setText(doctor.getSalary());
 			contractStartField.setText(doctor.getContractStartDate().toString());
 			contractEndField.setText(doctor.getContractEndDate().toString());
 		} catch (SQLException e) {
@@ -252,13 +252,14 @@ public class ProfilePanel extends javax.swing.JPanel {
 				new SimpleDateFormat("yyyy-MM-dd").format(birthSpinner.getValue()),
 				emailField.getText(),
 				phoneField.getText(),
-				doctor.getSpeciality(),
 				doctor.getSalary(),
 				doctor.getContractStartDate(),
 				doctor.getContractEndDate(),
+				doctor.getSpeciality(),
+				doctor.getRegState().name(),
+				doctor.getNotes(),
 				doctor.getPass()
 				);
-
 		try {
 			ctrl.updateDoctor(d);
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Changes were successfully saved", "", JOptionPane.INFORMATION_MESSAGE);

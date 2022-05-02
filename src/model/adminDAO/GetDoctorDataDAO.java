@@ -32,11 +32,13 @@ public class GetDoctorDataDAO {
 			String email = resultSet.getString("email");
 			String phone = resultSet.getString("phone");
 			String speciality = resultSet.getString("speciality");
-			float salary = resultSet.getFloat("salary");
+			String salary = String.valueOf(resultSet.getFloat("salary"));
 			Date start = resultSet.getDate("contract_start_date");
 			Date end = resultSet.getDate("contract_end_date");
+			String regState = resultSet.getString("regState");
 			String pass = resultSet.getString("password");
-			docs = new Doctor(dni, name, lastName, birthDate, email, phone, speciality, salary, start, end, pass);
+			String notes = resultSet.getString("notes");
+			docs = new Doctor(dni, name, lastName, birthDate, email, phone, salary, start, end, speciality, regState, notes, pass);
 		}
 		resultSet.close();
 
