@@ -46,6 +46,7 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// Singleton
 	public static AppointmentsPanel getInstance(Controller ctrl, String dni_patient, UserRole role) {
 		if (instance == null)
 			instance = new AppointmentsPanel(ctrl, dni_patient, role);

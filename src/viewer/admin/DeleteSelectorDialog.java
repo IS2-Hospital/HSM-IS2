@@ -19,6 +19,7 @@ import javax.swing.SwingUtilities;
 import control.Controller;
 import model.Patient;
 
+@SuppressWarnings("serial")
 public class DeleteSelectorDialog extends JDialog {
 
 	private Controller _ctrl;

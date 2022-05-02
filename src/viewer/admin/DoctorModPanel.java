@@ -37,6 +37,7 @@ public class DoctorModPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// Singleton
 	public static DoctorModPanel getInstace(Controller ctrl) {
 		if (instance == null)
 			instance = new DoctorModPanel(ctrl);
@@ -48,7 +49,10 @@ public class DoctorModPanel extends javax.swing.JPanel {
 	private void open() {
 		doctorList = ctrl.getDoctorList();
 		doctorComboBox.setModel(new DefaultComboBoxModel<>(doctorList));
+		updateDoctorInfo();
+	}
 
+	private void updateDoctorInfo() {
 		try {
 			info = ctrl.getDoctorData(((Doctor) doctorComboBox.getSelectedItem()).getDni()).asStringList();
 		} catch (SQLException e) {
@@ -281,7 +285,7 @@ public class DoctorModPanel extends javax.swing.JPanel {
 	}// </editor-fold>
 
 	private void buttonUpdateActionPerformed(ActionEvent e) {
-		open();
+		updateDoctorInfo();
 	}
 
 	private void buttonsaveActionPerformed(ActionEvent e) {

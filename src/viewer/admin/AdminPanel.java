@@ -185,7 +185,6 @@ public class AdminPanel extends JPanel {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				modDoctorButtonButtonActionPerformed(evt);
-				//new DoctorModificatorDialog(_ctrl);
 			}
 		});
 
@@ -223,7 +222,6 @@ public class AdminPanel extends JPanel {
 		assignDoctorButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				//new DoctorAssignDialog(_ctrl);
 				assignDoctorButtonActionPerformed(evt);
 			}
 		});
@@ -361,7 +359,7 @@ public class AdminPanel extends JPanel {
 	}
 
 	private void ansreqButtonactionPerformed(ActionEvent evt) {
-		setCenterPanel(DoctorChangeRequestAproverPanel.getInstance(_ctrl));
+		setCenterPanel(DoctorChangeRequestAproverPanel.getInstance(ctrl));
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {

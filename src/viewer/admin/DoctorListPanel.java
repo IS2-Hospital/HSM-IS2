@@ -21,6 +21,7 @@ public class DoctorListPanel extends JPanel{
 		initComponents();
 	}
 
+	// Singleton
 	public static DoctorListPanel getInstace(Controller ctrl) {
 		if (instance == null)
 			instance = new DoctorListPanel(ctrl);

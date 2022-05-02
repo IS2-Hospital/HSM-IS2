@@ -22,6 +22,7 @@ public class AboutUsPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// Singleton
 	public static AboutUsPanel getInstace() {
 		if (instance == null)
 			instance = new AboutUsPanel();

@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import control.Controller;
 import launcher.Main;
 
+@SuppressWarnings("serial")
 public class HistoryPanel extends JPanel{
 
 	private static HistoryPanel instance = null;
@@ -23,6 +24,7 @@ public class HistoryPanel extends JPanel{
 		initComponents();
 	}
 
+	// Singleton
 	public static HistoryPanel getInstance(Controller ctrl, String dni_patient) {
 		if (instance == null)
 			instance = new HistoryPanel(ctrl, dni_patient);

@@ -23,6 +23,7 @@ public class TreatmentPanel extends JPanel{
 		initComponents();
 	}
 
+	// Singleton
 	public static TreatmentPanel getInstance(Controller ctrl, String dni_patient) {
 		if (instance == null)
 			instance = new TreatmentPanel(ctrl, dni_patient);

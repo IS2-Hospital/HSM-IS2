@@ -76,7 +76,6 @@ public class AdminApp {
 
 	public void deletePatient(String patientDni) throws SQLException {
 		DeletePatientDAO.execute(patientDni);
-
 	}
 
 	public List<String> getPlanList() {

@@ -42,6 +42,7 @@ public class ProfilePanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// Singleton
 	public static ProfilePanel getInstance(Controller ctrl, String doctor_dni) {
 		if (instance == null)
 			instance = new ProfilePanel(ctrl, doctor_dni);

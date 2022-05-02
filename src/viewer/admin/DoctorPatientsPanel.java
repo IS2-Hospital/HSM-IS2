@@ -31,6 +31,7 @@ public class DoctorPatientsPanel extends javax.swing.JPanel{
 		initComponents();
 	}
 
+	// Singleton
 	public static DoctorPatientsPanel getInstace(Controller ctrl) {
 		if (instance == null)
 			instance = new DoctorPatientsPanel(ctrl);
