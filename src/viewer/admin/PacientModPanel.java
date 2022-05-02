@@ -1,11 +1,19 @@
 package viewer.admin;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import control.Controller;
+import launcher.Main;
 import model.Patient;
 import model.Enums.BloodType;
 import model.Enums.Gender;
@@ -34,7 +42,18 @@ public class PacientModPanel extends javax.swing.JPanel {
 	}
 
 	void open() {
-
+		patient = (Patient) patientComboBox.getSelectedItem();
+		info = ctrl.getPatientData(patient.getDni()).asStringList();
+		textName.setText(info.get(2));
+		textLastName.setText(info.get(1));
+		textBDay.setText(info.get(3));
+		textemail.setText(info.get(4));
+		textPhone.setText(info.get(5));
+		textGender.setSelectedItem(Gender.valueOf(info.get(6)));
+		bloodText.setSelectedItem(BloodType.getEnum(info.get(7)));
+		textGender.setSelectedItem(HealthInsuranceType.valueOf(info.get(8)));
+		takerText.setText(info.get(9) == null ? patient.getDni() : info.get(9));
+		billText.setText(info.get(10) == null ? "0.000" : info.get(10));
 	}
 
 	/**
@@ -51,40 +70,42 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel1 = new javax.swing.JLabel();
 		ComboBoxPanel = new javax.swing.JPanel();
 		patientComboBox = new javax.swing.JComboBox<>();
+		ButtonUpdatePanel = new javax.swing.JPanel();
+		buttonUpdate = new misc.RSButtonMetro();
 		CenterPanel = new javax.swing.JPanel();
 		NamePanel = new javax.swing.JPanel();
 		jLabel10 = new javax.swing.JLabel();
-		jTextField2 = new javax.swing.JTextField();
+		textName = new javax.swing.JTextField();
 		LastNamePanel = new javax.swing.JPanel();
 		jLabel11 = new javax.swing.JLabel();
-		jTextField3 = new javax.swing.JTextField();
+		textLastName = new javax.swing.JTextField();
 		BithDatePanel = new javax.swing.JPanel();
 		jLabel12 = new javax.swing.JLabel();
-		jTextField4 = new javax.swing.JTextField();
+		textBDay = new javax.swing.JTextField();
 		EmailPanel = new javax.swing.JPanel();
 		jLabel13 = new javax.swing.JLabel();
-		jTextField5 = new javax.swing.JTextField();
+		textemail = new javax.swing.JTextField();
 		EmailPanel1 = new javax.swing.JPanel();
 		jLabel19 = new javax.swing.JLabel();
-		jTextField6 = new javax.swing.JTextField();
+		textPhone = new javax.swing.JTextField();
 		GenderPanel = new javax.swing.JPanel();
 		jLabel14 = new javax.swing.JLabel();
-		jComboBox1 = new javax.swing.JComboBox<>();
+		textGender = new javax.swing.JComboBox<>();
 		BloodTypePanel = new javax.swing.JPanel();
 		jLabel15 = new javax.swing.JLabel();
-		jComboBox2 = new javax.swing.JComboBox<>();
+		bloodText = new javax.swing.JComboBox<>();
 		InsuranceTypePanel = new javax.swing.JPanel();
 		jLabel16 = new javax.swing.JLabel();
-		jComboBox3 = new javax.swing.JComboBox<>();
+		healthText = new javax.swing.JComboBox<>();
 		InsuranceTakerPanel = new javax.swing.JPanel();
 		jLabel17 = new javax.swing.JLabel();
-		jTextField9 = new javax.swing.JTextField();
+		takerText = new javax.swing.JTextField();
 		BillPanel = new javax.swing.JPanel();
 		jLabel18 = new javax.swing.JLabel();
-		jTextField10 = new javax.swing.JTextField();
+		billText = new javax.swing.JTextField();
 		ButtonsPanel = new javax.swing.JPanel();
 		cancel = new misc.RSButtonMetro();
-		commit = new misc.RSButtonMetro();
+		save = new misc.RSButtonMetro();
 
 		setLayout(new java.awt.BorderLayout());
 
@@ -99,11 +120,30 @@ public class PacientModPanel extends javax.swing.JPanel {
 		NorthPanel.add(LabelPanel);
 
 		patientComboBox.setModel(new DefaultComboBoxModel<>(patientList));
-		Patient p = (Patient) patientComboBox.getSelectedItem();
-		info = ctrl.getPatientData(p.getDni()).asStringList();
+
 		ComboBoxPanel.add(patientComboBox);
 
 		NorthPanel.add(ComboBoxPanel);
+
+		buttonUpdate.setText("Update");
+		buttonUpdate.setColorHover(new java.awt.Color(138, 202, 234));
+		buttonUpdate.setColorNormal(new java.awt.Color(8, 72, 135));
+		buttonUpdate.setColorPressed(new java.awt.Color(8, 72, 135));
+		buttonUpdate.setColorTextHover(new java.awt.Color(51, 51, 51));
+		buttonUpdate.setColorTextNormal(new java.awt.Color(242, 242, 242));
+		buttonUpdate.setColorTextPressed(new java.awt.Color(242, 242, 242));
+		buttonUpdate.setFocusPainted(false);
+		buttonUpdate.setRolloverEnabled(false);
+		buttonUpdate.setRolloverEnabled(false);
+		buttonUpdate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				buttonUpdateActionPerformed(e);
+			}
+		});
+		ButtonUpdatePanel.add(buttonUpdate);
+
+		NorthPanel.add(ButtonUpdatePanel);
 
 		add(NorthPanel, java.awt.BorderLayout.PAGE_START);
 
@@ -114,8 +154,9 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel10.setText("Name: ");
 		NamePanel.add(jLabel10);
 
-		jTextField2.setText("jTextField1");
-		NamePanel.add(jTextField2);
+		textName.setText("jTextField1");
+		textName.setPreferredSize(new Dimension(60, 20));
+		NamePanel.add(textName);
 
 		CenterPanel.add(NamePanel);
 
@@ -124,8 +165,9 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel11.setText("Last Name: ");
 		LastNamePanel.add(jLabel11);
 
-		jTextField3.setText("jTextField1");
-		LastNamePanel.add(jTextField3);
+		textLastName.setText("jTextField1");
+		textLastName.setPreferredSize(new Dimension(60, 20));
+		LastNamePanel.add(textLastName);
 
 		CenterPanel.add(LastNamePanel);
 
@@ -134,8 +176,9 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel12.setText("Birth Date: ");
 		BithDatePanel.add(jLabel12);
 
-		jTextField4.setText("jTextField1");
-		BithDatePanel.add(jTextField4);
+		textBDay.setText("jTextField1");
+		textBDay.setPreferredSize(new Dimension(80, 20));
+		BithDatePanel.add(textBDay);
 
 		CenterPanel.add(BithDatePanel);
 
@@ -144,8 +187,9 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel13.setText("Email: ");
 		EmailPanel.add(jLabel13);
 
-		jTextField5.setText("jTextField1");
-		EmailPanel.add(jTextField5);
+		textemail.setText("jTextField1");
+		textemail.setPreferredSize(new Dimension(120, 20));
+		EmailPanel.add(textemail);
 
 		CenterPanel.add(EmailPanel);
 
@@ -154,8 +198,9 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel19.setText("Phone: ");
 		EmailPanel1.add(jLabel19);
 
-		jTextField6.setText("jTextField1");
-		EmailPanel1.add(jTextField6);
+		textPhone.setText("jTextField1");
+		textPhone.setPreferredSize(new Dimension(60, 20));
+		EmailPanel1.add(textPhone);
 
 		CenterPanel.add(EmailPanel1);
 
@@ -164,8 +209,8 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel14.setText("Gender: ");
 		GenderPanel.add(jLabel14);
 
-		jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(Gender.values()));
-		GenderPanel.add(jComboBox1);
+		textGender.setModel(new javax.swing.DefaultComboBoxModel<>(Gender.values()));
+		GenderPanel.add(textGender);
 
 		CenterPanel.add(GenderPanel);
 
@@ -174,8 +219,8 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel15.setText("Blood Type: ");
 		BloodTypePanel.add(jLabel15);
 
-		jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(BloodType.values()));
-		BloodTypePanel.add(jComboBox2);
+		bloodText.setModel(new javax.swing.DefaultComboBoxModel<>(BloodType.values()));
+		BloodTypePanel.add(bloodText);
 
 		CenterPanel.add(BloodTypePanel);
 
@@ -184,8 +229,8 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel16.setText("Insurance Type: ");
 		InsuranceTypePanel.add(jLabel16);
 
-		jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(HealthInsuranceType.values()));
-		InsuranceTypePanel.add(jComboBox3);
+		healthText.setModel(new javax.swing.DefaultComboBoxModel<>(HealthInsuranceType.values()));
+		InsuranceTypePanel.add(healthText);
 
 		CenterPanel.add(InsuranceTypePanel);
 
@@ -194,8 +239,9 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel17.setText("Insurance Taker: ");
 		InsuranceTakerPanel.add(jLabel17);
 
-		jTextField9.setText("jTextField1");
-		InsuranceTakerPanel.add(jTextField9);
+		takerText.setText("jTextField1");
+		takerText.setPreferredSize(new Dimension(60, 20));
+		InsuranceTakerPanel.add(takerText);
 
 		CenterPanel.add(InsuranceTakerPanel);
 
@@ -204,8 +250,9 @@ public class PacientModPanel extends javax.swing.JPanel {
 		jLabel18.setText("Bill");
 		BillPanel.add(jLabel18);
 
-		jTextField10.setText("jTextField1");
-		BillPanel.add(jTextField10);
+		billText.setText("jTextField1");
+		billText.setPreferredSize(new Dimension(60, 20));
+		BillPanel.add(billText);
 
 		CenterPanel.add(BillPanel);
 
@@ -219,29 +266,108 @@ public class PacientModPanel extends javax.swing.JPanel {
 		cancel.setFocusPainted(false);
 		cancel.setRolloverEnabled(false);
 		cancel.setRolloverEnabled(false);
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cancelActionPerformed(e);
+			}
+		});
+
 		ButtonsPanel.add(cancel);
 
-		commit.setText("Commit");
-		commit.setColorHover(new java.awt.Color(138, 202, 234));
-		commit.setColorNormal(new java.awt.Color(8, 72, 135));
-		commit.setColorPressed(new java.awt.Color(8, 72, 135));
-		commit.setColorTextHover(new java.awt.Color(51, 51, 51));
-		commit.setColorTextNormal(new java.awt.Color(242, 242, 242));
-		commit.setColorTextPressed(new java.awt.Color(242, 242, 242));
-		commit.setFocusPainted(false);
-		commit.setRolloverEnabled(false);
-		ButtonsPanel.add(commit);
+		save.setText("Save");
+		save.setColorHover(new java.awt.Color(138, 202, 234));
+		save.setColorNormal(new java.awt.Color(8, 72, 135));
+		save.setColorPressed(new java.awt.Color(8, 72, 135));
+		save.setColorTextHover(new java.awt.Color(51, 51, 51));
+		save.setColorTextNormal(new java.awt.Color(242, 242, 242));
+		save.setColorTextPressed(new java.awt.Color(242, 242, 242));
+		save.setFocusPainted(false);
+		save.setRolloverEnabled(false);
+		save.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				commitActionPerformed(e);
+			}
+		});
+		ButtonsPanel.add(save);
 
 		CenterPanel.add(ButtonsPanel);
 
 		add(CenterPanel, java.awt.BorderLayout.CENTER);
 	}// </editor-fold>
 
+	private void buttonUpdateActionPerformed(ActionEvent e) {
+		open();
+	}
+
+	private void cancelActionPerformed(ActionEvent e) {
+	}
+
+	private void commitActionPerformed(ActionEvent e) {
+		List<String> colData = getIntroducedData();
+		if (colData.size() != 11) {
+			JOptionPane.showMessageDialog(null, "Not enough arguments",
+					"Error on data collection", JOptionPane.ERROR_MESSAGE);
+		}
+		else {
+			try {
+				ctrl.updatePatient(colData);
+				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Changes were saved sucessfully","", JOptionPane.INFORMATION_MESSAGE);
+			} catch (SQLException e1) {
+				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e1.getMessage(),"Error on Query", JOptionPane.ERROR_MESSAGE);
+				if (Main.SHOW_EXCEPTIONS_TRACE)
+					e1.printStackTrace();
+			}
+		}
+
+	}
+
+	@SuppressWarnings("finally")
+	public List<String> getIntroducedData(){
+		ArrayList<String> data = new ArrayList<String>();
+		try {
+			data.add(patient.getDni());
+			data.add(textLastName.getText());
+			data.add(textName.getText());
+			data.add(textBDay.getText());
+			data.add(textemail.getText());
+			data.add(textPhone.getText());
+			data.add(textGender.getSelectedItem().toString());
+			data.add(bloodText.getSelectedItem().toString());
+			data.add(healthText.getSelectedItem().toString());
+			try {
+				data.add(takerText.getText());
+			}
+			catch (NullPointerException e1) {
+				data.add(patient.getDni());
+			}
+			try {
+				data.add(billText.getText());
+			}
+			catch (NullPointerException e1) {
+				data.add("0");
+			}
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(),
+					"Error on data collection", JOptionPane.ERROR_MESSAGE);
+
+			if (Main.SHOW_EXCEPTIONS_TRACE)
+				e.printStackTrace();
+		}
+		finally{
+			return data;
+		}
+	}
+
 
 	// Variables declaration - do not modify
 	private javax.swing.JPanel BillPanel;
 	private javax.swing.JPanel BithDatePanel;
 	private javax.swing.JPanel BloodTypePanel;
+	private misc.RSButtonMetro buttonUpdate;
+	private javax.swing.JPanel ButtonUpdatePanel;
 	private javax.swing.JPanel ButtonsPanel;
 	private javax.swing.JPanel CenterPanel;
 	private javax.swing.JPanel ComboBoxPanel;
@@ -255,11 +381,11 @@ public class PacientModPanel extends javax.swing.JPanel {
 	private javax.swing.JPanel NamePanel;
 	private javax.swing.JPanel NorthPanel;
 	private misc.RSButtonMetro cancel;
-	private misc.RSButtonMetro commit;
+	private misc.RSButtonMetro save;
 	private javax.swing.JComboBox<Patient> patientComboBox;
-	private javax.swing.JComboBox<Gender> jComboBox1;
-	private javax.swing.JComboBox<BloodType> jComboBox2;
-	private javax.swing.JComboBox<HealthInsuranceType> jComboBox3;
+	private javax.swing.JComboBox<Gender> textGender;
+	private javax.swing.JComboBox<BloodType> bloodText;
+	private javax.swing.JComboBox<HealthInsuranceType> healthText;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel10;
 	private javax.swing.JLabel jLabel11;
@@ -271,13 +397,12 @@ public class PacientModPanel extends javax.swing.JPanel {
 	private javax.swing.JLabel jLabel17;
 	private javax.swing.JLabel jLabel18;
 	private javax.swing.JLabel jLabel19;
-	private javax.swing.JTextField jTextField10;
-	private javax.swing.JTextField jTextField2;
-	private javax.swing.JTextField jTextField3;
-	private javax.swing.JTextField jTextField4;
-	private javax.swing.JTextField jTextField5;
-	private javax.swing.JTextField jTextField6;
-	private javax.swing.JTextField jTextField9;
+	private javax.swing.JTextField billText;
+	private javax.swing.JTextField textName;
+	private javax.swing.JTextField textLastName;
+	private javax.swing.JTextField textBDay;
+	private javax.swing.JTextField textemail;
+	private javax.swing.JTextField textPhone;
+	private javax.swing.JTextField takerText;
 	// End of variables declaration
-
 }
