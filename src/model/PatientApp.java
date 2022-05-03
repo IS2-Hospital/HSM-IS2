@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import model.patientDAO.AskForAppointmentDAO;
+import model.patientDAO.CancelAppointmentPatientDAO;
 import model.patientDAO.GetAppointmentsDAO;
 import model.patientDAO.GetDoctorsOfPatientDAO;
 import model.patientDAO.GetHistoryDAO;
@@ -55,8 +56,8 @@ public class PatientApp {
 		return availableHours;
 	}
 
-	public void askForAppointment(Appointment appo, String dni_patient) throws SQLException {
-		AskForAppointmentDAO.execute(appo, dni_patient);
+	public void askForAppointment(Appointment appo) throws SQLException {
+		AskForAppointmentDAO.execute(appo);
 	}
 
 	public Vector<Appointment> getAppointments(String dni_patient) throws SQLException {
@@ -81,6 +82,10 @@ public class PatientApp {
 
 	public void requestDoctorChange(DoctorChangeRequest req) throws IllegalArgumentException, SQLException {
 		RequestDoctorChangeDAO.execute(req);
+	}
+
+	public void cancelAppointment(Appointment p, String dni_patient) throws SQLException {
+		CancelAppointmentPatientDAO.execute(p, dni_patient);
 	}
 
 }

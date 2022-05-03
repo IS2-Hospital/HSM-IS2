@@ -22,6 +22,7 @@ import viewer.LoginPanel;
 import viewer.MainWindow;
 import viewer.RegisterPlanPanel;
 
+@SuppressWarnings("serial")
 public class RegPanelDoctor extends JPanel{
 	private Controller _ctrl;
 	private MainWindow _mainWindow;

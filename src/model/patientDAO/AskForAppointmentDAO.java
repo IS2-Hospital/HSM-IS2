@@ -10,7 +10,7 @@ import model.DBConnector;
 
 public class AskForAppointmentDAO {
 
-	public static void execute(Appointment appo, String dni) throws SQLException {
+	public static void execute(Appointment appo) throws SQLException {
 		Connection con = DBConnector.connectdb();
 
 		String select = "INSERT INTO appointments VALUES (STR_TO_DATE(?, '%Y-%m-%d'), STR_TO_DATE(?, '%H:%i'), ?, ?, ?)";
@@ -18,7 +18,7 @@ public class AskForAppointmentDAO {
 		st.setString(1, appo.getDay());
 		st.setString(2, appo.getHour());
 		st.setString(3, appo.getPerson());
-		st.setString(4, dni);
+		st.setString(4, appo.getDni_patient());
 		st.setString(5, appo.getDescription());
 
 		st.execute();

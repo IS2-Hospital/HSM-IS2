@@ -10,8 +10,8 @@ import control.Controller;
 import launcher.Main;
 import model.History;
 
+@SuppressWarnings("serial")
 public class HistoryTableModel extends AbstractTableModel{
-
 
 	private Controller ctrl;
 	private String dni;

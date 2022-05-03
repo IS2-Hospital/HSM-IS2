@@ -58,8 +58,8 @@ public class Controller {
 		return patientApp.getAvailableHours(doctor_dni, date);
 	}
 
-	public void askForAppointment(Appointment appointment, String dni_patient) throws SQLException {
-		patientApp.askForAppointment(appointment, dni_patient);
+	public void askForAppointment(Appointment appointment) throws SQLException {
+		patientApp.askForAppointment(appointment);
 	}
 
 	public Vector<Appointment> getAppointments(String dni, UserRole role) throws SQLException {
@@ -82,6 +82,10 @@ public class Controller {
 
 	public void updatePatient(Patient p) throws SQLException {
 		patientApp.updatePatient(p);
+	}
+
+	public void cancelAppointment(Appointment p, String dni_patient) throws SQLException {
+		patientApp.cancelAppointment(p, dni_patient);
 	}
 
 	//Admin facade

@@ -25,6 +25,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public class RegPatientTabbedPane extends JPanel{
 
 	private JTabbedPane _tabbedPane;

@@ -6,12 +6,14 @@ public class Appointment {
 	private String hour;
 	private String person;
 	private String description;
+	private String dni_patient;
 
-	public Appointment(String day, String hour, String person, String description) {
+	public Appointment(String day, String hour, String person, String description, String dni_patient) {
 		this.day = day;
 		this.hour = hour;
 		this.person = person;
 		this.description = description;
+		this.dni_patient = dni_patient;
 	}
 
 	public String getDay() {
@@ -28,6 +30,10 @@ public class Appointment {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public String getDni_patient() {
+		return dni_patient;
 	}
 
 }

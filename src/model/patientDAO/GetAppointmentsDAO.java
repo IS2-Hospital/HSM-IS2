@@ -33,7 +33,7 @@ public class GetAppointmentsDAO {
 			String doctor = name + " " + lastName;
 			String desc = resultSet.getString("description");
 
-			Appointment ap = new Appointment(date, hour, doctor, desc);
+			Appointment ap = new Appointment(date, hour, doctor, desc, dni_patient);
 			v.add(ap);
 		}
 

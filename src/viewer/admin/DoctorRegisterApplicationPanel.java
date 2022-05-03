@@ -12,6 +12,7 @@ import control.Controller;
 import launcher.Main;
 import model.DoctorRegisterApplication;
 
+@SuppressWarnings("serial")
 public class DoctorRegisterApplicationPanel extends JPanel {
 
 	private static DoctorRegisterApplicationPanel instance = null;

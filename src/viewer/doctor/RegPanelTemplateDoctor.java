@@ -31,6 +31,7 @@ import model.Enums.RegState;
 import model.Enums.UserRole;
 import model.userManagment.UserRegisterer;
 
+@SuppressWarnings("serial")
 public class RegPanelTemplateDoctor extends JPanel{
 
 	private static final String TITLE = "Doctor registration";

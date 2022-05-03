@@ -25,17 +25,15 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 	private static MyPatientsPanel instance = null;
 
 	private Controller ctrl;
-	private DoctorPanel doctorPanel;
 
 	private MyPatientsTableModel tableModel;
 
 	/**
 	 * Creates new form MyPatientsPanel
 	 */
-	private MyPatientsPanel(Controller ctrl, String doctor_dni, DoctorPanel doctorPanel) {
+	private MyPatientsPanel(Controller ctrl, String doctor_dni) {
 		this.ctrl = ctrl;
 		this.tableModel = new MyPatientsTableModel(ctrl, doctor_dni);
-		this.doctorPanel = doctorPanel;
 
 		initComponents();
 	}
@@ -43,7 +41,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 	// Singleton
 	public static MyPatientsPanel getInstance(Controller ctrl, String doctor_dni, DoctorPanel doctorPanel) {
 		if (instance == null)
-			instance = new MyPatientsPanel(ctrl, doctor_dni, doctorPanel);
+			instance = new MyPatientsPanel(ctrl, doctor_dni);
 		instance.open();
 
 		return instance;
@@ -160,7 +158,7 @@ public class MyPatientsPanel extends javax.swing.JPanel {
 	private void viewTreatmentsButtonActionPerformed(ActionEvent e) {
 		try {
 			Patient p = tableModel.getSelectedPatient(patientsTable.getSelectedRow());
-			TreatmentsDialog d = new TreatmentsDialog(ctrl, p.getDni(), SwingUtilities.getWindowAncestor(this));
+			new TreatmentsDialog(ctrl, p.getDni(), SwingUtilities.getWindowAncestor(this));
 
 		} catch (IndexOutOfBoundsException e1) { // no row selected
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "You have to select a patient", "", JOptionPane.ERROR_MESSAGE);

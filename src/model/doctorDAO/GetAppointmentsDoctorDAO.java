@@ -13,7 +13,7 @@ public class GetAppointmentsDoctorDAO {
 
 	public static Vector<Appointment> execute(String dni_doctor) throws SQLException {
 		Connection con = DBConnector.connectdb();
-		String SQL = "SELECT a.day, a.hour, u.name, u.lastname, a.description "
+		String SQL = "SELECT a.day, a.hour, u.name, u.lastname, a.description, a.dni_patient "
 				+ "FROM appointments a "
 				+ "join users u on a.dni_patient = u.dni "
 				+ "WHERE a.dni_doctor =" + dni_doctor
@@ -32,8 +32,9 @@ public class GetAppointmentsDoctorDAO {
 			String lastName = resultSet.getString("lastname");
 			String doctor = name + " " + lastName;
 			String desc = resultSet.getString("description");
+			String dni_patient = resultSet.getString("dni_patient");
 
-			Appointment ap = new Appointment(date, hour, doctor, desc);
+			Appointment ap = new Appointment(date, hour, doctor, desc, dni_patient);
 			v.add(ap);
 		}
 

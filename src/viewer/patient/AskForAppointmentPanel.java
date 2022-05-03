@@ -243,7 +243,7 @@ public class AskForAppointmentPanel extends javax.swing.JPanel {
 			String dni_doctor = ((Doctor) doctorComboBox.getSelectedItem()).getDni();
 			String desc = descriptionTextArea.getText();
 
-			ctrl.askForAppointment(new Appointment(day, hour, dni_doctor, desc), dni_patient);
+			ctrl.askForAppointment(new Appointment(day, hour, dni_doctor, desc, dni_patient));
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Your appointment has been registered successfully", "", JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), e.getMessage(), "", JOptionPane.ERROR_MESSAGE);

@@ -87,13 +87,13 @@ public class AdminPanel extends JPanel {
 
 		add(northpanel, java.awt.BorderLayout.PAGE_START);
 
-		leftpanel.setPreferredSize(new java.awt.Dimension(220, 364));//l
+		leftpanel.setPreferredSize(new java.awt.Dimension(250, 364));//l
 
 		leftSubPanel.setBackground(new java.awt.Color(216, 216, 216));
 		leftSubPanel.setLayout(new java.awt.BorderLayout());
 
 		leftMenu.setBackground(new java.awt.Color(214, 214, 214));
-		leftMenu.setPreferredSize(new java.awt.Dimension(220, 400));
+		leftMenu.setPreferredSize(new java.awt.Dimension(200, 500));
 
 		patientListButton.setBackground(new java.awt.Color(214, 214, 214));
 		patientListButton.setForeground(new java.awt.Color(51, 51, 51));
@@ -249,7 +249,7 @@ public class AdminPanel extends JPanel {
 		});
 
 		checkDoctorsRegister.setForeground(new java.awt.Color(51, 51, 51));
-		checkDoctorsRegister.setIcon(new javax.swing.ImageIcon(("resources/icons/calendarDot.png"))); // NOI18N
+		checkDoctorsRegister.setIcon(new javax.swing.ImageIcon(("resources/icons/aprove.png"))); // NOI18N
 		checkDoctorsRegister.setText("Validate Doctor's Reg");
 		checkDoctorsRegister.setColorHover(new java.awt.Color(138, 202, 234));
 		checkDoctorsRegister.setColorNormal(new java.awt.Color(214, 214, 214));
@@ -410,7 +410,6 @@ public class AdminPanel extends JPanel {
 	}
 
 	private void logoButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		mainWindow.signOut();
 	}
 
 	private void changeInsurancesBillButtonActionPerformed(ActionEvent evt) {

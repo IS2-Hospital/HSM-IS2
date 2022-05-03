@@ -8,6 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import control.Controller;
 import model.DoctorRegisterApplication;
 
+@SuppressWarnings("serial")
 public class DoctorRegisterApplicationModel extends AbstractTableModel {
 	private final String[] COL_NAMES = {"DOCTOR", "SPECIALITY", "SALARY", "START CONTRACT", "END CONTRACT", "NOTES"};
 	private List<DoctorRegisterApplication> requests;
