@@ -16,7 +16,7 @@ public class GetAppointmentsDAO {
 		String SQL = "SELECT a.day, a.hour, u.name, u.lastname, a.description "
 				+ "FROM appointments a "
 				+ "join users u on a.dni_doctor = u.dni "
-				+ "WHERE a.dni_patient =" + dni_patient
+				+ "WHERE a.dni_patient = '" + dni_patient + "'"
 				+ " AND a.day >= STR_TO_DATE(CURDATE(), '%Y-%m-%d') "
 				+ "order by a.day, a.hour;";
 

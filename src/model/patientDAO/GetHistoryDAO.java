@@ -29,7 +29,7 @@ public class GetHistoryDAO {
 		String SQL = "SELECT * "
 				+ "FROM treatments "
 				+ "join recieves_treatment using(id_treatment) "
-				+ "WHERE dni_patient = " + dni_patient
+				+ "WHERE dni_patient = '" + dni_patient + "'"
 				+ " ORDER BY start_date, end_date, name;";
 
 		Statement st = con.createStatement();
@@ -60,7 +60,7 @@ public class GetHistoryDAO {
 
 		hoyAux = (hoy.charAt(0) - 48) * 1000 + (hoy.charAt(1) - 48) * 100 + (hoy.charAt(2) - 48) * 10 + (hoy.charAt(3) - 48);
 		end_dateAux = (end_date.charAt(0) - 48) * 1000 + (end_date.charAt(1) - 48) * 100 + (end_date.charAt(2) - 48) * 10 + (end_date.charAt(3) - 48);
-		//Comparar año
+		//Comparar aï¿½o
 		if(hoyAux < end_dateAux) { return true; }
 		else if(hoyAux > end_dateAux) { return false; }
 

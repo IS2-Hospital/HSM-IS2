@@ -29,7 +29,7 @@ public class GetTreatmentsDAO {
 		String SQL = "SELECT * "
 				+ "FROM treatments "
 				+ "join recieves_treatment using(id_treatment) "
-				+ "WHERE dni_patient = " + dni_patient
+				+ "WHERE dni_patient = '" + dni_patient + "'"
 				+ " ORDER BY start_date, end_date, name;";
 
 		Statement st = con.createStatement();

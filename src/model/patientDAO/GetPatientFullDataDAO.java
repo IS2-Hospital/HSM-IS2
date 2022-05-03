@@ -20,7 +20,7 @@ public class GetPatientFullDataDAO {
 		ResultSet resultSet = null;
 
 		if(adminConex != null) {
-			PreparedStatement st = adminConex.prepareStatement("SELECT * FROM users JOIN patients ON dni = dni_patient WHERE "+dni+" = dni", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement st = adminConex.prepareStatement("SELECT * FROM users JOIN patients ON dni = dni_patient WHERE '"+dni+"' = dni", Statement.RETURN_GENERATED_KEYS);
 			st.execute();
 			resultSet = st.getResultSet();
 		}
