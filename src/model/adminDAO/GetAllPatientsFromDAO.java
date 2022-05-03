@@ -23,7 +23,7 @@ public class GetAllPatientsFromDAO {
 		ResultSet resultSet = null;
 
 		if(adminConex != null) {
-			PreparedStatement st = adminConex.prepareStatement("SELECT * FROM patients JOIN users ON dni = dni_patient JOIN treated_by ON treated_by.dni_patient = patients.dni_patient AND dni_doctor = "+dniDoctor+" order by dni;", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement st = adminConex.prepareStatement("SELECT * FROM patients JOIN users ON dni = dni_patient JOIN treated_by ON treated_by.dni_patient = patients.dni_patient AND dni_doctor = '"+dniDoctor+"' order by dni;", Statement.RETURN_GENERATED_KEYS);
 			st.execute();
 			resultSet = st.getResultSet();
 		}
