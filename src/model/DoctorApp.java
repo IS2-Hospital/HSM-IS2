@@ -7,6 +7,7 @@ import java.util.Vector;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import model.adminDAO.GetAllPatientsFromDAO;
+import model.doctorDAO.DeleteDoctorDAO;
 import model.doctorDAO.DeleteTreatmentOfDAO;
 import model.doctorDAO.GetAppointmentsDoctorDAO;
 import model.doctorDAO.SaveTreatmentDao;
@@ -41,6 +42,10 @@ public class DoctorApp {
 
 	public void deleteTreatment(Treatment t, String dni_patient) throws SQLException {
 		DeleteTreatmentOfDAO.execute(t, dni_patient);
+	}
+
+	public void deleteDoctor(String dni) throws Exception{
+		DeleteDoctorDAO.execute(dni);
 	}
 
 

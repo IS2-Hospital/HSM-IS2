@@ -44,6 +44,10 @@ public class Controller {
 		_userManager.get_patientRegisterer().registerUsers(usersToRegister);
 	}
 
+	public void deleteDoctor(String dni) throws Exception {
+		doctorApp.deleteDoctor(dni);
+	}
+
 	//Patient facade
 
 	public Vector<Doctor> getDoctorsOf(String dni) throws SQLException {

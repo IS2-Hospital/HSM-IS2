@@ -200,7 +200,18 @@ public class LoginPanel extends JPanel{
 					JOptionPane.showMessageDialog(_mainWindow, "<html>Hello there! We are still checking your application for the clinic. <br>Come back later ;) .", "In process", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else if(regState == RegState.DENEGATED){
-					JOptionPane.showMessageDialog(_mainWindow, "<html>Hello there! We are sorry, but we have to dennied your application<br> for the clinic. Would you like to delete your application?", "Application dennied", JOptionPane.OK_CANCEL_OPTION);
+					int input = JOptionPane.showConfirmDialog(_mainWindow, "<html>Hello there! We are sorry, but we have to dennied your application<br> for the clinic. Would you like to delete your application?", "Application dennied", JOptionPane.OK_CANCEL_OPTION);
+					if (input == 0) {
+						try{
+							_ctrl.deleteDoctor(_userNameTF.getText());
+							JOptionPane.showMessageDialog(_mainWindow, "<html>Your application was deleted successfully.", "Application Deleted", JOptionPane.INFORMATION_MESSAGE);
+
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							JOptionPane.showMessageDialog(_mainWindow, "<html>Something went wrong. Try again later.", "Database Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
 				}
 				break;
 			case ADMIN:
